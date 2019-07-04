@@ -4,26 +4,21 @@
   
     
     <entry>
-      <title>test</title>
-      <link href="/2019/07/03/test/"/>
-      <url>/2019/07/03/test/</url>
+      <title>利用GitHub Pages+Hexo搭建个人博客（踩坑之路）</title>
+      <link href="/2019/07/04/li-yong-github-pages-da-jian-ge-ren-bo-ke-cai-keng-zhi-lu/"/>
+      <url>/2019/07/04/li-yong-github-pages-da-jian-ge-ren-bo-ke-cai-keng-zhi-lu/</url>
       
-        <content type="html"><![CDATA[]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Hello World</title>
-      <link href="/2019/07/02/hello-world/"/>
-      <url>/2019/07/02/hello-world/</url>
-      
-        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class=" language-bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span></code></pre><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class=" language-bash"><code class="language-bash">$ hexo server</code></pre><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class=" language-bash"><code class="language-bash">$ hexo generate</code></pre><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class=" language-bash"><code class="language-bash">$ hexo deploy</code></pre><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
+        <content type="html"><![CDATA[<hr><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>其实很早之前就想搭建一个个人博客，出于各种原因，一直没有行动。最近终于着手开始搭建，希望自己可以一直坚持下去。在搭建的过程中，踩了不少坑，特此记录，也希望对后来人有一点点参考价值。</p><hr><h1 id="一、Github"><a href="#一、Github" class="headerlink" title="一、Github"></a>一、Github</h1><h2 id="1-注册Github账号"><a href="#1-注册Github账号" class="headerlink" title="1. 注册Github账号"></a>1. 注册Github账号</h2><p>进入<a href="https://github.com" target="_blank" rel="noopener">Github</a>官网，注册账号。</p><h2 id="2-创建仓库"><a href="#2-创建仓库" class="headerlink" title="2. 创建仓库"></a>2. 创建仓库</h2><p>点击首页右上角头像左侧的头像<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190705010509.png" alt><br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190705011051.png" alt></p><h2 id="3-Github-Pages"><a href="#3-Github-Pages" class="headerlink" title="3. Github Pages"></a>3. Github Pages</h2><p>点击Settings<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190705011609.png" alt><br>找到GitHub Pages，以用户名命名的仓库自动开启github pages，确认开启后就可以通过给出的网址访问了。<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190705011514.png" alt></p><hr><h1 id="二、Hexo"><a href="#二、Hexo" class="headerlink" title="二、Hexo"></a>二、Hexo</h1><p><a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener">hexo</a>是一个快速、简洁且高效的博客框架，可以参考官方文档。</p><h2 id="1-环境安装"><a href="#1-环境安装" class="headerlink" title="1. 环境安装"></a>1. 环境安装</h2><p>要使用hexo，必须安装<a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">Node.js</a>和<a href="https://git-scm.com/download/" target="_blank" rel="noopener">Git</a>。网上教程很多，这里不再赘述。</p><h2 id="2-hexo安装"><a href="#2-hexo安装" class="headerlink" title="2. hexo安装"></a>2. hexo安装</h2><p>先创建存放blog文件的文件夹，切换到此文件夹右击git bash打开<br>输入命令安装hexo：<br><code>npm install -g hexo-cli</code></p><p>依次执行：</p><pre><code>hexo init npm installhexo g #生成静态网页hexo s #启动本地服务</code></pre><p>完成后，在浏览器输入localhost:4000就可以看到你的博客了</p><hr><h1 id="三、部署到Github"><a href="#三、部署到Github" class="headerlink" title="三、部署到Github"></a>三、部署到Github</h1><h2 id="1-设置SSH"><a href="#1-设置SSH" class="headerlink" title="1. 设置SSH"></a>1. 设置SSH</h2><p>返回GIt Bash中，依次输入：</p><pre><code>git config --global.name &quot;yourname&quot;git config --global.email &quot;youremail&quot;</code></pre><p>这里的yourname输入你的Github的用户名，<br>youremail输入你的Github邮箱</p><pre><code>cd ~/.sshlsmkdir key_backupcp id_rsa* key_backuprm id_rsa*#检查有没有生成过SSH并备份移除ssh-keygen -t rsa -C &quot;youremail&quot; #生成新的SSH，接下来输入密码 一路回车</code></pre><h2 id="2-添加SSH-Key到Github"><a href="#2-添加SSH-Key到Github" class="headerlink" title="2.添加SSH Key到Github"></a>2.添加SSH Key到Github</h2><p>点击头像，选择Settings<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190705022259.png" alt><br>添加新的SSH Key<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190705022426.png" alt><br>找到c:\users\当前用户名.ssh    文本形式打开id_ras.pub (打开系统查看隐藏文件选项)<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190705022656.png" alt><br>测试是否连接成功<br><code>ssh -T git@github.com</code><br>输入yes就ok</p><h2 id="3-部署到Github"><a href="#3-部署到Github" class="headerlink" title="3. 部署到Github"></a>3. 部署到Github</h2><p>打开hexo配置文件（根目录）<strong>_config.yml</strong><br>翻到最后将xxx修改为你的Github账户（冒号后面有一个空格）</p><pre><code>deploy:    type: git    repo: https://github.com/xxx/xxx.github.io.git    branch: master</code></pre><p>然后安装deploy-git(不然报错”ERROR Deployer not found: git“)<br><code>npm install hexo-deployer-git --save</code></p><p>然后</p><pre><code>hexo cleanhexo ghexo d</code></pre><p>deploy时可能要你输入密码，再刷新username.github.io就可以看到你的blog。</p><hr><p><strong>注意：</strong></p><blockquote><p>如果输入命令的过程中出现了”LF will be replaced by CRLF”报错，<br>    1. windows中的换行符为 CRLF，而在Linux下的换行符为LF，所以在执行add . 时出现提示<br>    2. CRLF和LF是两种不同的换行格式，git工作区默认为CRLF来作为换行符，<br>        所以当我们项目文件里有用的地方使用LF作为换行符，这个时候我们再继续git add<br>        或者git commit的时候就会弹出警告，当最终push到远程仓库的时候git会统一格式全部转化为用CRLF作为换行符 </p></blockquote><p><strong>解决办法：</strong></p><blockquote><ol><li>这个只是一个警告，我们直接忽略就好。</li><li>git config –global core.autocrlf false  //禁用自动转换 </li></ol></blockquote>]]></content>
       
       
+      
+        <tags>
+            
+            <tag> Blog </tag>
+            
+            <tag> Hexo </tag>
+            
+        </tags>
       
     </entry>
     

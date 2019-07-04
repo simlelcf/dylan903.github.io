@@ -4,8 +4,11 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="test, dylan&#39;s blog">
-    <meta name="description" content="test | dylan&#39;s blog">
+    <meta name="keywords" content="利用GitHub Pages+Hexo搭建个人博客（踩坑之路）, dylan&#39;s blog">
+    <meta name="description" content="
+前言其实很早之前就想搭建一个个人博客，出于各种原因，一直没有行动。最近终于着手开始搭建，希望自己可以一直坚持下去。在搭建的过程中，踩了不少坑，特此记录，也希望对后来人有一点点参考价值。
+
+一、Github1. 注册Github账号进入Gi">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +16,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>test | dylan&#39;s blog</title>
+    <title>利用GitHub Pages+Hexo搭建个人博客（踩坑之路） | dylan&#39;s blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -273,13 +276,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        test
+                        利用GitHub Pages+Hexo搭建个人博客（踩坑之路）
                     </div>
                 </div>
             </div>
@@ -388,9 +391,17 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Blog/" target="_blank">
+                                <span class="chip bg-color">Blog</span>
+                            </a>
+                        
+                            <a href="/tags/Hexo/" target="_blank">
+                                <span class="chip bg-color">Hexo</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -401,21 +412,21 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-07-03
+                    2019-07-04
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        0
+                        741
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        2 分
                     </div>
                     
                 
@@ -431,7 +442,55 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <hr>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>其实很早之前就想搭建一个个人博客，出于各种原因，一直没有行动。最近终于着手开始搭建，希望自己可以一直坚持下去。在搭建的过程中，踩了不少坑，特此记录，也希望对后来人有一点点参考价值。</p>
+<hr>
+<h1 id="一、Github"><a href="#一、Github" class="headerlink" title="一、Github"></a>一、Github</h1><h2 id="1-注册Github账号"><a href="#1-注册Github账号" class="headerlink" title="1. 注册Github账号"></a>1. 注册Github账号</h2><p>进入<a href="https://github.com" target="_blank" rel="noopener">Github</a>官网，注册账号。</p>
+<h2 id="2-创建仓库"><a href="#2-创建仓库" class="headerlink" title="2. 创建仓库"></a>2. 创建仓库</h2><p>点击首页右上角头像左侧的头像<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190705010509.png" alt><br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190705011051.png" alt></p>
+<h2 id="3-Github-Pages"><a href="#3-Github-Pages" class="headerlink" title="3. Github Pages"></a>3. Github Pages</h2><p>点击Settings<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190705011609.png" alt><br>找到GitHub Pages，以用户名命名的仓库自动开启github pages，确认开启后就可以通过给出的网址访问了。<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190705011514.png" alt></p>
+<hr>
+<h1 id="二、Hexo"><a href="#二、Hexo" class="headerlink" title="二、Hexo"></a>二、Hexo</h1><p><a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener">hexo</a>是一个快速、简洁且高效的博客框架，可以参考官方文档。</p>
+<h2 id="1-环境安装"><a href="#1-环境安装" class="headerlink" title="1. 环境安装"></a>1. 环境安装</h2><p>要使用hexo，必须安装<a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">Node.js</a>和<a href="https://git-scm.com/download/" target="_blank" rel="noopener">Git</a>。网上教程很多，这里不再赘述。</p>
+<h2 id="2-hexo安装"><a href="#2-hexo安装" class="headerlink" title="2. hexo安装"></a>2. hexo安装</h2><p>先创建存放blog文件的文件夹，切换到此文件夹右击git bash打开<br>输入命令安装hexo：<br><code>npm install -g hexo-cli</code></p>
+<p>依次执行：</p>
+<pre><code>hexo init 
+npm install
+hexo g #生成静态网页
+hexo s #启动本地服务</code></pre><p>完成后，在浏览器输入localhost:4000就可以看到你的博客了</p>
+<hr>
+<h1 id="三、部署到Github"><a href="#三、部署到Github" class="headerlink" title="三、部署到Github"></a>三、部署到Github</h1><h2 id="1-设置SSH"><a href="#1-设置SSH" class="headerlink" title="1. 设置SSH"></a>1. 设置SSH</h2><p>返回GIt Bash中，依次输入：</p>
+<pre><code>git config --global.name &quot;yourname&quot;
+git config --global.email &quot;youremail&quot;</code></pre><p>这里的yourname输入你的Github的用户名，<br>youremail输入你的Github邮箱</p>
+<pre><code>cd ~/.ssh
+ls
+mkdir key_backup
+cp id_rsa* key_backup
+rm id_rsa*
+#检查有没有生成过SSH并备份移除
+ssh-keygen -t rsa -C &quot;youremail&quot; 
+#生成新的SSH，接下来输入密码 一路回车</code></pre><h2 id="2-添加SSH-Key到Github"><a href="#2-添加SSH-Key到Github" class="headerlink" title="2.添加SSH Key到Github"></a>2.添加SSH Key到Github</h2><p>点击头像，选择Settings<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190705022259.png" alt><br>添加新的SSH Key<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190705022426.png" alt><br>找到c:\users\当前用户名.ssh    文本形式打开id_ras.pub (打开系统查看隐藏文件选项)<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190705022656.png" alt><br>测试是否连接成功<br><code>ssh -T git@github.com</code><br>输入yes就ok</p>
+<h2 id="3-部署到Github"><a href="#3-部署到Github" class="headerlink" title="3. 部署到Github"></a>3. 部署到Github</h2><p>打开hexo配置文件（根目录）<strong>_config.yml</strong><br>翻到最后将xxx修改为你的Github账户（冒号后面有一个空格）</p>
+<pre><code>deploy:
+    type: git
+    repo: https://github.com/xxx/xxx.github.io.git
+    branch: master</code></pre><p>然后安装deploy-git(不然报错”ERROR Deployer not found: git“)<br><code>npm install hexo-deployer-git --save</code></p>
+<p>然后</p>
+<pre><code>hexo clean
+hexo g
+hexo d</code></pre><p>deploy时可能要你输入密码，再刷新username.github.io就可以看到你的blog。</p>
+<hr>
+<p><strong>注意：</strong></p>
+<blockquote>
+<p>如果输入命令的过程中出现了”LF will be replaced by CRLF”报错，<br>    1. windows中的换行符为 CRLF，而在Linux下的换行符为LF，所以在执行add . 时出现提示<br>    2. CRLF和LF是两种不同的换行格式，git工作区默认为CRLF来作为换行符，<br>        所以当我们项目文件里有用的地方使用LF作为换行符，这个时候我们再继续git add<br>        或者git commit的时候就会弹出警告，当最终push到远程仓库的时候git会统一格式全部转化为用CRLF作为换行符 </p>
+</blockquote>
+<p><strong>解决办法：</strong></p>
+<blockquote>
+<ol>
+<li>这个只是一个警告，我们直接忽略就好。</li>
+<li>git config –global core.autocrlf false  //禁用自动转换 </li>
+</ol>
+</blockquote>
+
             </div>
             <hr/>
 
@@ -589,9 +648,9 @@
             <br/>
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
-                    《test》
+                    《利用GitHub Pages+Hexo搭建个人博客（踩坑之路）》
                 </span> 由
-            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/07/03/test/" property="cc:attributionName"
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/07/04/li-yong-github-pages-da-jian-ge-ren-bo-ke-cai-keng-zhi-lu/" property="cc:attributionName"
                rel="cc:attributionURL">
                 Dylan He
             </a> 采用
@@ -632,7 +691,7 @@
         repo: 'dylan903.github.io',
         owner: 'dylan903',
         admin: "dylan903",
-        id: '2019-07-03T00-00-36',
+        id: '2019-07-04T20-56-23',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -658,24 +717,27 @@
                 <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
             </div>
             <div class="card">
-                <a href="/2019/07/03/test/">
+                <a href="/2019/07/04/li-yong-github-pages-da-jian-ge-ren-bo-ke-cai-keng-zhi-lu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="test">
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="利用GitHub Pages+Hexo搭建个人博客（踩坑之路）">
                         
-                        <span class="card-title">test</span>
+                        <span class="card-title">利用GitHub Pages+Hexo搭建个人博客（踩坑之路）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
                             
+前言其实很早之前就想搭建一个个人博客，出于各种原因，一直没有行动。最近终于着手开始搭建，希望自己可以一直坚持下去。在搭建的过程中，踩了不少坑，特此记录，也希望对后来人有一点点参考价值。
+
+一、Github1. 注册Github账号进入Gi
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-03
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-04
                             </span>
                         <span class="publish-author">
                             
@@ -687,33 +749,48 @@
                 </div>
 
                 
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Blog/" target="_blank">
+                        <span class="chip bg-color">Blog</span>
+                    </a>
+                    
+                    <a href="/tags/Hexo/" target="_blank">
+                        <span class="chip bg-color">Hexo</span>
+                    </a>
+                    
+                </div>
+                
             </div>
         </div>
         
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                本篇&nbsp;<i class="fa fa-dot-circle-o"></i>
             </div>
             <div class="card">
-                <a href="/2019/07/02/hello-world/">
+                <a href="/2019/07/04/li-yong-github-pages-da-jian-ge-ren-bo-ke-cai-keng-zhi-lu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="利用GitHub Pages+Hexo搭建个人博客（踩坑之路）">
                         
-                        <span class="card-title">Hello World</span>
+                        <span class="card-title">利用GitHub Pages+Hexo搭建个人博客（踩坑之路）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex
+                            
+前言其实很早之前就想搭建一个个人博客，出于各种原因，一直没有行动。最近终于着手开始搭建，希望自己可以一直坚持下去。在搭建的过程中，踩了不少坑，特此记录，也希望对后来人有一点点参考价值。
+
+一、Github1. 注册Github账号进入Gi
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-02
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-04
                             </span>
                         <span class="publish-author">
                             
@@ -722,6 +799,19 @@
                             
                         </span>
                     </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Blog/" target="_blank">
+                        <span class="chip bg-color">Blog</span>
+                    </a>
+                    
+                    <a href="/tags/Hexo/" target="_blank">
+                        <span class="chip bg-color">Hexo</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -877,7 +967,7 @@
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">73</span>
+                <span class="white-color">741</span>
             
 
             
