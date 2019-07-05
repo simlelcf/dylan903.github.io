@@ -79,8 +79,10 @@ theme: hexo-theme-matery
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:dylan903/dylan903.github.io.git
-  branch: master
+  repo: 
+        github: git@github.com:dylan903/dylan903.github.io.git,master
+        coding: git@git.dev.tencent.com:dylan903/dylan903.coding.me.git,master
+  #branch: master
 
 # plugin
 prism_plugin:
