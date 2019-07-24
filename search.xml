@@ -33,6 +33,35 @@
     
     
     <entry>
+      <title>Discuz ML! V3.X 代码注入漏洞复现</title>
+      <link href="/2019/07/22/discuz-ml-v3.x-dai-ma-zhu-ru-lou-dong-fu-xian/"/>
+      <url>/2019/07/22/discuz-ml-v3.x-dai-ma-zhu-ru-lou-dong-fu-xian/</url>
+      
+        <content type="html"><![CDATA[<h1 id="一、漏洞详情"><a href="#一、漏洞详情" class="headerlink" title="一、漏洞详情"></a>一、漏洞详情</h1><p>2019年7月11日， Discuz！ML被发现存在一处远程代码执行漏洞，<br>攻击者通过在请求流量的cookie字段中的language参数处插入构造的payload，<br>进行远程代码执行利用，该漏洞利用方式简单，危害性较大。<br>本次漏洞是由于Discuz! ML对于cookie字段的不恰当处理造成的<br>cookie字段中的language参数未经过滤，直接被拼接写入缓存文件之中，<br>而缓存文件随后又被加载，从而造成代码执行</p><p><strong>漏洞影响版本：</strong><br>Discuz!ML v.3.4 、Discuz!ML v.3.2 、Discuz!ML v.3.3 product of codersclub.org</p><hr><h1 id="二、漏洞复现"><a href="#二、漏洞复现" class="headerlink" title="二、漏洞复现"></a>二、漏洞复现</h1><p>本地搭建Discuz！ML 环境<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190724113043.png" alt></p><p>在主页进行抓包，修改Language的值，添加  <code>&#39;.phpinfo().&#39;</code><br>成功复现该漏洞<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190724114153.png" alt></p><hr><h1 id="三、漏洞修复"><a href="#三、漏洞修复" class="headerlink" title="三、漏洞修复"></a>三、漏洞修复</h1><p>由于代码包含的原因，所以注入到缓存文件中的恶意代码直接执行，其中首页就有包涵，<br>全局搜索一下的话，应该有不少地方有进行包含可以直接利用，危害很大。<br>VulkeyChen师傅的建议：单看语言这个点，在/source/class/discuz/discuz_application.php<br>第338行之后341行之前加入该代码暂缓此安全问题：</p><pre><code>$lng = str_replace(&quot;(&quot;,&quot;&quot;,$lng);$lng = str_replace(&quot;)&quot;,&quot;&quot;,$lng);$lng = str_replace(&quot;&#39;&quot;,&quot;&quot;,$lng);$lng = str_replace(&#39;&quot;&#39;,&quot;&quot;,$lng);$lng = str_replace(&#39;`&#39;,&quot;&quot;,$lng);</code></pre><hr><h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p><a href="http://blog.topsec.com.cn/discuz-ml-v3-x-代码注入漏洞深度分析/" target="_blank" rel="noopener">Discuz ML! V3.X 代码注入漏洞深度分析</a><br><a href="https://www.cnblogs.com/-mo-/p/11180396.html" target="_blank" rel="noopener">Discuz ML! V3.X 代码注入漏洞</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Information Security </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 漏洞 </tag>
+            
+            <tag> 复现 </tag>
+            
+            <tag> Discuz </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Github分支备份hexo</title>
       <link href="/2019/07/05/github-fen-zhi-bei-fen-hexo/"/>
       <url>/2019/07/05/github-fen-zhi-bei-fen-hexo/</url>
