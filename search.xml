@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>zzzphp V1.6.1 远程代码执行漏洞复现</title>
+      <link href="/2019/07/24/zzzphp-v1.6.1-yuan-cheng-dai-ma-zhi-xing-lou-dong-fen-xi-fu-xian/"/>
+      <url>/2019/07/24/zzzphp-v1.6.1-yuan-cheng-dai-ma-zhi-xing-lou-dong-fen-xi-fu-xian/</url>
+      
+        <content type="html"><![CDATA[<h1 id="一、漏洞详情"><a href="#一、漏洞详情" class="headerlink" title="一、漏洞详情"></a>一、漏洞详情</h1><p>远程代码执行漏洞存在的主要原因是页面对模块的php代码过滤不严谨，<br>导致在后台可以写入php代码从而造成代码执行。</p><hr><h1 id="二、漏洞复现"><a href="#二、漏洞复现" class="headerlink" title="二、漏洞复现"></a>二、漏洞复现</h1><p>本地搭建zzzphp V1.6.1环境<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190724141219.png" alt></p><p>在后台模块管理中的电脑模块找到cn2016<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190724141335.png" alt></p><p>然后在cn2016文件中到html文件，然后在html文件中找到search.html，然后将其的代码修改为<br><code>{if:assert($_request[phpinfo()])}phpinfo();{end if}</code></p><p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190724141523.png" alt></p><p>然后打开<code>http://xxx/zzzcms/search/</code>就可以看到我们刚刚输入的phpinfo()执行了。<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190724141748.png" alt></p><hr><h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p><a href="https://xz.aliyun.com/t/4471" target="_blank" rel="noopener">zzzphp V1.6.1 远程代码执行漏洞分析</a><br><a href="https://www.anquanke.com/post/id/173991" target="_blank" rel="noopener">zzzphpV1.6.1 远程代码执行漏洞简单分析</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Information Security </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 漏洞 </tag>
+            
+            <tag> 复现 </tag>
+            
+            <tag> zzzphp </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>dedecms V5.7-UTF-8-SP2 命令执行漏洞复现</title>
       <link href="/2019/07/23/dedecms-v5.7-utf-8-sp2-ming-ling-zhi-xing-lou-dong-fu-xian/"/>
       <url>/2019/07/23/dedecms-v5.7-utf-8-sp2-ming-ling-zhi-xing-lou-dong-fu-xian/</url>
