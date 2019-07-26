@@ -1,10 +1,15 @@
 ---
 title: 利用GitHub Pages+Hexo搭建个人博客（踩坑之路）
 date: 2019-07-04 20:56:23
+author: dylan
 top: true
+cover: true
+password: 
+categories: Blog
 tags: 
         - Blog
         - Hexo
+        - GitHub
 ---
 ***
 # 前言
@@ -98,7 +103,6 @@ hexo d
 ```
 deploy时可能要你输入密码，再刷新username.github.io就可以看到你的blog。
 
-
 ***
 **注意：**
    >如果输入命令的过程中出现了"LF will be replaced by CRLF"报错，
@@ -106,7 +110,7 @@ deploy时可能要你输入密码，再刷新username.github.io就可以看到�
     2. CRLF和LF是两种不同的换行格式，git工作区默认为CRLF来作为换行符，
         所以当我们项目文件里有用的地方使用LF作为换行符，这个时候我们再继续git add
         或者git commit的时候就会弹出警告，当最终push到远程仓库的时候git会统一格式全部转化为用CRLF作为换行符 
-        
+
 **解决办法：**
 
 >1. 这个只是一个警告，我们直接忽略就好。
