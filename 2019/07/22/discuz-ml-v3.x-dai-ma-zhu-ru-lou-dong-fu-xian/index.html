@@ -5,7 +5,7 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="Discuz ML! V3.X 代码注入漏洞复现, dylan&#39;s blog">
-    <meta name="description" content="一、漏洞详情2019年7月11日， Discuz！ML被发现存在一处远程代码执行漏洞，攻击者通过在请求流量的cookie字段中的language参数处插入构造的payload，进行远程代码执行利用，该漏洞利用方式简单，危害性较大。本次漏洞是">
+    <meta name="description" content="一、漏洞概述2019年7月11日， Discuz！ML被发现存在一处远程代码执行漏洞，攻击者通过在请求流量的cookie字段中的language参数处插入构造的payload，进行远程代码执行利用，该漏洞利用方式简单，危害性较大。本次漏洞是">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -452,7 +452,7 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="一、漏洞详情"><a href="#一、漏洞详情" class="headerlink" title="一、漏洞详情"></a>一、漏洞详情</h1><p>2019年7月11日， Discuz！ML被发现存在一处远程代码执行漏洞，<br>攻击者通过在请求流量的cookie字段中的language参数处插入构造的payload，<br>进行远程代码执行利用，该漏洞利用方式简单，危害性较大。<br>本次漏洞是由于Discuz! ML对于cookie字段的不恰当处理造成的<br>cookie字段中的language参数未经过滤，直接被拼接写入缓存文件之中，<br>而缓存文件随后又被加载，从而造成代码执行</p>
+                <h1 id="一、漏洞概述"><a href="#一、漏洞概述" class="headerlink" title="一、漏洞概述"></a>一、漏洞概述</h1><p>2019年7月11日， Discuz！ML被发现存在一处远程代码执行漏洞，<br>攻击者通过在请求流量的cookie字段中的language参数处插入构造的payload，<br>进行远程代码执行利用，该漏洞利用方式简单，危害性较大。<br>本次漏洞是由于Discuz! ML对于cookie字段的不恰当处理造成的<br>cookie字段中的language参数未经过滤，直接被拼接写入缓存文件之中，<br>而缓存文件随后又被加载，从而造成代码执行</p>
 <p><strong>漏洞影响版本：</strong><br>Discuz!ML v.3.4 、Discuz!ML v.3.2 、Discuz!ML v.3.3 product of codersclub.org</p>
 <hr>
 <h1 id="二、漏洞复现"><a href="#二、漏洞复现" class="headerlink" title="二、漏洞复现"></a>二、漏洞复现</h1><p>本地搭建Discuz！ML 环境<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190724113043.png" alt></p>
@@ -940,7 +940,7 @@ $lng = str_replace(&#39;`&#39;,&quot;&quot;,$lng);</code></pre><hr>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            一、漏洞详情
+                            一、漏洞概述
 
 二、漏洞分析环境搭建这里不再赘述，搭建好后访问网站主页
 dedecms默认的后台是/dede,没有修改直接访问登陆
@@ -1202,7 +1202,7 @@ dedecms默认的后台是/dede,没有修改直接访问登陆
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">3.1k</span>
+                <span class="white-color">3.6k</span>
             
 
             

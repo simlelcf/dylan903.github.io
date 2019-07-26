@@ -4,10 +4,8 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="Github分支备份hexo, dylan&#39;s blog">
-    <meta name="description" content="一、前言使用hexo搭建个人博客框架，配置起来有些消耗时间，管理起来也不是特别方便。特别是有时需要在其他电脑上写博客时，就让人头疼。所以我们就利用Github的分支，来备份hexo，方便快速搭上手写博客。
-
-二、创建本地分支目录1. 新建文">
+    <meta name="keywords" content="WinRAR目录穿越漏洞复现, dylan&#39;s blog">
+    <meta name="description" content="0x01 漏洞概述该漏洞是由于 WinRAR 所使用的一个陈旧的动态链接库UNACEV2.dll所造成的，该动态链接库在 2006 年被编译，没有任何的基础保护机制(ASLR, DEP 等)。动态链接库的作用是处理 ACE 格式文件。而Wi">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -15,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Github分支备份hexo | dylan&#39;s blog</title>
+    <title>WinRAR目录穿越漏洞复现 | dylan&#39;s blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -275,13 +273,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Github分支备份hexo
+                        WinRAR目录穿越漏洞复现
                     </div>
                 </div>
             </div>
@@ -392,24 +390,20 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Blog/" target="_blank">
-                                <span class="chip bg-color">Blog</span>
+                            <a href="/tags/漏洞/" target="_blank">
+                                <span class="chip bg-color">漏洞</span>
                             </a>
                         
-                            <a href="/tags/hexo/" target="_blank">
-                                <span class="chip bg-color">hexo</span>
+                            <a href="/tags/复现/" target="_blank">
+                                <span class="chip bg-color">复现</span>
                             </a>
                         
-                            <a href="/tags/备份/" target="_blank">
-                                <span class="chip bg-color">备份</span>
+                            <a href="/tags/WinRAR/" target="_blank">
+                                <span class="chip bg-color">WinRAR</span>
                             </a>
                         
-                            <a href="/tags/分支/" target="_blank">
-                                <span class="chip bg-color">分支</span>
-                            </a>
-                        
-                            <a href="/tags/GitHub/" target="_blank">
-                                <span class="chip bg-color">GitHub</span>
+                            <a href="/tags/目录穿越/" target="_blank">
+                                <span class="chip bg-color">目录穿越</span>
                             </a>
                         
                     </div>
@@ -420,8 +414,8 @@
                     <div class="post-cate">
                         <i class="fa fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Blog/" class="post-category" target="_blank">
-                                Blog
+                            <a href="/categories/Information-Security/" class="post-category" target="_blank">
+                                Information Security
                             </a>
                         
                     </div>
@@ -432,14 +426,14 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-07-05
+                    2019-07-26
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        624
+                        570
                     </div>
                     
 
@@ -462,48 +456,35 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h1><p>使用hexo搭建个人博客框架，配置起来有些消耗时间，管理起来也不是特别方便。特别是有时需要在其他电脑上写博客时，就让人头疼。所以我们就利用Github的分支，来备份hexo，方便快速搭上手写博客。</p>
+                <h1 id="0x01-漏洞概述"><a href="#0x01-漏洞概述" class="headerlink" title="0x01 漏洞概述"></a>0x01 漏洞概述</h1><p>该漏洞是由于 WinRAR 所使用的一个陈旧的动态链接库UNACEV2.dll所造成的，该动态链接库在 2006 年被编译，<br>没有任何的基础保护机制(ASLR, DEP 等)。动态链接库的作用是处理 ACE 格式文件。<br>而WinRAR解压ACE文件时，由于没有对文件名进行充分过滤，导致其可实现目录穿越，<br>将恶意文件写入任意目录,甚至可以写入文件至开机启动项，导致代码执行。</p>
 <hr>
-<h1 id="二、创建本地分支目录"><a href="#二、创建本地分支目录" class="headerlink" title="二、创建本地分支目录"></a>二、创建本地分支目录</h1><h2 id="1-新建文件夹存放分支工作目录。"><a href="#1-新建文件夹存放分支工作目录。" class="headerlink" title="1. 新建文件夹存放分支工作目录。"></a>1. 新建文件夹存放分支工作目录。</h2><p><code>mkdir hexo</code></p>
-<h2 id="2-把你的GitHub的远程仓库克隆到hexo文件夹"><a href="#2-把你的GitHub的远程仓库克隆到hexo文件夹" class="headerlink" title="2. 把你的GitHub的远程仓库克隆到hexo文件夹"></a>2. 把你的GitHub的远程仓库克隆到hexo文件夹</h2><p><code>git clone https://github.com/yourusername/yourusername.github.io hexo</code></p>
-<h2 id="3-删除除了版本管理的-git之外的所有文件和文件夹"><a href="#3-删除除了版本管理的-git之外的所有文件和文件夹" class="headerlink" title="3. 删除除了版本管理的.git之外的所有文件和文件夹"></a>3. 删除除了版本管理的.git之外的所有文件和文件夹</h2><pre><code>cd hexo
-rm -r *</code></pre><h2 id="4-把要备份的文件复制到hexo目录"><a href="#4-把要备份的文件复制到hexo目录" class="headerlink" title="4. 把要备份的文件复制到hexo目录"></a>4. 把要备份的文件复制到hexo目录</h2><pre><code>scaffolds/
-source/
-themes/
-.git/
-.gitignore
-_config.yml
-package.json</code></pre><blockquote>
-<p>注意：<br>如果使用的主题是从Github克隆的，那么使用命令删除它的Git文件（以next主题为例）<br><code>rm -R themes/next/.git*</code></p>
-</blockquote>
+<h1 id="0x02-漏洞影响"><a href="#0x02-漏洞影响" class="headerlink" title="0x02 漏洞影响"></a>0x02 漏洞影响</h1><p><strong>影响版本：</strong><br>       * WinRAR &lt; 5.70 Beta 1<br>       * Bandizip &lt; = 6.2.0.0<br>       * 好压(2345压缩) &lt; = 5.9.8.10907<br>       * 360压缩 &lt; = 4.0.0.1170<br>       * ……</p>
 <hr>
-<h1 id="三、创建分支"><a href="#三、创建分支" class="headerlink" title="三、创建分支"></a>三、创建分支</h1><h2 id="1-新建仓库"><a href="#1-新建仓库" class="headerlink" title="1. 新建仓库"></a>1. 新建仓库</h2><p>在blog项目仓库下，输入备份分支hexo，点击create创建（因为我已经创建过了，所以显示的不一样）<br>或者在本地使用命令 <code>git checkout -b hexo</code><br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190705133032.png" alt></p>
-<h2 id="2-点击设置，把默认分支设置为新建的备份分支"><a href="#2-点击设置，把默认分支设置为新建的备份分支" class="headerlink" title="2. 点击设置，把默认分支设置为新建的备份分支"></a>2. 点击设置，把默认分支设置为新建的备份分支</h2><p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190705132053.png" alt><br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190705132123.png" alt></p>
+<h1 id="0x03-漏洞复现"><a href="#0x03-漏洞复现" class="headerlink" title="0x03 漏洞复现"></a>0x03 漏洞复现</h1><p>新建一个任意文件，名称类型内容随意<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726155542.png" alt></p>
+<p>使用Winace进行压缩<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726155906.png" alt></p>
+<p>然后下载<a href="https://github.com/droe/acefile/blob/master/acefile.py" target="_blank" rel="noopener">acefile.py</a>脚本<br>输入命令<code>python acefile.py --headers test.ace</code> 读取文件的头部信息<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726160308.png" alt></p>
+<p>ok，开始构造恶意文件<br>用 010Editor 打开test.ace文件<br>需要修改以下参数：</p>
+<ul>
+<li>hdr_crc</li>
+<li>hdr_size</li>
+<li>filename的长度</li>
+<li>filename<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726160517.png" alt><br>首先将filename的值改为 <code>d:\d:\liehu.txt</code><br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726161040.png" alt></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726161237.png" alt></p>
+<p>修改后的filename的长度，选中它，左下角就是它的长度15，16进制为00 0F，filename的前两位就是它的长度<br>修改顺序是由后到前，即将10改为0F即可<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726161841.png" alt></p>
+<p>修改<strong>hdr_size</strong>，选中如下位置，左下角查看其长度，这里是（00 2E），选中的前面的红框就是hdr_size<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726162147.png" alt></p>
+<p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726162439.png" alt></p>
+<p>最后修改<strong>hdr_crc</strong>，再次运行<br><code>python acefile.py --headers test.ace</code><br>CRC校验失败，报错<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726162831.png" alt><br>在acefile.py文件中查找 <code>header CRC failed</code><br>在其上面一行添加输出语句，输出ace_crc16(buf)，即为我们需要的<strong>hdr_crc</strong>的值<br><code>print (ace_crc16(buf), buf)</code><br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726163206.png" alt></p>
+<p>改好保存，再次运行<br><code>python acefile.py --headers test.ace</code><br>31102即我们需要的值，转换成16进制为79 7E<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726163625.png" alt></p>
+<p>将<strong>hdr_size</strong> 前面的两位即为<strong>hdr_crc</strong>，从右到左修改为79 7E<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726164206.png" alt></p>
+<p>再次运行<br><code>python acefile.py --headers test.ace</code><br>输出如下信息无报错，就成功了，用开头所述解压工具解压test.ace，就会在红框的路径生成对应的文件。<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726164506.png" alt></p>
 <hr>
-<h1 id="四、提交备份"><a href="#四、提交备份" class="headerlink" title="四、提交备份"></a>四、提交备份</h1><p>在本地的hexo文件夹打开git bash，依次执行以下命令：</p>
-<pre><code>git add -all   #保存所有文件到暂存区
-git commit -m &quot;创建hexo分支&quot; #提交变更
-git push --set-upstream origin hexo
-#推送到Github，并用`--set-upstream`与origin创建关联
-#将hexo设置为默认分区</code></pre><hr>
-<h1 id="五、合并管理"><a href="#五、合并管理" class="headerlink" title="五、合并管理"></a>五、合并管理</h1><p>将本地hexo分支中的.git文件夹复制到博客根目录中，<br>我们只需要手动管理hexo分支中的文件（备份），<br>.gitignore之外的文件由hexo管理（hexo d）<br>移除主题目录下的Git管理文件</p>
-<p><code>rm -R themes/next/.git* #以next主题为例</code></p>
-<p>master分支的文件则由hexo管理，编辑hexo配置文件<em>_config.yml</em></p>
-<pre><code>deploy:
-        type: git
-        repo: https://github.com/yourusername/yourusername.github.io
-        branch: master</code></pre><hr>
-<h1 id="六、发表文章及修改配置"><a href="#六、发表文章及修改配置" class="headerlink" title="六、发表文章及修改配置"></a>六、发表文章及修改配置</h1><h2 id="1-将相关更改（配置修改或发表文章）推送到hexo分支"><a href="#1-将相关更改（配置修改或发表文章）推送到hexo分支" class="headerlink" title="1. 将相关更改（配置修改或发表文章）推送到hexo分支"></a>1. 将相关更改（配置修改或发表文章）推送到hexo分支</h2><pre><code>git add .
-git commit -m &quot;修改配置/发表文章&quot;
-git push origin hexo</code></pre><h2 id="2-将静态文件推送到master分支"><a href="#2-将静态文件推送到master分支" class="headerlink" title="2. 将静态文件推送到master分支"></a>2. 将静态文件推送到master分支</h2><pre><code>hexo clean 
-hexo g
-hexo d</code></pre><hr>
-<h1 id="七、迁移"><a href="#七、迁移" class="headerlink" title="七、迁移"></a>七、迁移</h1><h2 id="1-环境安装"><a href="#1-环境安装" class="headerlink" title="1. 环境安装"></a>1. 环境安装</h2><pre><code>npm install -g hexo-cli
-hexo init
-npm install</code></pre><h2 id="2-克隆hexo分支"><a href="#2-克隆hexo分支" class="headerlink" title="2. 克隆hexo分支"></a>2. 克隆hexo分支</h2><p><code>git clone -b hexo https://github.com/username/username.github.io</code></p>
+<h1 id="0x04-修复建议"><a href="#0x04-修复建议" class="headerlink" title="0x04 修复建议"></a>0x04 修复建议</h1><ol>
+<li>升级最新的WinRAR ，目前版本是 5.71 </li>
+<li>winRAR安装目录下，删除UNACEV2.dll文件</li>
+</ol>
 <hr>
-<p>这样就可以进行写作了，写完记得同步备份博客。</p>
-<h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p><a href="https://blog.csdn.net/white_idiot/article/details/80685990" target="_blank" rel="noopener">【GitHub】创建Git分支将Hexo博客迁移到其它电脑</a></p>
+<h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p><a href="https://fuping.site/2019/02/21/WinRAR-Extracting-Code-Execution-Validate/" target="_blank" rel="noopener">WinRAR漏洞复现过程</a><br><a href="https://research.checkpoint.com/extracting-code-execution-from-winrar/" target="_blank" rel="noopener">Extracting a 19 Year Old Code Execution from WinRAR - Check Point Research</a></p>
 
             </div>
             <hr/>
@@ -662,9 +643,9 @@ npm install</code></pre><h2 id="2-克隆hexo分支"><a href="#2-克隆hexo分支
             <br/>
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
-                    《Github分支备份hexo》
+                    《WinRAR目录穿越漏洞复现》
                 </span> 由
-            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/07/05/github-fen-zhi-bei-fen-hexo/" property="cc:attributionName"
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/07/26/winrar-mu-lu-chuan-yue-lou-dong-fu-xian/" property="cc:attributionName"
                rel="cc:attributionURL">
                 dylan
             </a> 采用
@@ -963,29 +944,92 @@ npm install</code></pre><h2 id="2-克隆hexo分支"><a href="#2-克隆hexo分支
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2019/07/22/discuz-ml-v3.x-dai-ma-zhu-ru-lou-dong-fu-xian/">
+                <a href="/2019/07/26/winrar-mu-lu-chuan-yue-lou-dong-fu-xian/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="Discuz ML! V3.X 代码注入漏洞复现">
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="WinRAR目录穿越漏洞复现">
                         
-                        <span class="card-title">Discuz ML! V3.X 代码注入漏洞复现</span>
+                        <span class="card-title">WinRAR目录穿越漏洞复现</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            一、漏洞概述2019年7月11日， Discuz！ML被发现存在一处远程代码执行漏洞，攻击者通过在请求流量的cookie字段中的language参数处插入构造的payload，进行远程代码执行利用，该漏洞利用方式简单，危害性较大。本次漏洞是
+                            0x01 漏洞概述该漏洞是由于 WinRAR 所使用的一个陈旧的动态链接库UNACEV2.dll所造成的，该动态链接库在 2006 年被编译，没有任何的基础保护机制(ASLR, DEP 等)。动态链接库的作用是处理 ACE 格式文件。而Wi
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-22
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-26
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Information-Security/" class="post-category" target="_blank">
+                                    Information Security
+                                </a>
+                            
+                            
                         </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/漏洞/" target="_blank">
+                        <span class="chip bg-color">漏洞</span>
+                    </a>
+                    
+                    <a href="/tags/复现/" target="_blank">
+                        <span class="chip bg-color">复现</span>
+                    </a>
+                    
+                    <a href="/tags/WinRAR/" target="_blank">
+                        <span class="chip bg-color">WinRAR</span>
+                    </a>
+                    
+                    <a href="/tags/目录穿越/" target="_blank">
+                        <span class="chip bg-color">目录穿越</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/07/25/shu-dong-x-forwarded-for-zhu-ru-lou-dong-fu-xian/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="树洞外链X_FORWARDED_FOR注入漏洞复现">
+                        
+                        <span class="card-title">树洞外链X_FORWARDED_FOR注入漏洞复现</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            一、漏洞概述树洞外链现在已经停止更新，作者又开发了Cloudreve，有兴趣可以了解一下。回归正题，虽然树洞已经停止更新了，还是可以做一些研究学习。树洞外链存在X_FORWARDED_FOR注入漏洞，最新版本的已经修复了，2.2.1版本的可
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-25
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
@@ -1009,68 +1053,8 @@ npm install</code></pre><h2 id="2-克隆hexo分支"><a href="#2-克隆hexo分支
                         <span class="chip bg-color">复现</span>
                     </a>
                     
-                    <a href="/tags/Discuz/" target="_blank">
-                        <span class="chip bg-color">Discuz</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2019/07/04/li-yong-github-pages-da-jian-ge-ren-bo-ke-cai-keng-zhi-lu/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="利用GitHub Pages+Hexo搭建个人博客（踩坑之路）">
-                        
-                        <span class="card-title">利用GitHub Pages+Hexo搭建个人博客（踩坑之路）</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-前言其实很早之前就想搭建一个个人博客，出于各种原因，一直没有行动。最近终于着手开始搭建，希望自己可以一直坚持下去。在搭建的过程中，踩了不少坑，特此记录，也希望对后来人有一点点参考价值。
-
-一、Github1. 注册Github账号进入Gi
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-04
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fa fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/Blog/" class="post-category" target="_blank">
-                                    Blog
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/Blog/" target="_blank">
-                        <span class="chip bg-color">Blog</span>
-                    </a>
-                    
-                    <a href="/tags/GitHub/" target="_blank">
-                        <span class="chip bg-color">GitHub</span>
-                    </a>
-                    
-                    <a href="/tags/Hexo/" target="_blank">
-                        <span class="chip bg-color">Hexo</span>
+                    <a href="/tags/树洞外链/" target="_blank">
+                        <span class="chip bg-color">树洞外链</span>
                     </a>
                     
                 </div>
