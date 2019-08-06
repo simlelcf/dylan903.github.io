@@ -1147,7 +1147,7 @@ npm install</code></pre><h2 id="2-克隆hexo分支"><a href="#2-克隆hexo分支
             contentSelector: '#articleContent',
             headingsOffset: -($(window).height() * 0.4 - 45),
             // headingsOffset: -205,
-            headingSelector: 'h1, h2, h3, h4'
+            headingSelector: 'h1, h2, h3, h4, h5'
         });
 
         // modify the toc link href to support Chinese.
@@ -1159,7 +1159,7 @@ npm install</code></pre><h2 id="2-克隆hexo分支"><a href="#2-克隆hexo分支
 
         // modify the heading title id to support Chinese.
         i = 0;
-        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+        $('#articleContent').children('h1, h2, h3, h4, h5').each(function () {
             $(this).attr('id', tocHeading + (++i));
         });
 
@@ -1228,7 +1228,7 @@ npm install</code></pre><h2 id="2-克隆hexo分支"><a href="#2-克隆hexo分支
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">8.6k</span>
+                <span class="white-color">9.3k</span>
             
 
             

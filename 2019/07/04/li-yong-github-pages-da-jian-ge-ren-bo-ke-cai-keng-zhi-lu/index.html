@@ -1157,7 +1157,7 @@ hexo d</code></pre><p>deploy时可能要你输入密码，再刷新username.gith
             contentSelector: '#articleContent',
             headingsOffset: -($(window).height() * 0.4 - 45),
             // headingsOffset: -205,
-            headingSelector: 'h1, h2, h3, h4'
+            headingSelector: 'h1, h2, h3, h4, h5'
         });
 
         // modify the toc link href to support Chinese.
@@ -1169,7 +1169,7 @@ hexo d</code></pre><p>deploy时可能要你输入密码，再刷新username.gith
 
         // modify the heading title id to support Chinese.
         i = 0;
-        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+        $('#articleContent').children('h1, h2, h3, h4, h5').each(function () {
             $(this).attr('id', tocHeading + (++i));
         });
 
@@ -1238,7 +1238,7 @@ hexo d</code></pre><p>deploy时可能要你输入密码，再刷新username.gith
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">8.6k</span>
+                <span class="white-color">9.3k</span>
             
 
             
