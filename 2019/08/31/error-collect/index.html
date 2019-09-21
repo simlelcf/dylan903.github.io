@@ -423,14 +423,14 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        147
+                        451
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        2 分
                     </div>
                     
                 
@@ -454,6 +454,19 @@
 <p>通过参考<a href="https://github.com/pypa/pip/issues/4104" target="_blank" rel="noopener">https://github.com/pypa/pip/issues/4104</a></p>
 <p>利用easy_install –version 查看了setuptools的版本，将其升级到30.1.0版本</p>
 <p>pip install –upgrade setuptools==30.1.0</p>
+<h2 id="dpkg报错"><a href="#dpkg报错" class="headerlink" title="dpkg报错"></a>dpkg报错</h2><pre><code>dpkg-deb: error: subprocess paste was killed by signal (Broken pipe)
+Errors were encountered while processing:</code></pre><p>使用命令<code>sudo autoremove -y</code> 即可</p>
+<h2 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h2><h3 id="重启服务器后-Nginx-启动失败"><a href="#重启服务器后-Nginx-启动失败" class="headerlink" title="重启服务器后 Nginx 启动失败"></a>重启服务器后 Nginx 启动失败</h3><p>重启Ubuntu服务器后，使用命令<code>systemctl start nginx</code>提示：<br><code>Job for nginx.service failed because the control process exited with error code. See &quot;systemctl status nginx.service&quot; and &quot;journalctl -xe&quot; for details.</code></p>
+<p>使用<code>nginx -s reload</code> 提示如下，<code>sites-enabled</code>文件夹下多了一些其他文件和文件夹，删除多余的即可<br><code>nginx: [crit] pread() &quot;/etc/nginx/sites-enabled/scans&quot; failed (21: Is a directory)</code></p>
+<p>再次使用<code>nginx -s reload</code> 报错如下，这应该是因为重启把nginx进程杀死后pid丢失了<br><code>nginx: [error] open() &quot;/run/nginx.pid&quot; failed (2: No such file or directory</code></p>
+<p>解决方法如下：<br><code>nginx -c /etc/nginx/nginx.conf （其中/etc/nginx/nginx.conf 是你的nginx.conf的文件路径）</code></p>
+<p>最后使用<code>nginx -s reload</code>即可重新启动</p>
+<h1 id="0x03-语言"><a href="#0x03-语言" class="headerlink" title="0x03 语言"></a>0x03 语言</h1><h2 id="python"><a href="#python" class="headerlink" title="python"></a>python</h2><h3 id="pip升级报错"><a href="#pip升级报错" class="headerlink" title="pip升级报错"></a>pip升级报错</h3><p>Ubuntu 16  pip3 升级之后 报错 如下：<br><code>from pip import main ImportError: cannot import name &#39;main&#39;</code></p>
+<p>两种解决办法：</p>
+<ol>
+<li>使用命令  <code>python3 -m pip install 模块名</code> 来安装即可。</li>
+<li>使用命令<code>sudo vim /usr/bin/pip3</code><br> 修改：<code>from pip import main</code> 为：<code>from pip._internal import main</code><br> 保存退出,再运行 pip3 install 模块名 就能成功了！</li>
+</ol>
 <hr>
 <h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p><a href="https://blog.csdn.net/qq_40259641/article/details/79022844?utm_source=blogxgwz4" target="_blank" rel="noopener">安装VMware Tools显示灰色正确解决办法</a></p>
 
@@ -1021,12 +1034,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Information-Security/" target="_blank">
-                        <span class="chip bg-color">Information Security</span>
-                    </a>
-                    
                     <a href="/tags/tools/" target="_blank">
                         <span class="chip bg-color">tools</span>
+                    </a>
+                    
+                    <a href="/tags/Information-Security/" target="_blank">
+                        <span class="chip bg-color">Information Security</span>
                     </a>
                     
                     <a href="/tags/sources/" target="_blank">
@@ -1188,7 +1201,7 @@
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">13.9k</span>
+                <span class="white-color">15k</span>
             
 
             
