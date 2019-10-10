@@ -4,10 +4,12 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="Error_Collect, dylan&#39;s blog">
-    <meta name="description" content="0x01 前言记录一下遇到的坑爹的事，和一些问题的解决办法
-0x02 WindowsVMware‘安装VMware Tools’ 按钮呈灰色如图：
-解决办法：关闭虚拟机，在虚拟机设置分别设置CD/DVD、CD/DVD2和软盘为自动检测，重启">
+    <meta name="keywords" content="泛微OA  WorkflowCenterTreeData接口注入漏洞复现, dylan&#39;s blog">
+    <meta name="description" content="0x01 前言在CNVD上刚发现泛微OA的新漏洞，就有大佬发出漏洞细节，就进行了复现。
+0x02 漏洞影响攻击者可利用漏洞获取数据库敏感信息。
+（限Oracle数据库）
+ 影响版本 暂不明确
+0x03 漏洞分析泛微e-cology OA系统">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -15,7 +17,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Error_Collect | dylan&#39;s blog</title>
+    <title>泛微OA  WorkflowCenterTreeData接口注入漏洞复现 | dylan&#39;s blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -275,13 +277,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Error_Collect
+                        泛微OA  WorkflowCenterTreeData接口注入漏洞复现
                     </div>
                 </div>
             </div>
@@ -392,8 +394,16 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Error/" target="_blank">
-                                <span class="chip bg-color">Error</span>
+                            <a href="/tags/复现/" target="_blank">
+                                <span class="chip bg-color">复现</span>
+                            </a>
+                        
+                            <a href="/tags/泛微OA/" target="_blank">
+                                <span class="chip bg-color">泛微OA</span>
+                            </a>
+                        
+                            <a href="/tags/注入漏洞/" target="_blank">
+                                <span class="chip bg-color">注入漏洞</span>
                             </a>
                         
                     </div>
@@ -404,8 +414,8 @@
                     <div class="post-cate">
                         <i class="fa fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Error/" class="post-category" target="_blank">
-                                Error
+                            <a href="/categories/web安全/" class="post-category" target="_blank">
+                                web安全
                             </a>
                         
                     </div>
@@ -416,21 +426,21 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-08-31
+                    2019-10-10
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        451
+                        143
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        2 分
+                        1 分
                     </div>
                     
                 
@@ -446,29 +456,15 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="0x01-前言"><a href="#0x01-前言" class="headerlink" title="0x01 前言"></a>0x01 前言</h1><p>记录一下遇到的坑爹的事，和一些问题的解决办法</p>
-<h1 id="0x02-Windows"><a href="#0x02-Windows" class="headerlink" title="0x02 Windows"></a>0x02 Windows</h1><h2 id="VMware"><a href="#VMware" class="headerlink" title="VMware"></a>VMware</h2><h3 id="‘安装VMware-Tools’-按钮呈灰色"><a href="#‘安装VMware-Tools’-按钮呈灰色" class="headerlink" title="‘安装VMware Tools’ 按钮呈灰色"></a>‘安装VMware Tools’ 按钮呈灰色</h3><p>如图：<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190908205656.png" alt></p>
-<p>解决办法：<br>关闭虚拟机，在虚拟机设置分别设置CD/DVD、CD/DVD2和软盘为自动检测，重启即可<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190908205835.png" alt></p>
-<hr>
-<h1 id="0x03-Linux"><a href="#0x03-Linux" class="headerlink" title="0x03 Linux"></a>0x03 Linux</h1><h2 id="docker"><a href="#docker" class="headerlink" title="docker"></a>docker</h2><h3 id="docker-compose"><a href="#docker-compose" class="headerlink" title="docker-compose"></a>docker-compose</h3><p>在Centos安装docker-compose时，出现了ImportError: ‘module’ object has no attribute ‘check_specifier，</p>
-<p>通过参考<a href="https://github.com/pypa/pip/issues/4104" target="_blank" rel="noopener">https://github.com/pypa/pip/issues/4104</a></p>
-<p>利用easy_install –version 查看了setuptools的版本，将其升级到30.1.0版本</p>
-<p>pip install –upgrade setuptools==30.1.0</p>
-<h2 id="dpkg报错"><a href="#dpkg报错" class="headerlink" title="dpkg报错"></a>dpkg报错</h2><pre><code>dpkg-deb: error: subprocess paste was killed by signal (Broken pipe)
-Errors were encountered while processing:</code></pre><p>使用命令<code>sudo autoremove -y</code> 即可</p>
-<h2 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h2><h3 id="重启服务器后-Nginx-启动失败"><a href="#重启服务器后-Nginx-启动失败" class="headerlink" title="重启服务器后 Nginx 启动失败"></a>重启服务器后 Nginx 启动失败</h3><p>重启Ubuntu服务器后，使用命令<code>systemctl start nginx</code>提示：<br><code>Job for nginx.service failed because the control process exited with error code. See &quot;systemctl status nginx.service&quot; and &quot;journalctl -xe&quot; for details.</code></p>
-<p>使用<code>nginx -s reload</code> 提示如下，<code>sites-enabled</code>文件夹下多了一些其他文件和文件夹，删除多余的即可<br><code>nginx: [crit] pread() &quot;/etc/nginx/sites-enabled/scans&quot; failed (21: Is a directory)</code></p>
-<p>再次使用<code>nginx -s reload</code> 报错如下，这应该是因为重启把nginx进程杀死后pid丢失了<br><code>nginx: [error] open() &quot;/run/nginx.pid&quot; failed (2: No such file or directory</code></p>
-<p>解决方法如下：<br><code>nginx -c /etc/nginx/nginx.conf （其中/etc/nginx/nginx.conf 是你的nginx.conf的文件路径）</code></p>
-<p>最后使用<code>nginx -s reload</code>即可重新启动</p>
-<h1 id="0x03-语言"><a href="#0x03-语言" class="headerlink" title="0x03 语言"></a>0x03 语言</h1><h2 id="python"><a href="#python" class="headerlink" title="python"></a>python</h2><h3 id="pip升级报错"><a href="#pip升级报错" class="headerlink" title="pip升级报错"></a>pip升级报错</h3><p>Ubuntu 16  pip3 升级之后 报错 如下：<br><code>from pip import main ImportError: cannot import name &#39;main&#39;</code></p>
-<p>两种解决办法：</p>
-<ol>
-<li>使用命令  <code>python3 -m pip install 模块名</code> 来安装即可。</li>
-<li>使用命令<code>sudo vim /usr/bin/pip3</code><br> 修改：<code>from pip import main</code> 为：<code>from pip._internal import main</code><br> 保存退出,再运行 pip3 install 模块名 就能成功了！</li>
-</ol>
-<hr>
-<h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p><a href="https://blog.csdn.net/qq_40259641/article/details/79022844?utm_source=blogxgwz4" target="_blank" rel="noopener">安装VMware Tools显示灰色正确解决办法</a></p>
+                <h1 id="0x01-前言"><a href="#0x01-前言" class="headerlink" title="0x01 前言"></a>0x01 前言</h1><p>在CNVD上刚发现泛微OA的新漏洞，就有大佬发出漏洞细节，就进行了复现。</p>
+<h1 id="0x02-漏洞影响"><a href="#0x02-漏洞影响" class="headerlink" title="0x02 漏洞影响"></a>0x02 漏洞影响</h1><p>攻击者可利用漏洞获取数据库敏感信息。</p>
+<p><strong>（限Oracle数据库）</strong></p>
+<p> 影响版本 暂不明确</p>
+<h1 id="0x03-漏洞分析"><a href="#0x03-漏洞分析" class="headerlink" title="0x03 漏洞分析"></a>0x03 漏洞分析</h1><p>泛微e-cology OA系统的WorkflowCenterTreeData接口在使用oracle数据库时,由于内置sql语句拼接不严,导致其存在sql注入漏洞</p>
+<p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20191010155307.png" alt></p>
+<h1 id="0x04-漏洞复现"><a href="#0x04-漏洞复现" class="headerlink" title="0x04 漏洞复现"></a>0x04 漏洞复现</h1><h2 id="复现"><a href="#复现" class="headerlink" title="复现"></a>复现</h2><p>直接抓包，使用payload请求</p>
+<p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20191010155058.png" alt></p>
+<h2 id="payload"><a href="#payload" class="headerlink" title="payload"></a>payload</h2><h2 id="POC"><a href="#POC" class="headerlink" title="POC"></a>POC</h2><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.cnvd.org.cn/flaw/show/CNVD-2019-34241" target="_blank" rel="noopener">泛微e-cology OA系统Wo***接口存在SQL注入漏洞</a></p>
 
             </div>
             <hr/>
@@ -627,9 +623,9 @@ Errors were encountered while processing:</code></pre><p>使用命令<code>sudo 
             <br/>
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
-                    《Error_Collect》
+                    《泛微OA  WorkflowCenterTreeData接口注入漏洞复现》
                 </span> 由
-            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/08/31/error-collect/" property="cc:attributionName"
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/10/10/fan-wei-oa-workflowcentertreedata-jie-kou-zhu-ru-lou-dong-fu-xian/" property="cc:attributionName"
                rel="cc:attributionURL">
                 dylan
             </a> 采用
@@ -928,65 +924,60 @@ Errors were encountered while processing:</code></pre><p>使用命令<code>sudo 
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2019/08/31/sublime-text3-shi-yong-zhi-nan/">
+                <a href="/2019/10/10/fan-wei-oa-workflowcentertreedata-jie-kou-zhu-ru-lou-dong-fu-xian/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="Sublime Text3使用指南">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="泛微OA  WorkflowCenterTreeData接口注入漏洞复现">
                         
-                        <span class="card-title">Sublime Text3使用指南</span>
+                        <span class="card-title">泛微OA  WorkflowCenterTreeData接口注入漏洞复现</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            0x01 前言sublime是一款轻便、快捷的编辑器，好处多多，只不过配置起来麻烦了点，所有在此记录一下自用配置。（本文默认环境为window 10）
-
-0x02 下载官网直达,下载安装即可
-0x03 使用技巧启用VIM模式在Prefere
+                            0x01 前言在CNVD上刚发现泛微OA的新漏洞，就有大佬发出漏洞细节，就进行了复现。
+0x02 漏洞影响攻击者可利用漏洞获取数据库敏感信息。
+（限Oracle数据库）
+ 影响版本 暂不明确
+0x03 漏洞分析泛微e-cology OA系统
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-08-31
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-10-10
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/tools/" class="post-category" target="_blank">
-                                    tools
+                            <a href="/categories/web安全/" class="post-category" target="_blank">
+                                    web安全
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Sublime-Text3/" target="_blank">
-                        <span class="chip bg-color">Sublime Text3</span>
+                    <a href="/tags/复现/" target="_blank">
+                        <span class="chip bg-color">复现</span>
                     </a>
                     
-                    <a href="/tags/透明美化/" target="_blank">
-                        <span class="chip bg-color">透明美化</span>
+                    <a href="/tags/泛微OA/" target="_blank">
+                        <span class="chip bg-color">泛微OA</span>
                     </a>
                     
-                    <a href="/tags/python/" target="_blank">
-                        <span class="chip bg-color">python</span>
-                    </a>
-                    
-                    <a href="/tags/插件/" target="_blank">
-                        <span class="chip bg-color">插件</span>
-                    </a>
-                    
-                    <a href="/tags/vim/" target="_blank">
-                        <span class="chip bg-color">vim</span>
+                    <a href="/tags/注入漏洞/" target="_blank">
+                        <span class="chip bg-color">注入漏洞</span>
                     </a>
                     
                 </div>
@@ -1000,31 +991,35 @@ Errors were encountered while processing:</code></pre><p>使用命令<code>sudo 
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/08/23/zi-yuan-gong-ju/">
+                <a href="/2019/09/30/kali-zhua-bao-po-jie-wifi-mi-ma/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="资源工具">
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="kali抓包破解WIFI密码">
                         
-                        <span class="card-title">资源工具</span>
+                        <span class="card-title">kali抓包破解WIFI密码</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Being their worst nightmare！
+                            0x01 前言使用kali破解wifi密码，如果kali安装在虚拟机，需要一个外置usb网卡。
+0x02 开始查看插入的网卡打开kali虚拟机，插入USB无线网卡，打开终端
+iwconfig
+
+查看无线网卡airmon-ng上面命令列出了支
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-08-23
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-30
                             </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/tools/" class="post-category" target="_blank">
-                                    tools
+                            <a href="/categories/无线安全/" class="post-category" target="_blank">
+                                    无线安全
                                 </a>
                             
                             
@@ -1042,8 +1037,16 @@ Errors were encountered while processing:</code></pre><p>使用命令<code>sudo 
                         <span class="chip bg-color">tools</span>
                     </a>
                     
-                    <a href="/tags/sources/" target="_blank">
-                        <span class="chip bg-color">sources</span>
+                    <a href="/tags/wifi/" target="_blank">
+                        <span class="chip bg-color">wifi</span>
+                    </a>
+                    
+                    <a href="/tags/爆破/" target="_blank">
+                        <span class="chip bg-color">爆破</span>
+                    </a>
+                    
+                    <a href="/tags/密码/" target="_blank">
+                        <span class="chip bg-color">密码</span>
                     </a>
                     
                 </div>
