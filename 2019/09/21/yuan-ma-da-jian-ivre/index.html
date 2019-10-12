@@ -437,14 +437,14 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        855
+                        995
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        4 分
+                        5 分
                     </div>
                     
                 
@@ -464,7 +464,7 @@
 <h1 id="0x02-Install-amp-Setup"><a href="#0x02-Install-amp-Setup" class="headerlink" title="0x02 Install&amp;Setup"></a>0x02 Install&amp;Setup</h1><h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><p>安装需要的服务器数据库<br><code>sudo apt-get -y install mongodb python-pymongo python-crypto \</code><br><code>python-future python-bottle apache2 libapache2-mod-wsgi dokuwiki</code></p>
 <p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190921161300.png" alt></p>
 <p>下载源码<br><code>git clone https://github.com/cea-sec/ivre</code></p>
-<p>源码安装<br><code>cd ivre</code><br><code>python3 setup.py build</code><br><code>sudo python3 setup.py install</code></p>
+<p>源码安装<br>（推荐用Python2，Python3踩坑见文末）<br><code>cd ivre</code><br><code>python3 setup.py build</code><br><code>sudo python3 setup.py install</code></p>
 <h2 id="Setup"><a href="#Setup" class="headerlink" title="Setup"></a>Setup</h2><pre><code>$ sudo -s
 # cd /var/www/html ## or depending on your version /var/www
 # rm index.html
@@ -507,8 +507,22 @@ $ sudo ivre ipdata --download --import-all</code></pre><p><img src="https://raw.
 <p>如果报如下错误：</p>
 <pre><code>nmap: unrecognized option &#39;--script-timeout&#39;
 ADDING TARGET 1 : 120.75.39.145
-ERROR: NMAP PROCESS IS DEAD</code></pre><p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190920111226.png" alt></p>
-<p>因为 nmap版本过低，Nmap Debian 版本可能比当前的版本晚一年甚至更长的时间<br>下载最新 RPM 格式的 nmap 包，然后使用 alien 工具把他转换成 debian 包，再用 dpkg 工具安装即可。</p>
+ERROR: NMAP PROCESS IS DEAD</code></pre><p>或者</p>
+<pre><code>Traceback (most recent call last):
+  File &quot;/usr/local/bin/ivre&quot;, line 84, in &lt;module&gt;
+    main()
+  File &quot;/usr/local/bin/ivre&quot;, line 56, in main
+    tools.get_command(next(iter(possible_commands)))()
+  File &quot;/usr/local/lib/python2.7/dist-packages/ivre/tools/runscans.py&quot;, line 498, in main
+    accept_target_status=accept_target_status)
+  File &quot;/usr/local/lib/python2.7/dist-packages/ivre/tools/runscans.py&quot;, line 217, in call_nmap
+    stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+  File &quot;/usr/lib/python2.7/subprocess.py&quot;, line 711, in __init__
+    errread, errwrite)
+  File &quot;/usr/lib/python2.7/subprocess.py&quot;, line 1343, in _execute_child
+    raise child_exception
+OSError: [Errno 2] No such file or directory</code></pre><p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190920111226.png" alt></p>
+<p>因为 nmap未安装或者版本过低，Nmap Debian 版本可能比当前的版本晚一年甚至更长的时间<br>下载最新 RPM 格式的 nmap 包，然后使用 alien 工具把他转换成 debian 包，再用 dpkg 工具安装即可。</p>
 <p>步骤如下：</p>
 <ul>
 <li>先卸载已安装的nmap<br><code>sudo apt remove nmap -y</code></li>
@@ -521,7 +535,9 @@ ERROR: NMAP PROCESS IS DEAD</code></pre><p><img src="https://raw.githubuserconte
 &gt;              scans/ROUTABLE/up
 $ ivre db2view nmap</code></pre><p>返回Web UI，刷新即可查看扫描结果。</p>
 <p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190921213155.png" alt></p>
-<h2 id="WEB-UI-没有数据"><a href="#WEB-UI-没有数据" class="headerlink" title="WEB-UI 没有数据"></a>WEB-UI 没有数据</h2><p>安装好后，数据导入了数据库，web-ui界面一直显示Conuting，没有数据<br>查看apache错误日志，发现<br>使用的是Python3 安装的，但是它会调用Python2，所以报错<br>解决办法是</p>
+<h2 id="WEB-UI-没有数据"><a href="#WEB-UI-没有数据" class="headerlink" title="WEB-UI 没有数据"></a>WEB-UI 没有数据</h2><p>安装好后，数据导入了数据库，web-ui界面一直显示Conuting，没有数据</p>
+<p><code>cat /var/log/apache2/error.log</code></p>
+<p>查看apache错误日志，发现<br>使用的是Python3 安装的，但是它会调用Python2，所以报错<br>解决办法是</p>
 <p>直接卸载python2，<br>或者<br>使用python2来安装IVRE。</p>
 <p>如果还不出来，再查看apache错误日志，根据报错来改，可能缺少模块。</p>
 <h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p><a href="https://mstajbakhsh.ir/ivre-drunk-frenchman-port-scanner-framework/" target="_blank" rel="noopener">IVRE! Drunk Frenchman Port Scanner Framework!</a><br><a href="https://doc.ivre.rocks/en/latest/overview/index.html" target="_blank" rel="noopener">Overview — IVRE documentation</a></p>
@@ -1258,7 +1274,7 @@ $ ivre db2view nmap</code></pre><p>返回Web UI，刷新即可查看扫描结果
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">20.6k</span>
+                <span class="white-color">22.8k</span>
             
 
             

