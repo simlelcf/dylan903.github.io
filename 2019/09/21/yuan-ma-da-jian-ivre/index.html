@@ -406,6 +406,10 @@
                                 <span class="chip bg-color">IVRE</span>
                             </a>
                         
+                            <a href="/tags/网络侦查框架/" target="_blank">
+                                <span class="chip bg-color">网络侦查框架</span>
+                            </a>
+                        
                     </div>
                     
                 </div>
@@ -433,14 +437,14 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        753
+                        855
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        3 分
+                        4 分
                     </div>
                     
                 
@@ -517,6 +521,9 @@ ERROR: NMAP PROCESS IS DEAD</code></pre><p><img src="https://raw.githubuserconte
 &gt;              scans/ROUTABLE/up
 $ ivre db2view nmap</code></pre><p>返回Web UI，刷新即可查看扫描结果。</p>
 <p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190921213155.png" alt></p>
+<h2 id="WEB-UI-没有数据"><a href="#WEB-UI-没有数据" class="headerlink" title="WEB-UI 没有数据"></a>WEB-UI 没有数据</h2><p>安装好后，数据导入了数据库，web-ui界面一直显示Conuting，没有数据<br>查看apache错误日志，发现<br>使用的是Python3 安装的，但是它会调用Python2，所以报错<br>解决办法是</p>
+<p>直接卸载python2，<br>或者<br>使用python2来安装IVRE。</p>
+<p>如果还不出来，再查看apache错误日志，根据报错来改，可以缺少模块。</p>
 <h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p><a href="https://mstajbakhsh.ir/ivre-drunk-frenchman-port-scanner-framework/" target="_blank" rel="noopener">IVRE! Drunk Frenchman Port Scanner Framework!</a><br><a href="https://doc.ivre.rocks/en/latest/overview/index.html" target="_blank" rel="noopener">Overview — IVRE documentation</a></p>
 
             </div>
@@ -1251,7 +1258,7 @@ $ ivre db2view nmap</code></pre><p>返回Web UI，刷新即可查看扫描结果
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">20.5k</span>
+                <span class="white-color">20.6k</span>
             
 
             
