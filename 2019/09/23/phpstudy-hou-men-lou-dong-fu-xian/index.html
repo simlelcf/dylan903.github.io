@@ -5,7 +5,7 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="phpStudy后门漏洞复现, dylan&#39;s blog">
-    <meta name="description" content="0x01 概述phpStudy是一款PHP调试环境的程序集成包，集成了最新的Apache、PHP、phpMyAdmin、ZendOptimizer等多款软件一次性安装，无需配置，即装即用。由于其免费且方便的特性，在国内有着近百万的PHP语言">
+    <meta name="description" content="0x01 漏洞概述phpStudy是一款PHP调试环境的程序集成包，集成了最新的Apache、PHP、phpMyAdmin、ZendOptimizer等多款软件一次性安装，无需配置，即装即用。由于其免费且方便的特性，在国内有着近百万的PHP">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -433,7 +433,7 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        810
+                        814
                     </div>
                     
 
@@ -456,7 +456,7 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="0x01-概述"><a href="#0x01-概述" class="headerlink" title="0x01 概述"></a>0x01 概述</h1><p>phpStudy是一款PHP调试环境的程序集成包，集成了最新的Apache、PHP、phpMyAdmin、<br>ZendOptimizer等多款软件一次性安装，无需配置，即装即用。由于其免费且方便的特性，<br>在国内有着近百万的PHP语言学习者、开发者用户。<br>最近杭州公安在<a href="https://mp.weixin.qq.com/s?__biz=MzA4MjM2MDgxMA==&mid=2815602999&idx=1&sn=b01cd1d8b2c50df48d4196400a3db8d9&chksm=bda0f1b28ad778a46f7cf77ec1ddf1488a063b183732735bc3808621d71765792213f8deb6fe&scene=21#wechat_redirect" target="_blank" rel="noopener">“杭州警方通报打击涉网违法犯罪暨“净网2019”专项行动战果”</a>一文中提到:</p>
+                <h1 id="0x01-漏洞概述"><a href="#0x01-漏洞概述" class="headerlink" title="0x01 漏洞概述"></a>0x01 漏洞概述</h1><p>phpStudy是一款PHP调试环境的程序集成包，集成了最新的Apache、PHP、phpMyAdmin、<br>ZendOptimizer等多款软件一次性安装，无需配置，即装即用。由于其免费且方便的特性，<br>在国内有着近百万的PHP语言学习者、开发者用户。<br>最近杭州公安在<a href="https://mp.weixin.qq.com/s?__biz=MzA4MjM2MDgxMA==&mid=2815602999&idx=1&sn=b01cd1d8b2c50df48d4196400a3db8d9&chksm=bda0f1b28ad778a46f7cf77ec1ddf1488a063b183732735bc3808621d71765792213f8deb6fe&scene=21#wechat_redirect" target="_blank" rel="noopener">“杭州警方通报打击涉网违法犯罪暨“净网2019”专项行动战果”</a>一文中提到:</p>
 <blockquote>
 <p>Phpstudy软件是国内的一款免费的PHP调试环境的程序集成包，通过集成Apache、PHP、MySQL、phpMyAdmin、ZendOptimizer<br>多款软件一次性安装，无需配置即可直接安装使用，具有PHP环境调试和PHP开发功能，在国内有着近百万PHP语言学习者、开发者用户。<br>正是这样一款公益性软件，2018年12月4日，西湖区公安分局网警大队接报案称，某公司发现公司内有20余台计算机被执行危险命令，<br>疑似远程控制抓取账号密码等计算机数据 回传大量敏感信息。<br>据统计，截止抓获时间，犯罪嫌疑人共非法控制计算机67万余台，非法获取账号密码类、聊天数据类、设备码类等数据10万余组，<br>非法牟利共计600余万元。</p>
 </blockquote>
@@ -465,7 +465,7 @@
 <li>phpStudy2016<br>  <code>php\php-5.2.17\ext\php_xmlrpc.dll</code><br>  <code>php\php-5.4.45\ext\php_xmlrpc.dll</code></li>
 <li>phpStudy2018<br>  <code>PHPTutorial\php\php-5.2.17\ext\php_xmlrpc.dll</code><br>  <code>PHPTutorial\php\php-5.4.45\ext\php_xmlrpc.dll</code></li>
 </ul>
-<h1 id="0x03-复现"><a href="#0x03-复现" class="headerlink" title="0x03 复现"></a>0x03 复现</h1><h2 id="复现环境："><a href="#复现环境：" class="headerlink" title="复现环境："></a>复现环境：</h2><p>win10+phpStudy 2018(php-5.4.45+Apache)<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190924232920.png" alt></p>
+<h1 id="0x03-漏洞复现"><a href="#0x03-漏洞复现" class="headerlink" title="0x03 漏洞复现"></a>0x03 漏洞复现</h1><h2 id="复现环境："><a href="#复现环境：" class="headerlink" title="复现环境："></a>复现环境：</h2><p>win10+phpStudy 2018(php-5.4.45+Apache)<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190924232920.png" alt></p>
 <h2 id="后门验证："><a href="#后门验证：" class="headerlink" title="后门验证："></a>后门验证：</h2><p>用记事本或者Notepad++打开phpstudy安装目录下的：</p>
 <p><code>PHPTutorial\php\php-5.4.45\ext\php_xmlrpc.dll</code></p>
 <p>存在<code>@eval(%s(&#39;%s&#39;));</code>即说明有后门。</p>
@@ -992,12 +992,12 @@ iwconfig
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/web安全/" target="_blank">
-                        <span class="chip bg-color">web安全</span>
-                    </a>
-                    
                     <a href="/tags/tools/" target="_blank">
                         <span class="chip bg-color">tools</span>
+                    </a>
+                    
+                    <a href="/tags/web安全/" target="_blank">
+                        <span class="chip bg-color">web安全</span>
                     </a>
                     
                     <a href="/tags/wifi/" target="_blank">
@@ -1057,10 +1057,6 @@ iwconfig
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/tools/" target="_blank">
-                        <span class="chip bg-color">tools</span>
-                    </a>
-                    
                     <a href="/tags/Ubuntu16/" target="_blank">
                         <span class="chip bg-color">Ubuntu16</span>
                     </a>
@@ -1071,6 +1067,10 @@ iwconfig
                     
                     <a href="/tags/IVRE/" target="_blank">
                         <span class="chip bg-color">IVRE</span>
+                    </a>
+                    
+                    <a href="/tags/tools/" target="_blank">
+                        <span class="chip bg-color">tools</span>
                     </a>
                     
                     <a href="/tags/网络侦查框架/" target="_blank">
@@ -1232,7 +1232,7 @@ iwconfig
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">22.8k</span>
+                <span class="white-color">23.2k</span>
             
 
             
