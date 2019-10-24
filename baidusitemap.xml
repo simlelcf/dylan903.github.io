@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://dylan903.coding.me/2019/10/23/new-note/</loc>
+    <loc>https://dylan903.coding.me/2019/10/24/thinkcmf-kuang-jia-ren-yi-nei-rong-bao-han-lou-dong-fu-xian/</loc>
+    <lastmod>2019-10-24</lastmod>
+  </url>  <url>
+    <loc>https://dylan903.coding.me/2019/08/23/zi-yuan-gong-ju/</loc>
+    <lastmod>2019-10-24</lastmod>
+  </url>  <url>
+    <loc>https://dylan903.coding.me/2019/10/23/php-fpm-zai-nginx-te-ding-pei-zhi-xia-yuan-cheng-dai-ma-zhi-xing-lou-dong-fu-xian/</loc>
     <lastmod>2019-10-23</lastmod>
   </url>  <url>
     <loc>https://dylan903.coding.me/2019/10/20/kibana-rce-lou-dong-fu-xian/</loc>
@@ -15,9 +21,6 @@
   </url>  <url>
     <loc>https://dylan903.coding.me/2019/10/15/linux-sudo-root-quan-xian-rao-guo-lou-dong-cve-2019-14287-fu-xian/</loc>
     <lastmod>2019-10-15</lastmod>
-  </url>  <url>
-    <loc>https://dylan903.coding.me/2019/08/23/zi-yuan-gong-ju/</loc>
-    <lastmod>2019-10-14</lastmod>
   </url>  <url>
     <loc>https://dylan903.coding.me/2019/10/10/fan-wei-oa-workflowcentertreedata-jie-kou-zhu-ru-lou-dong-fu-xian/</loc>
     <lastmod>2019-10-12</lastmod>

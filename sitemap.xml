@@ -2,7 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://dylan903.coding.me/2019/10/23/new-note/</loc>
+    <loc>https://dylan903.coding.me/2019/10/24/thinkcmf-kuang-jia-ren-yi-nei-rong-bao-han-lou-dong-fu-xian/</loc>
+    
+    <lastmod>2019-10-24T04:28:22.571Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://dylan903.coding.me/2019/08/23/zi-yuan-gong-ju/</loc>
+    
+    <lastmod>2019-10-24T03:22:18.957Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://dylan903.coding.me/2019/10/23/php-fpm-zai-nginx-te-ding-pei-zhi-xia-yuan-cheng-dai-ma-zhi-xing-lou-dong-fu-xian/</loc>
     
     <lastmod>2019-10-23T14:47:10.781Z</lastmod>
     
@@ -33,13 +47,6 @@
     <loc>https://dylan903.coding.me/2019/10/15/linux-sudo-root-quan-xian-rao-guo-lou-dong-cve-2019-14287-fu-xian/</loc>
     
     <lastmod>2019-10-15T08:12:33.647Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://dylan903.coding.me/2019/08/23/zi-yuan-gong-ju/</loc>
-    
-    <lastmod>2019-10-14T02:07:08.271Z</lastmod>
     
   </url>
   
