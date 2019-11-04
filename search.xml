@@ -4,6 +4,37 @@
   
     
     <entry>
+      <title>Wordpress未授权访问漏洞复现(CVE-2019-17671)</title>
+      <link href="/2019/11/04/wordpress-wei-shou-quan-fang-wen-lou-dong-fu-xian-cve-2019-17671/"/>
+      <url>/2019/11/04/wordpress-wei-shou-quan-fang-wen-lou-dong-fu-xian-cve-2019-17671/</url>
+      
+        <content type="html"><![CDATA[<h1 id="0x00-漏洞概述"><a href="#0x00-漏洞概述" class="headerlink" title="0x00 漏洞概述"></a>0x00 漏洞概述</h1><p>wordpress 爆出最新的查看未经身份验证的文章漏洞，<br>该漏洞源于程序没有正确处理静态查询，<br>攻击者可利用该漏洞未经认证查看部分内容。</p><h1 id="0x01-影响版本"><a href="#0x01-影响版本" class="headerlink" title="0x01 影响版本"></a>0x01 影响版本</h1><p><strong>WordPress &lt;= 5.2.3</strong></p><h1 id="0x02-漏洞复现"><a href="#0x02-漏洞复现" class="headerlink" title="0x02 漏洞复现"></a>0x02 漏洞复现</h1><h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>本地搭建 WordPress 5.2.3 版本</p><p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20191104110719.png" alt></p><p>登陆后台新建私密页面</p><p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20191104110946.png" alt></p><p>随便填入内容，选择私密，发布<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20191104111053.png" alt></p><p>访问前台页面，退出登陆，模拟外部访问</p><p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20191104111225.png" alt></p><h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>直接访问，查看不了私密文章</p><p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20191104111440.png" alt></p><p>输入<code>payload</code>访问，即可未授权访问所有文章</p><p><code>url+/?static=1&amp;order=asc</code></p><p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20191104111641.png" alt></p><h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p><a href="https://www.seebug.org/vuldb/ssvid-98098" target="_blank" rel="noopener">https://www.seebug.org/vuldb/ssvid-98098</a><br><a href="https://mp.weixin.qq.com/s?__biz=MzA4NzUwMzc3NQ==&mid=2247483931&idx=1&sn=44723857a94560c9c6058a06cec4faa7" target="_blank" rel="noopener">https://mp.weixin.qq.com/s?__biz=MzA4NzUwMzc3NQ==&amp;mid=2247483931&amp;idx=1&amp;sn=44723857a94560c9c6058a06cec4faa7</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> web安全 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 漏洞复现 </tag>
+            
+            <tag> Wordpress </tag>
+            
+            <tag> CVE-2019-17671 </tag>
+            
+            <tag> 未授权访问 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>apache_solr_via_velocity_template_rce复现</title>
       <link href="/2019/10/31/apache-solr-via-velocity-template-rce-fu-xian/"/>
       <url>/2019/10/31/apache-solr-via-velocity-template-rce-fu-xian/</url>
@@ -22,11 +53,11 @@
             
             <tag> 漏洞复现 </tag>
             
-            <tag> RCE </tag>
-            
             <tag> solr </tag>
             
             <tag> via_velocity_template </tag>
+            
+            <tag> RCE </tag>
             
         </tags>
       
@@ -109,11 +140,11 @@
             
             <tag> 漏洞复现 </tag>
             
+            <tag> RCE </tag>
+            
             <tag> PHP </tag>
             
             <tag> Nginx </tag>
-            
-            <tag> RCE </tag>
             
             <tag> CVE-2019-11043 </tag>
             
@@ -796,13 +827,13 @@
             
             <tag> Blog </tag>
             
+            <tag> GitHub </tag>
+            
             <tag> hexo </tag>
             
             <tag> 备份 </tag>
             
             <tag> 分支 </tag>
-            
-            <tag> GitHub </tag>
             
         </tags>
       
@@ -829,9 +860,9 @@
             
             <tag> Blog </tag>
             
-            <tag> GitHub </tag>
-            
             <tag> Hexo </tag>
+            
+            <tag> GitHub </tag>
             
         </tags>
       

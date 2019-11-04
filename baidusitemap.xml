@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://dylan903.coding.me/2019/11/04/wordpress-wei-shou-quan-fang-wen-lou-dong-fu-xian-cve-2019-17671/</loc>
+    <lastmod>2019-11-04</lastmod>
+  </url>  <url>
     <loc>https://dylan903.coding.me/2019/10/31/apache-solr-via-velocity-template-rce-fu-xian/</loc>
     <lastmod>2019-10-31</lastmod>
   </url>  <url>
