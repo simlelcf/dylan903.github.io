@@ -430,7 +430,7 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        710
+                        709
                     </div>
                     
 
@@ -456,10 +456,10 @@
                 <h1 id="0x00-漏洞概述"><a href="#0x00-漏洞概述" class="headerlink" title="0x00 漏洞概述"></a>0x00 漏洞概述</h1><p>泛微ecology OA系统接口存在数据库配置信息泄露漏洞,<br>攻击者可通过该漏洞页面直接获取到数据库配置信息，<br>攻击者可通过访问存在漏洞的页面并解密从而获取数据库配置信息</p>
 <h1 id="0x01-影响版本"><a href="#0x01-影响版本" class="headerlink" title="0x01 影响版本"></a>0x01 影响版本</h1><p><strong>漏洞涉及范围包括不限于8.0、9.0版</strong></p>
 <h1 id="0x02-漏洞复现"><a href="#0x02-漏洞复现" class="headerlink" title="0x02 漏洞复现"></a>0x02 漏洞复现</h1><h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>附上 <strong>ecology8.1安装包+安装教程</strong><br>百度链接：<a href="https://pan.baidu.com/s/1ciU0clOlqV3iDqQ6Ic2RAA" target="_blank" rel="noopener">https://pan.baidu.com/s/1ciU0clOlqV3iDqQ6Ic2RAA</a><br>提取码: 3xh9 </p>
-<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>直接访问存在漏洞路径，<br>结果为为DES加密以后的乱码</p>
+<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>直接访问存在漏洞路径，<br>结果为DES加密以后的乱码</p>
 <p><code>url+/mobile/DBconfigReader.jsp</code></p>
 <p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20191104142320.png" alt></p>
-<p>查看返回的数据，发现存在一些\r\n，需要去掉\r\n，<br>可以选择切片取出数据，也可以使用repalce替换<br>再使用DES算法结合密钥进行解密之后，<br>即可获得数据库相关信息，密钥为<code>1z2x3c4v</code></p>
+<p>查看返回的数据，发现存在一些<code>\r\n</code>，需要去掉<code>\r\n</code>，<br>可以选择切片取出数据，也可以使用repalce替换<br>再使用DES算法结合密钥进行解密之后，<br>即可获得数据库相关信息，密钥为<code>1z2x3c4v</code></p>
 <p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20191104142755.png" alt></p>
 <h2 id="POC"><a href="#POC" class="headerlink" title="POC"></a>POC</h2><pre><code>#! python3
 &quot;&quot;&quot;
