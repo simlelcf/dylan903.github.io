@@ -112,6 +112,37 @@
   </entry>
   
   <entry>
+    <title>泛微ecology OA数据库配置信息泄露漏洞复现</title>
+    <link href="https://dylan903.coding.me/2019/10/28/fan-wei-ecology-oa-shu-ju-ku-pei-zhi-xin-xi-xie-lu-lou-dong-fu-xian/"/>
+    <id>https://dylan903.coding.me/2019/10/28/fan-wei-ecology-oa-shu-ju-ku-pei-zhi-xin-xi-xie-lu-lou-dong-fu-xian/</id>
+    <published>2019-10-28T01:31:52.000Z</published>
+    <updated>2019-11-04T06:31:09.915Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;0x00-漏洞概述&quot;&gt;&lt;a href=&quot;#0x00-漏洞概述&quot; class=&quot;headerlink&quot; title=&quot;0x00 漏洞概述&quot;&gt;&lt;/a&gt;0x00 漏洞概述&lt;/h1&gt;&lt;p&gt;泛微ecology
+        
+      
+    
+    </summary>
+    
+    
+      <category term="web安全" scheme="https://dylan903.coding.me/categories/web%E5%AE%89%E5%85%A8/"/>
+    
+    
+      <category term="漏洞复现" scheme="https://dylan903.coding.me/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/"/>
+    
+      <category term="泛微e-cology OA" scheme="https://dylan903.coding.me/tags/%E6%B3%9B%E5%BE%AEe-cology-OA/"/>
+    
+      <category term="info_disclosure" scheme="https://dylan903.coding.me/tags/info-disclosure/"/>
+    
+  </entry>
+  
+  <entry>
     <title>ThinkCMF框架任意内容包含漏洞复现</title>
     <link href="https://dylan903.coding.me/2019/10/24/thinkcmf-kuang-jia-ren-yi-nei-rong-bao-han-lou-dong-fu-xian/"/>
     <id>https://dylan903.coding.me/2019/10/24/thinkcmf-kuang-jia-ren-yi-nei-rong-bao-han-lou-dong-fu-xian/</id>
@@ -248,7 +279,7 @@
     <link href="https://dylan903.coding.me/2019/10/10/fan-wei-oa-workflowcentertreedata-jie-kou-zhu-ru-lou-dong-fu-xian/"/>
     <id>https://dylan903.coding.me/2019/10/10/fan-wei-oa-workflowcentertreedata-jie-kou-zhu-ru-lou-dong-fu-xian/</id>
     <published>2019-10-10T07:13:23.000Z</published>
-    <updated>2019-10-31T03:35:06.755Z</updated>
+    <updated>2019-11-04T06:21:58.679Z</updated>
     
     <summary type="html">
     
@@ -269,7 +300,7 @@
     
       <category term="漏洞复现" scheme="https://dylan903.coding.me/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/"/>
     
-      <category term="泛微OA" scheme="https://dylan903.coding.me/tags/%E6%B3%9B%E5%BE%AEOA/"/>
+      <category term="泛微e-cology OA" scheme="https://dylan903.coding.me/tags/%E6%B3%9B%E5%BE%AEe-cology-OA/"/>
     
       <category term="注入漏洞" scheme="https://dylan903.coding.me/tags/%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/"/>
     
@@ -402,9 +433,9 @@
       <category term="web安全" scheme="https://dylan903.coding.me/categories/web%E5%AE%89%E5%85%A8/"/>
     
     
-      <category term="漏洞复现" scheme="https://dylan903.coding.me/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/"/>
-    
       <category term="CVE-2019-0708" scheme="https://dylan903.coding.me/tags/CVE-2019-0708/"/>
+    
+      <category term="漏洞复现" scheme="https://dylan903.coding.me/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/"/>
     
       <category term="RDP" scheme="https://dylan903.coding.me/tags/RDP/"/>
     
@@ -480,7 +511,7 @@
     <link href="https://dylan903.coding.me/2019/08/23/zi-yuan-gong-ju/"/>
     <id>https://dylan903.coding.me/2019/08/23/zi-yuan-gong-ju/</id>
     <published>2019-08-23T05:14:21.000Z</published>
-    <updated>2019-10-31T08:04:03.374Z</updated>
+    <updated>2019-11-04T05:01:00.326Z</updated>
     
     <summary type="html">
     
@@ -630,39 +661,6 @@
       <category term="WebLogic WLS" scheme="https://dylan903.coding.me/tags/WebLogic-WLS/"/>
     
       <category term="中间件" scheme="https://dylan903.coding.me/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>upload-labs文件上传漏洞练习</title>
-    <link href="https://dylan903.coding.me/2019/08/04/upload-labs-wen-jian-shang-chuan-lou-dong-lian-xi/"/>
-    <id>https://dylan903.coding.me/2019/08/04/upload-labs-wen-jian-shang-chuan-lou-dong-lian-xi/</id>
-    <published>2019-08-04T05:20:00.000Z</published>
-    <updated>2019-09-30T06:34:36.235Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;0x01-前言&quot;&gt;&lt;a href=&quot;#0x01-前言&quot; class=&quot;headerlink&quot; title=&quot;0x01 前言&quot;&gt;&lt;/a&gt;0x01 前言&lt;/h1&gt;&lt;p&gt;最近在研究文件上传漏洞，找到一个很好的靶场——&lt;a
-        
-      
-    
-    </summary>
-    
-    
-      <category term="web安全" scheme="https://dylan903.coding.me/categories/web%E5%AE%89%E5%85%A8/"/>
-    
-    
-      <category term="靶场" scheme="https://dylan903.coding.me/tags/%E9%9D%B6%E5%9C%BA/"/>
-    
-      <category term="dcoker" scheme="https://dylan903.coding.me/tags/dcoker/"/>
-    
-      <category term="upload-labs" scheme="https://dylan903.coding.me/tags/upload-labs/"/>
-    
-      <category term="文件上传" scheme="https://dylan903.coding.me/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/"/>
     
   </entry>
   

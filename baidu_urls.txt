@@ -1,5 +1,5 @@
 https://dylan903.coding.me/2019/11/04/wordpress-wei-shou-quan-fang-wen-lou-dong-fu-xian-cve-2019-17671/
 https://dylan903.coding.me/2019/10/31/apache-solr-via-velocity-template-rce-fu-xian/
 https://dylan903.coding.me/2019/10/31/xue-xi-zong-jie-pian-xin-xi-shou-ji/
+https://dylan903.coding.me/2019/10/28/fan-wei-ecology-oa-shu-ju-ku-pei-zhi-xin-xi-xie-lu-lou-dong-fu-xian/
 https://dylan903.coding.me/2019/10/24/thinkcmf-kuang-jia-ren-yi-nei-rong-bao-han-lou-dong-fu-xian/
-https://dylan903.coding.me/2019/10/23/php-fpm-zai-nginx-te-ding-pei-zhi-xia-yuan-cheng-dai-ma-zhi-xing-lou-dong-fu-xian/
