@@ -5,13 +5,12 @@ author: dylan
 top: false
 cover: false
 password: 
-categories: Information Security
+categories: web安全
 tags: 
-    - 漏洞
-    - 复现
+    - 漏洞复现
     - Discuz
 ---
-# 一、漏洞详情
+# 一、漏洞概述
 2019年7月11日， Discuz！ML被发现存在一处远程代码执行漏洞，
 攻击者通过在请求流量的cookie字段中的language参数处插入构造的payload，
 进行远程代码执行利用，该漏洞利用方式简单，危害性较大。

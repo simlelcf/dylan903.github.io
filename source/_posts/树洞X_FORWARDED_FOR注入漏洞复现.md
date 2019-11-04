@@ -5,13 +5,12 @@ author: dylan
 top: false
 cover: false
 password: 
-categories: Information Security
+categories: web安全
 tags: 
-    - 漏洞
-    - 复现
+    - 漏洞复现
     - 树洞外链
 ---
-# 一、漏洞详情
+# 一、漏洞概述
 树洞外链现在已经停止更新，作者又开发了[Cloudreve](https://github.com/cloudreve/Cloudreve)，有兴趣可以了解一下。
 回归正题，虽然树洞已经停止更新了，还是可以做一些研究学习。
 树洞外链存在X_FORWARDED_FOR注入漏洞，最新版本的已经修复了，2.2.1版本的可以复现。

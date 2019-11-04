@@ -5,13 +5,12 @@ author: dylan
 top: false
 cover: false
 password: 
-categories: Information Security
+categories: web安全
 tags: 
-    - 漏洞
-    - 复现
+    - 漏洞复现
     - dedecms
 ---
-# 一、漏洞详情
+# 一、漏洞概述
 ![](https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190724101304.png)
 
 ***

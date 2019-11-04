@@ -55,8 +55,8 @@ hexo s #启动本地服务
 返回GIt Bash中，依次输入：
 
 ```
-git config --global.name "yourname"
-git config --global.email "youremail"
+git config --global user.name "yourname"
+git config --global user.email "youremail"
 ```
 这里的yourname输入你的Github的用户名，
 youremail输入你的Github邮箱

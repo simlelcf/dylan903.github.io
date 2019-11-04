@@ -92,7 +92,7 @@ indexbtn:
 # icon/button will not show up if you leave the corresponding socialLink empty
 # 首页 banner 中的第二行个人信息配置，留空即不启用
 socialLink:
-  qq: 23519037
+  qq:
   github: https://github.com/dylan903
   email: dylan9032@foxmail.com
 
@@ -102,7 +102,7 @@ socialLink:
 # 可以在某篇文章的 Front-matter 中再加上`toc: false`，使该篇文章关闭TOC目录功能
 toc:
   enable: true
-  heading: h1, h2, h3, h4
+  heading: h1, h2, h3, h4, h5
   showToggleBtn: true # 是否显示切换TOC目录展开收缩的按钮
 
 # Whether the code is broken.
@@ -256,8 +256,8 @@ livere:
 # Valine 评论模块的配置，默认为不激活，如要使用，就请激活该配置项，并设置 appId 和 appKey.
 valine:
   enable: true
-  appId: 42KWAykx3z05tGa90t3258Rp-gzGzoHsz
-  appKey: MtzvOotEwmPs0SADcYSlSx2p
+  appId: 6W9FUXsnyPz7MgGApFVK9M6A-MdYXbMMI
+  appKey: ETPOz2DkTDSuyncXoVo6bYy2
   notify: false
   verify: false
   visitor: true
@@ -280,8 +280,8 @@ githubLink:
 # 请注意：为了保证密码原文不会被泄露到网页中，文章的密码必须是通过'SHA256'加密的，这样就不会被破解.
 verifyPassword:
   enable: true
-  promptMessage: 请输入访问本文章的密码
-  errorMessage: 密码错误，将返回主页！
+  promptMessage: Being their worst nightmare！
+  errorMessage: Error！
 
 # busuanzi(http://busuanzi.ibruce.info/) website statistics
 # 不蒜子(http://busuanzi.ibruce.info/) 网站统计

@@ -5,13 +5,13 @@ author: dylan
 top: false
 cover: false
 password: 
-categories: Information Security
+categories: web安全
 tags: 
     - 漏洞
     - 复现
     - zzzphp
 ---
-# 一、漏洞详情
+# 一、漏洞概述
 
 远程代码执行漏洞存在的主要原因是页面对模块的php代码过滤不严谨，
 导致在后台可以写入php代码从而造成代码执行。

@@ -111,3 +111,13 @@ baidu_url_submit:
   host: dylan903.coding.me        ## 百度站长平台中注册的域名
   token: cKGTxI9CBxoY67Bq   ## 准入秘钥
   path: baidu_urls.txt       ## 文本文档的地址， 新链接会保存在此文本文档里
+
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+  hub:
+  content:
+  content_limit: 140
+  content_limit_delim: ' '
+  order_by: -date
