@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dylan903.coding.me/"/>
-  <updated>2019-11-06T16:45:35.293Z</updated>
+  <updated>2019-11-07T12:07:13.054Z</updated>
   <id>https://dylan903.coding.me/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Linux 工具篇</title>
+    <link href="https://dylan903.coding.me/2019/11/07/linux-gong-ju-pian/"/>
+    <id>https://dylan903.coding.me/2019/11/07/linux-gong-ju-pian/</id>
+    <published>2019-11-07T06:28:16.000Z</published>
+    <updated>2019-11-07T12:07:13.054Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00  前言&quot;&gt;&lt;/a&gt;0x00  前言&lt;/h1&gt;&lt;p&gt;收集整理自己用的一些工具和安装使用过程中的一些坑&lt;/p&gt;
+&lt;h1
+        
+      
+    
+    </summary>
+    
+    
+      <category term="tools" scheme="https://dylan903.coding.me/categories/tools/"/>
+    
+    
+      <category term="Linux" scheme="https://dylan903.coding.me/tags/Linux/"/>
+    
+      <category term="工具" scheme="https://dylan903.coding.me/tags/%E5%B7%A5%E5%85%B7/"/>
+    
+  </entry>
   
   <entry>
     <title>Wordpress 后台GetShell总结</title>
@@ -630,37 +660,6 @@
       <category term="tools" scheme="https://dylan903.coding.me/tags/tools/"/>
     
       <category term="sources" scheme="https://dylan903.coding.me/tags/sources/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ecshop XSS 复现</title>
-    <link href="https://dylan903.coding.me/2019/08/17/ecshop-xss-fu-xian/"/>
-    <id>https://dylan903.coding.me/2019/08/17/ecshop-xss-fu-xian/</id>
-    <published>2019-08-17T05:35:05.000Z</published>
-    <updated>2019-10-31T03:35:22.138Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;0x01-前言&quot;&gt;&lt;a href=&quot;#0x01-前言&quot; class=&quot;headerlink&quot; title=&quot;0x01 前言&quot;&gt;&lt;/a&gt;0x01
-        
-      
-    
-    </summary>
-    
-    
-      <category term="web安全" scheme="https://dylan903.coding.me/categories/web%E5%AE%89%E5%85%A8/"/>
-    
-    
-      <category term="漏洞复现" scheme="https://dylan903.coding.me/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/"/>
-    
-      <category term="XSS" scheme="https://dylan903.coding.me/tags/XSS/"/>
-    
-      <category term="ecshop" scheme="https://dylan903.coding.me/tags/ecshop/"/>
     
   </entry>
   
